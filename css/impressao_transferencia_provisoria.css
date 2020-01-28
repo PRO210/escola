@@ -1,0 +1,72 @@
+html{
+    background-color: whitesmoke;
+}
+body{    
+    width: 19cm;
+    margin: 0cm auto;    
+  
+    }
+.header{
+    width: 19cm;
+    height: 5cm;
+    margin-top: inherit;     
+}
+.header p{
+    text-align: center;
+}
+
+#pos_header{
+    	text-align: center;
+        margin-top: 3cm;
+	 
+}
+#declaracao {
+    text-align: justify;  
+    margin-top: 1.5cm;
+    }
+#declaracao p{
+    text-align: justify; 
+    margin: 12px;
+    text-indent: 1.5cm;
+   
+}
+#documentos{        
+    height: 3cm;   
+    margin-top: 2cm;  
+}
+#documentos p{   
+    text-align: justify;
+     margin: 12px; 
+}
+#meio p{
+    text-align: center;
+    margin-top: 1.5cm;
+    
+}
+#meio_2 p{
+    text-align: center;  
+    margin: 1.5cm;       
+}
+#meio_3 p{
+    text-align: center;
+    
+}  
+#fim p{
+    text-align: center;    
+    margin-top: 2cm;
+}
+#fim2{
+    text-align: center;  
+     margin-top: -12px;
+}
+.footer{
+    position: relative;
+    margin-top: 2.5cm;    
+}
+#footer2 p{
+    padding-top: 12px;
+    text-align: center;
+    margin-bottom: -24px;
+    font-size: 12px;
+
+}

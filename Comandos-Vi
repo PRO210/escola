@@ -1,0 +1,51 @@
+ 
+Comandos do vi
+Estes comandos devem ser executados fora do modo de inserção (digitação).
+
+Notação:
+
+    O símbolo "-" geralmente não faz parte do comando, sendo somente um separador do comando e sua descrição.
+    Sendo que o símbolo "+" indica a combinação da teclas mencionadas.
+    Quando a letra em um comando for maiúscula, significa que deve-se utilizar a combinação "SHIFT + letra".
+    Palavra maiúscula e em itálico, corresponde a uma tecla, por exemplo, ENTER corresponde a tecla de nome enter.
+
+Edição
+
+    i - insere texto a partir do cursor.
+    I - insere texto a partir da primeira palavra da linha atual.
+    U - desfaz as alterações realizadas após ter salvo o texto.
+    dd - remove (recorta) a linha atual.
+    yy - copia a linha atual.
+    p - adiciona ao texto informações copiadas ou recortadas.
+    : d - remove (recorta) a linha atual.
+    D - remove o resto da linha a partir do cursor.
+    x - remove o caractere sob o cursor.
+    s - remove o caractere sob o cursor e entra em modo de inserção.
+    a - entra em modo de inserção na posição seguinte ao cursor.
+    r + carac - substitui o caractere sob o cursor por carac.
+    R - entra no modo de inserção substituindo o texto contido após o cursor pelo que for digitado, até que se pressione ESC.
+    :1,10 comando - executa o comando da linha 1 até a linha 10.
+    >> - movimenta a linha para a direita.
+    << - movimenta a linha para a esquerda.
+    /word - localiza a palavra word no texto. Utilize a tecla n para encontrar a próxima ocorrência e a tecla N para encontrar a anterior.
+    :% s/search_string/replacement_string/ - Localiza todas as palavras search_string e as substitui por replacement_string.
+    : w - salvar
+    : w foo - salva o texto num arquivo de nome foo
+    : wq - salva e fecha o VI.
+    ZZ - salva e sai fecha o VI.
+    :q - fecha o VI
+    :q! - fecha o VI ignorando qualquer alteração não salva.
+
+Navegação
+
+    e - avança para o fim da palavra.
+    w - avança para o inicio da palavra.
+    b - retrocede para o inicio da palavra.
+    numb + G - vai para a linha de número igual a numb.
+    : numb - vai para a linha de número numb.
+    gg - vai para a primeira linha
+    G - vai para a última linha.
+    HOME - vai para o inicio da linha
+    END - vai para o fim da linha
+    PAGE DOWN - desce uma tela
+    PAGE UP - sobe uma tela

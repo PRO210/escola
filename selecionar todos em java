@@ -1,0 +1,28 @@
+Javascript:
+
+function marcardesmarcar(){
+   if ($("#todos").attr("checked")){
+      $('.marcar').each(
+         function(){
+            $(this).attr("checked", true);
+         }
+      );
+   }else{
+      $('.marcar').each(
+         function(){
+            $(this).attr("checked", false);
+         }
+      );
+   }
+}
+
+HTML:
+
+<input type="checkbox" name="todos" id="todos" value="todos" onclick="marcardesmarcar();" /> Marcar/Desmarcar todos<br/>
+<input type="checkbox" class="marcar" name="1"  value="1" />Valor 1<br/>
+<input type="checkbox" class="marcar" name="2"  value="2" />Valor 2<br/>
+<input type="checkbox" class="marcar" name="3"  value="3" />Valor 3<br/>
+
+
+
+http://viniciusfesil.com.br/desenvolvimento/jquery/jquery-selecionar-todos-os-checkbox-da-melhor-maneira/

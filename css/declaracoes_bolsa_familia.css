@@ -1,0 +1,41 @@
+body{
+    width: 19cm;     margin: 0cm auto;  
+    margin-top: 1cm;
+}
+img{ width: 19cm; height: 3cm;       
+}
+.caixaInicial{
+    text-align: center; 
+}
+.caixa{
+    width: 16cm; 
+    height:6cm;  font-size: 14px;
+    margin: auto;
+}
+.p1{
+    word-spacing: 3px !important;
+    text-align: justify;
+    text-indent: 1cm;
+    font-size: 14px;
+}
+.caixa_2{
+    width: 7cm; 
+    height:2cm;  font-size: 14px;
+    margin-left: 11cm;
+    word-spacing: 6px;
+}
+.p{
+    text-indent: 2cm; text-justify: inter-word; text-align: justify;
+    padding-left: 5px;   word-spacing: 6px;
+}
+.caixa_3{
+    width: 16cm; 
+    height:2cm;  font-size: 14px; 
+    margin-top: 2cm !important;
+    margin: auto;
+    text-align: center
+}
+.rodape{font-size: 8px; position: absolute; top: 27cm; padding-left: 4px;
+        text-align: center; width: 19cm;
+}
+

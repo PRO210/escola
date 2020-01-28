@@ -1,0 +1,99 @@
+body{
+    margin-top: 5mm;
+}
+#nis {
+    margin-left: -7mm; margin-top: 2mm;
+    font-size: 12px;
+}
+#linha_nis {
+    border-bottom: solid thin black; 
+    width: 8.3cm; height: 0.7cm; 
+    position: absolute; top: 11cm;
+    margin-left: 0.7cm;
+}
+#nome {
+    margin-left: -10mm;margin-top: 3mm;  font-size: 12px;
+}
+#linha_nome {
+    border-bottom: solid thin black; 
+    width: 8cm; height: 0.7cm; 
+    position: absolute; top: 11.7cm;
+    margin-left: 1cm;
+}
+#linha_endereco{
+    border-bottom: solid thin black; 
+    width: 163mm; height: 0.7cm; 
+    position: absolute; top: 12.4cm;
+    margin-left: 17mm;
+}
+#endereco {
+    margin-left: -17mm;margin-top: 3mm;  font-size: 12px;
+}
+#cidade {
+    margin-left: -12mm; margin-top: 3mm;
+    font-size: 12px;
+
+}
+#linha_cidade {
+    border-bottom: solid thin black; 
+    width: 8.3cm; height: 0.7cm; 
+    position: absolute; top: 13.1cm;
+    margin-left:12mm;
+}
+#dia {
+    margin-top: 2mm;
+    margin-left: -37mm; 
+    font-size: 14px;
+   
+}
+#dia_2 {
+    font-size: 14px;
+    margin-top: -8mm;
+    margin-left: 15mm;
+}
+#linha_nascimento {
+    border-bottom: solid thin black; 
+    width: 33mm; height: 0.7cm; 
+    position: absolute; top: 13.8cm;
+    margin-left:37mm;
+}
+#mes {
+    margin-left: -5mm; 
+    font-size: 12px;
+    display: inline;
+}
+#mes_2 {  
+    font-size: 14px;
+    display: inline;
+    margin-left: 23mm;
+}
+#linha_nascimento_2 {
+    border-bottom: solid thin black; 
+    width: 6cm; height: 0.7cm; 
+    position: absolute; top: 13.8cm;
+    margin-left:76mm;
+}
+#ano {
+    margin-left: -5mm; 
+    font-size: 12px;
+    display: inline;
+}
+#ano_2 {   
+    font-size: 14px;
+    display: inline;
+    margin-left: 15mm;
+}
+#linha_nascimento_3 {
+    border-bottom: solid thin black; 
+    width: 38mm; height: 0.7cm; 
+    position: absolute; top: 13.8cm;
+    margin-left:142mm;
+}
+#certidao {
+    margin-left: -10mm; font-size: 12px;
+}
+#linha_certidao {  
+    width: 8cm; height: 0.7cm; 
+    position: absolute; top: 14.3cm;
+    margin-left: 1cm;
+}

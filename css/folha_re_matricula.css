@@ -1,0 +1,33 @@
+body{
+    width: 21cm;   
+    margin: 0cm auto;
+    margin-top: 0.5cm;
+}
+#timbre{
+    height: 3cm;    
+    width: 19cm;   
+    margin-left: 4cm;       
+}
+#pos_timbre{   
+    margin-top: 10mm;
+    width: 19cm;       
+    text-align: center;
+
+}
+#folha_de_matricula{
+    height: 22cm;   
+    width: 20.5cm; 
+    margin-top: -5mm;
+
+}
+#folha_de_matricula img{
+    height: 21.5cm;   
+    width: 20cm; 
+
+}
+#pos_img2{
+    margin-left: 0.5cm;
+    margin-top: -1cm;   
+    width: 18.5cm; 
+
+}

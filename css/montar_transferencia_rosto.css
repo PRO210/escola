@@ -1,0 +1,176 @@
+body{
+    width: 19cm;   
+    margin: 0 auto;
+}
+body p,li{
+    font-size: 12px;
+}
+#inicio{text-align: center;margin-top: -5mm;}
+#esquerda{
+    float: left;
+    width: 8cm;
+    border: solid black 1px;   
+    margin-left: 0.5cm;
+}
+#esquerda p,#esquerda2 p,#centro p,#direita2 p{ padding-left: 6px;}
+#direita{   
+    width: 9cm;
+    border: solid black 1px; 
+    float: right;
+    margin-right: 0.5cm;
+}
+
+#direita p{
+    display: inline-block;
+    padding-left: 6px;
+}
+
+#esquerda2{
+    float: left;
+    width: 7cm;
+    border: solid black 1px;   
+    margin-left: 0.5cm;
+    margin-top: 0.5cm;
+}
+#direita2{   
+    width: 5.8cm;
+    border: solid black 1px; 
+    float: right;
+    margin-right: 0.5cm;
+    margin-left: 0.5cm;
+    margin-top: 0.5cm;
+}
+#centro{
+    width: 3.5cm;
+    border: solid black 1px; 
+    float: left;
+    margin-top: 0.5cm;
+    margin-left: 0.5cm;
+}
+#centro2{
+    text-align: center;
+    width: 18cm;
+    margin: 0.25cm 0.25cm 0.25cm 1cm;
+    float: left;
+
+}
+#centro3{   
+    width: 18cm;
+    height: 6cm;
+    border: solid black 1px; 
+    float: left;
+    margin-right: 1cm;
+    margin-left: 0.5cm;
+}
+#centro3 p{
+    padding-top: 10px;
+    padding-left: 6px;
+}
+#centro4{   
+    width: 18cm;    height: 8.5cm;
+    border: solid black 1px; 
+    float: left;
+    margin-right: 1cm;    
+    margin-left: 0.5cm;
+    margin-top: 1cm;
+}
+#centro4 li{
+    padding-top: 10px;
+    padding-left: 0.5cm;
+}
+#centro5{   
+    width: 18cm;    height:5.5cm;
+    border: solid black 1px; 
+    float: left;
+    margin-left: 0.5cm;
+    margin-top: 1cm;
+}
+#dentro{
+    width: 8cm;    height: 1cm;    
+    float: left;
+    text-align: center;
+    margin-top: -0.5cm; margin-left: 4.5cm; 
+    background-color: white;    
+
+}
+#dentro2{
+    width: 3cm;    height: 1cm;    
+    float: left;   
+    margin-top: -0.5cm;  margin-left: 1cm;
+    background-color: white;   
+    text-align: center; 
+}
+#input{
+    float: right;
+    margin-top: -6px;
+    padding-right: 2cm;
+}
+#linha1{
+    float: left;
+    margin-top:-16px;  margin-left: 5cm; 
+}
+#linha2{
+    float: left;
+    margin-top:-16px;  margin-left:2cm;
+}
+.inputobs{  
+    margin-left: 6px;
+    padding-left: 6px;
+    padding-top: 8px;
+    border:none;border-bottom: solid black thin;
+    width: 98%;
+    font-size: 12px;
+}
+
+input[type=checkbox]            {
+    /* Double-sized Checkboxes */
+    transform: scale(1.5); /* IE */                
+}
+@media print { 
+    #div { display:none !important;} 
+    body { background: #fff !important; }
+}
+.bt {
+    display: inline-block;
+    padding: 6px 12px;
+    padding-right: 12px;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    border-radius: 4px;
+}
+.btn-info {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+      padding: 8px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+    
+
+.btn-primary {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #46b8da;
+    padding: 8px;
+    border-radius: 8px;
+    text-decoration: none;
+}

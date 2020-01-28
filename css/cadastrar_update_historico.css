@@ -1,0 +1,50 @@
+
+.DivSm4{
+    margin-bottom: 12px !important;
+}
+
+.table th{text-align: center;
+}
+
+.verde{ color: green; 
+}
+
+.inputObs{
+    min-width: 100% !important;
+    border: none;
+    font-size: 12px;
+}
+.inputnotas{
+    text-align: center;
+    width: 80px !important;
+}
+
+.table{margin-bottom: 0px;
+}
+
+.table th{text-align: center;
+}
+
+.verde{ color: green; 
+}
+
+.borda{
+    width: 100% !important;
+}
+
+
+select{width: 150px !important;
+}
+
+p { margin-top: 12px;margin-bottom: 36px; margin-left: 3px;
+}
+
+input[type=checkbox]{   
+    transform: scale(1.5); /* IE */                
+}
+td{
+    font-size: 12px !important;
+}
+th{
+    font-size: 14px !important;
+}

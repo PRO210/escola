@@ -1,0 +1,23 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24/03/2017, 20:39:39
+    Author     : asa
+*/
+.verde{
+    color: green;
+}
+.vermelho{
+    color: red;
+}
+.amarelo{
+    color: orange;
+}
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }

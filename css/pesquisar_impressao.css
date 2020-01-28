@@ -1,0 +1,55 @@
+body{
+    width: 19cm;     margin: 0cm auto;   border: solid whitesmoke thin;   
+  }
+img{              
+    /*width: 19cm; height: 4cm;*/  margin-left: 3.5cm;
+}
+.caixaInicial{
+    width: 19cm; text-align: center;  margin-top: -5mm;
+}
+.caixa{
+    width: 19cm; font-size: 12px;margin-left: 3mm;
+}
+
+.e1F,.d1F{
+    float: left; height: 25px; padding-left: 4px;
+}
+.e2F{
+    float: left; height: 25px; min-width: 8cm; 
+}
+.border{
+    border-bottom: solid black thin;
+}
+.d2F{
+    float: left; height: 25px; min-width: 7.5cm; 
+}
+.border_total{
+    min-width: 17.4cm; 
+}
+.p{
+    text-indent: 2cm; text-justify: inter-word; text-align: justify;
+    padding-left: 5px;    max-width: 18.5cm;
+}
+.rodape{font-size: 8px; position: absolute; top: 27cm; padding-left: 4px;
+
+}
+.btn-info {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+    padding: 8px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #46b8da;
+    padding: 8px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+@media print { 
+    #div { display:none !important;} 
+    body { background: #fff !important; }
+}

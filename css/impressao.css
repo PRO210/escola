@@ -1,0 +1,77 @@
+html{
+     background-color: #4f4f4f;
+}
+
+body{
+    display: block;
+    margin: 0 auto;
+    background-color: White;
+    height: 29cm;
+    width: 21cm;
+
+}
+
+#titulo{
+    display: block;
+    margin: 0 auto;
+    width: 17cm;
+    background-color: #785446;
+}
+
+#titulo div{
+   
+    width: 10cm;
+    vertical-align: top;
+    text-align: center;
+}
+
+
+
+#requerimento {
+    display: block;
+    margin:  0 auto;
+    height: 17cm;
+    width: 17cm;
+    background-color: #4BAF4F;
+}
+
+#requerimento  p{
+    text-indent: 2cm;
+    text-align: justify;
+}        
+
+#certidao_civil{
+    display: inline-block;
+    width: 5.5cm;
+    
+}
+
+
+#t1 {
+    width: 17cm;
+
+}
+
+#t2 {
+    display: inline-block;
+    width: 5.5cm;
+}
+
+
+
+footer{   
+    display: block;
+    margin: 0 auto;
+    height: 5cm;
+    width: 17cm;
+    text-align: center;
+    background-color: #FF9700;
+
+}
+#p_footer{
+    word-spacing: 3cm;
+    font-size: 12px;
+}
+footer div{
+    line-height: 0.1;
+}

@@ -1,0 +1,58 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 01/04/2017, 20:48:46
+    Author     : asa
+*/
+#body{
+     background: rgb(6, 185, 207);
+}
+
+#alunos img{
+    height: 64px;
+
+}
+#alunos p{
+    float: left;
+    text-align: center;
+    margin-right: 25px;
+
+
+
+}
+#alunos p:hover{    
+    background-color: #D6D5D3;
+    border-radius: 6px;
+    -webkit-transition: 0.5s ease-in;
+    -moz-transition: 0.5s ease-in;
+    transition: 0.5s ease-in all;
+
+}
+
+.modal-body p{
+    float: left;
+    margin-right: 12px;
+    text-align: center;
+    
+   
+}
+
+
+.modal-body p:hover{
+    float: left;
+    margin-right: 12px;
+    text-align: center;
+    background-color: #D6D5D3;
+    border-radius: 6px;
+    -webkit-transition: 0.5s ease-in;
+    -moz-transition: 0.5s ease-in;
+    transition: 0.5s ease-in all;
+}
+.modal-body img{
+    height: 64px;
+}
+
+

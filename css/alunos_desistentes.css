@@ -1,0 +1,23 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 07/08/2017, 10:25:20
+    Author     : User
+*/
+
+.verde{
+    color: green;padding-bottom: 12px;
+}
+.vermelho{
+    color: red;padding-bottom: 12px;
+}
+.amarelo{
+    color: orange;padding-bottom: 12px;
+}
+.azul{ color: blue; padding-bottom: 12px;
+}
+.rosa{ color: pink; padding-bottom: 12px;
+}

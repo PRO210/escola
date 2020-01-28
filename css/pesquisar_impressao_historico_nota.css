@@ -1,0 +1,130 @@
+body{
+    font-size: 12px;
+    width: 27.4cm;       
+    margin: 0 auto;  margin-top: 1cm;
+    border: solid black thin;
+}
+.escola_ficha{
+    font-size: 18px;
+}
+td{
+    border: solid black thin;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    padding-bottom: 4px;
+    padding-top: 4px;
+}
+th{
+    border: solid black thin;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    padding-bottom: 4px;
+    padding-top: 4px;
+
+}
+#dados_gerais{
+    width: 4cm; 
+    font-size: 16px;
+    vertical-align: middle ;
+    text-align: center;
+}
+#serie{
+    width: 12cm;
+}
+#observacoes_texto{      
+    font-size: 16px;    
+    vertical-align: middle ;
+    text-align: center;
+}
+.vertical{
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    min-height: 3cm;
+}
+#vertical2{
+    writing-mode: vertical-lr !important;
+    transform: rotate(180deg);
+    font-size: 20px;
+    vertical-align: middle; 
+    min-height: 3cm;   
+}
+#recuperacao_final{
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    text-align: center;
+    vertical-align: middle;
+    min-width: 1cm;
+}
+.table{
+    margin-bottom: 0px !important;
+    padding: 0px !important;
+    border: solid black thin;
+    width: 100.1%;
+
+}
+
+.table > tbody > tr > th {
+    padding: 2px !important;
+
+}
+.table > tbody > tr > td {
+    padding: 2px !important;
+
+}
+#CC0{
+    width: 4cm !important;
+    max-width: 4cm !important;
+}
+#CC{
+    text-align: right;    
+    margin-bottom: 2cm;
+    width: 4cm !important;
+}
+#CC2{   
+    text-align: left; 
+    width: 4cm;
+}
+
+#corpo{
+    width: 27.35cm;  
+    border: solid black thin;
+
+}
+#tabela_notas{
+    float: left;
+    width: 16.14cm;
+
+}
+#dias_etc{
+    width: 2.5cm;
+
+}
+#dias_letivosI{
+    width: 1cm;
+
+}
+#dias_letivos{
+    writing-mode: vertical-lr;
+    transform: rotate(180deg); 
+
+}
+#observacoes{    
+    float: left; 
+    width: 10.5cm;
+}
+#observacoes div{
+    width: 10.8cm;
+    border-bottom: solid black thin;   
+    margin-left: 6px;    
+}
+
+.td_observacoes{
+    height: 1cm;
+}
+table > thead > tr > th, .table > tbody > tr > th,.table > thead > tr > td, .table > tbody > tr > td{
+    padding: 2px ;
+    padding-left: 8px;
+}
+input[type=checkbox]{   
+    transform: scale(1.5); /* IE */                
+}

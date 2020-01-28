@@ -1,0 +1,74 @@
+html{
+    background-color: whitesmoke;
+}
+body{
+    height: 27cm;
+    width: 19cm;
+    margin: 1cm auto;    
+    background-color: #4f4f4f;
+    border: solid;    
+}
+.header{
+    width: 19cm;
+    height: 3cm;
+    margin-top: -0.5cm;
+}
+#brazao{
+    height: 3cm;
+    position: relative;
+    float: left
+}
+#unicef{
+    height: 3cm;
+    position: relative;
+    float: right;      
+}
+.header div{
+    text-align: center;
+}
+.header  div p{
+    margin-top: -24px;
+    font-size: 10px;
+}
+#pos_header h1{
+	text-align: center;
+	 
+}
+#declaracao {
+    text-align: justify;  margin-top: 2cm; 
+}
+#declaracao p{
+    text-align: justify; margin: 12px; 
+}
+#documentos{        
+    height: 3cm;   
+    margin-top: 2cm;  
+}
+#documentos p{   
+    text-align: justify; margin: 12px; 
+}
+#meio p{
+    text-align: center;
+    margin-top: 2cm;
+}
+#meio2{
+    text-align: center;   margin-top: -12px;
+}
+#fim p{
+    text-align: center;    
+    margin-top: 2cm;
+}
+#fim2{
+    text-align: center;   margin-top: -12px;
+}
+.footer{
+    position: relative;
+    margin-top: 5cm;    
+}
+#footer2 p{
+    padding-top: 12px;
+    text-align: center;
+    margin-bottom: -24px;
+    font-size: 12px;
+
+}

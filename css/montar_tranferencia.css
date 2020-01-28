@@ -1,0 +1,45 @@
+body{
+    width: 19cm !important;
+    margin: 0 auto;    
+}
+#historico{
+    text-align: center;
+}
+th{
+    border: solid black 1px;    
+    font-size: 9px;  
+    width: 1cm;   
+    border-bottom-width: 0px;
+    border-left-width: 0px;   
+    height: 4.1mm;
+
+}
+td{
+    border: solid black 1px;   
+    font-size: 8px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;   
+}
+.disciplina{    
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);   
+    min-height: 2cm;
+      }
+.margin_p p{
+    margin: 1px; 
+   }  
+#teste{
+    margin: 0px;
+}
+.texto{   
+    text-align: left;
+}
+.rodape{
+    position: relative;
+    float: left;
+    width: 9.5cm;
+    text-align: center;
+    text-decoration: overline;
+    font-size: 12px;
+    padding-top: 0.3cm;
+}

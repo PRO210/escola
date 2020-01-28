@@ -1,0 +1,18 @@
+
+.verde{
+    color: green;
+}
+.vermelho{
+    color: red;
+}
+.amarelo{
+    color: orange;
+}
+.azul{
+    color: blue;
+}
+tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}

@@ -1,0 +1,59 @@
+            body{
+                width: 27.2cm; margin: 0 auto;
+            }
+            .pDisciplina{
+                margin-right: 10px;
+            }
+            .thDisciplina{
+                width: 1cm;
+                border: solid black thin;
+                text-align: center;
+                border-width: thin;
+                border: solid #000000 thin;
+                border-bottom-width: 0px;
+                border-left-width: 0px;
+            }
+            #thNome{
+                width: 8.5cm;
+            }
+            .nome{
+                font-size: 12px;              
+                padding-right: 3px;
+                padding-left: 3px;
+                white-space: nowrap;
+                border: solid black thin;
+            }
+            td{
+                border: solid black thin;
+                height: 0.50cm;
+            }
+            th{
+                text-align: center;
+                border: solid black thin;    
+            }
+            #tableAta{
+                border: solid black thin;
+                width: 27.5cm;
+            }
+             #tableAta2{
+                border: solid black thin;
+                width: 27.2cm;               
+            }
+            #branco{
+                width: 1cm !important;
+                border: solid black thin;
+            }
+            #cabecalho{
+                width: 27cm;
+            }
+            #pCabecalho{
+                text-indent: 2cm;
+                text-align: justify; 
+                margin-bottom: -1px;
+                letter-spacing: 1px;
+                padding: 2px;
+            }
+            #ordem{
+                width: 1cm;
+                font-size: 10px;
+            }

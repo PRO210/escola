@@ -1,0 +1,21 @@
+.btn-marron{
+    background-color: #A0522D;
+    transition: backgroun 0.3s linear 0s;
+    color: #ffffff;
+}
+.btn-marron:hover{
+    background-color: #9f6635;
+    transition: backgroun 0.3s linear 0s;   
+    color: #ffffff;
+}
+
+.btn-preto{
+    background-color: #696969;
+    transition: backgroun 0.3s linear 0s;
+    color: #ffffff;
+}
+.btn-preto:hover{
+    background-color: #000000;
+    transition: backgroun 0.3s linear 0s;   
+     color: #ffffff;
+}
