@@ -74,3 +74,6 @@ kate post-receive (Cria o arquivo)
 #!/bin/sh
 GIT_WORK_TREE=
 chmod +x post-receive
+
+
+    git push --set-upstream origin master

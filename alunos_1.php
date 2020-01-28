@@ -193,7 +193,7 @@
             . "<li><a href='pesquisar_no_banco.php?id=" . base64_encode($idf) . "' target='_self' title='Possível Caso de Duplicidade'><span class='glyphicon glyphicon-remove vermelho' aria-hidden='true'>&nbsp;</span>Possível Caso de Duplicidade</a></li>"
             . "<li $display3><a href='alunos_arquivo_passivo.php?id=" . base64_encode($idf) . "' target='_self' title='Retirar do Arquivo Passivo'><span class='glyphicon glyphicon-folder-open' aria-hidden='true'>&nbsp;</span>Retirar do Arquivo Passivo</a></li>"
             . "<li $display4><a><button type ='submit' onclick= 'validaCheckbox2();return validaCheckbox()' name = 'turma_transferidos' value = '$idf' class='btn btn-link arquivo' title = 'Mover para Arquivo Passivo' style='text-decoration: none;color: black;margin-left: -12px;'><span class='glyphicon glyphicon-folder-open' aria-hidden='true'></span></button>Mover para o Arquivo Passivo</a></li>"
-//            . "<li><a href='cadastrar_boleto.php?id=" . base64_encode($idf) . "' target='_blank' title='Boleto'><span class='glyphicon glyphicon-piggy-bank' aria-hidden='true'>&nbsp;</span>Boletos</a></li>"
+            . "<li><a href='cadastrar_boleto.php?id=" . base64_encode($idf) . "' target='_blank' title='Boleto'><span class='glyphicon glyphicon-piggy-bank' aria-hidden='true'>&nbsp;</span>Boletos</a></li>"
             . "</ul>"
             . "&nbsp;&nbsp;$nomef"
             . "</div>"
