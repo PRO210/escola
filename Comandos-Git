@@ -15,6 +15,7 @@ git add "Seu Arquivo"
 git add . (Adiciona todos os Arquivos)
 
 git commit -m "Comitando o Código depois de um Hiato"
+git commit -m "Comitando o Código depois de um Hiato 02"
 //
 git log
 git log -p (Mostra a difenrença entre os arquivos Antigo/Novo)
@@ -76,4 +77,4 @@ GIT_WORK_TREE=
 chmod +x post-receive
 
 
-    git push --set-upstream origin master
+ git push --set-upstream origin master
