@@ -42,9 +42,9 @@ $ContTransferidos = mysqli_num_rows($Transferidos);
             var data = google.visualization.arrayToDataTable([
                 ['Element', 'Quantidade', {role: 'style'}, {role: 'link'}],
                 ['Matriculados',<?= $ContMatriculados ?>, '#FF6501', ''],
-                ['Cursando', <?= $ContCursando ?>, 'green', '/Escola/alunos.php'],
+                ['Cursando', <?= $ContCursando ?>, 'green', '/escola/alunos.php'],
                 ['Novatos', <?= $ContNovatos ?>, 'blue', ''],
-                ['Transferidos', <?= $ContTransferidos ?>, 'red', '/Escola/solicitacao_transferencia.php']
+                ['Transferidos', <?= $ContTransferidos ?>, 'red', '/escola/solicitacao_transferencia.php']
             ]);
             var view = new google.visualization.DataView(data);
             view.setColumns([0, 1,
@@ -87,7 +87,7 @@ $ContTransferidos = mysqli_num_rows($Transferidos);
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                 ['Element', 'Quantidade', {role: 'style'}, {role: 'link'}],
-                ['Cadastrados',<?= $ContCadastrados ?>, '#b87333', '/Escola/alunos_geral.php']
+                ['Cadastrados',<?= $ContCadastrados ?>, '#b87333', '/escola/alunos_geral.php']
 
             ]);
             var view = new google.visualization.DataView(data);
@@ -157,7 +157,7 @@ if ($linhas > 0) {
         if (empty($cor[$i])) {
             $i = 0;
         }
-        echo "['" . $nome . "', " . $result['qtd'] . ",'$cor[$i]','/Escola/alunos_2.php?id=$id_turma'],";
+        echo "['" . $nome . "', " . $result['qtd'] . ",'$cor[$i]','/escola/alunos_2.php?id=$id_turma'],";
         $i++;
         if ($i == $Consulta_turma_Cont) {
             
@@ -236,7 +236,7 @@ if ($linhas > 0) {
         if (empty($cor[$i])) {
             $i = 0;
         }
-        echo "['" . $nome . "', " . $result['qtd'] . ",'$cor[$i]','/Escola/alunos_2.php?id=$id_turma'],";
+        echo "['" . $nome . "', " . $result['qtd'] . ",'$cor[$i]','/escola/alunos_2.php?id=$id_turma'],";
         $i++;
     }
 } else {

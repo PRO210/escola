@@ -290,7 +290,7 @@ if ($Recebe_id == "1") {
                     . "<li><a href='cadastrar_update.php?id=" . base64_encode($idf) . "' target='_self' title='Alterar'><span class='glyphicon glyphicon-pencil amarelo' aria-hidden='true' >&nbsp;</span>Alterar os Dados Cadastrais</a></li>"
                     . "<li><a href='pesquisar_no_banco_unitario.php?id=" . base64_encode($idf) . "' target='_self' title='Mostrar'><span class='glyphicon glyphicon-user rosa' aria-hidden='true'>&nbsp;</span>Mostrar os Dados Cadastrais</a></li>"
                     . "<li><a href='cadastrar_historico.php?id=" . base64_encode($idf) . "' target='_blank' title='Histórico'><span class='glyphicon glyphicon-book azul' aria-hidden='true'>&nbsp;</span>Históricos/Transferências/Solicitações</a></li>"
-                    . "<li><a href='cadastrar_boleto.php?id=" . base64_encode($idf) . "' target='_blank' title='Boleto'><span class='glyphicon glyphicon-piggy-bank' aria-hidden='true'>&nbsp;</span>Boletos</a></li>"
+                    . "<li><a href='boleto_cadastrar.php?id=" . base64_encode($idf) . "' target='_blank' title='Boleto'><span class='glyphicon glyphicon-piggy-bank' aria-hidden='true'>&nbsp;</span>Boletos Cadastrar</a></li>"
                     . "</ul>"
                     . "&nbsp;&nbsp;$nomef"
                     . "</div>"

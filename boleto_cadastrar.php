@@ -132,7 +132,7 @@ if (empty($_SESSION['msg'])) {
             <!--<script src="assets/js/jquery.min_maskMoney.js" type="text/javascript"></script>-->
             <script src="assets/js/jquery.maskMoney.min.js" type="text/javascript"></script>
 
-            <form name="form1" action="cadastrar_boleto_server.php" method="post" class="form-horizontal" > 
+            <form name="form1" action="boleto_cadastrar_server.php" method="post" class="form-horizontal" > 
                 <!--Modal-->                <!--Modal-->            <!--Modal-->        
                 <div class="modal fade" id="exemplomodal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" data-backdrop="static">
                     <div class="modal-dialog modal-lg" role="document">

@@ -48,11 +48,11 @@ if ($botao == "criar") {
 //
         session_start();
         $_SESSION['msg'] = "1";
-        header("LOCATION: cadastrar_boleto.php?id=$aluno_id");
+        header("LOCATION: boleto_cadastrar.php?id=$aluno_id");
     } else {
         session_start();
         $_SESSION['msg'] = "2";
-        header("LOCATION: cadastrar_boleto.php?id=$aluno_id");
+        header("LOCATION: boleto_cadastrar.php?id=$aluno_id");
     }
 //
 //
@@ -138,11 +138,11 @@ if ($botao == "criar") {
 //
         session_start();
         $_SESSION['msg'] = "1";
-        header("LOCATION: cadastrar_boleto.php?id=$aluno_id");
+        header("LOCATION: boleto_cadastrar.php?id=$aluno_id");
     } else {
         session_start();
         $_SESSION['msg'] = "2";
-        header("LOCATION: cadastrar_boleto.php?id=$aluno_id");
+        header("LOCATION: boleto_cadastrar.php?id=$aluno_id");
     }
 //
 //Impressao
@@ -166,11 +166,11 @@ if ($botao == "criar") {
 //
         session_start();
         $_SESSION['msg'] = "1";
-        header("LOCATION: cadastrar_boleto.php?id=$aluno_id");
+        header("LOCATION: boleto_cadastrar.php?id=$aluno_id");
     } else {
         session_start();
         $_SESSION['msg'] = "2";
-        header("LOCATION: cadastrar_boleto.php?id=$aluno_id");
+        header("LOCATION: boleto_cadastrar.php?id=$aluno_id");
     }
 //
 //

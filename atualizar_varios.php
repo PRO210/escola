@@ -25,17 +25,17 @@ if (isset($_POST['basica'])) {
 ?>
 <html lang="pt-br" style="background-color:white;">
     <head>
-        <?php
-        include_once './head.php';
-        ?>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ATUALIZAR VÁRIOS</title>
-        <script src="media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+<!--        <script src="media/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="media/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
         <link href="media/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/atualizar_varios.css" rel="stylesheet" type="text/css"/>
         <script src="js/cadastrar_validar.js" type="text/javascript"></script>
         <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
-        <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
+        <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>-->
         <style>
             @media (max-width: 768px) {.botoes{width: -moz-available; margin-bottom: 6px;}
             } 
@@ -59,13 +59,23 @@ if (isset($_POST['basica'])) {
                 color: white;
                 font-size: 14px;
             }
+            .radio{            
+                transform: scale(1.5);
+                width: 24px !important;               
+            }   
+
         </style>
     </head>   
     <body>
         <?php
         include_once './menu.php';
-       
-        ?>        
+        ?>      
+        <link href="assets/css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/bootstrap-reboot.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>      
         <h3 style=" text-align: center;">Atualizar Vários</h3>
         <div class="container-fluid">                          
             <p>
@@ -74,6 +84,7 @@ if (isset($_POST['basica'])) {
                 <button id="btnMostrarEsconderBtnTransporte" class="btn btn-success botoes" >Transporte</button>
                 <button id="btnMostrarEsconderBtnCoringa" class="btn btn-info botoes" >Outros</button>
                 <button id="btnMostrarEsconderBtnHistorico" class="btn btn-inverse botoes" >Histórico</button>
+                <button id="btnMostrarEsconderBtnboletos" class="btn btn-outline-secondary botoes" >Boletos</button>
                 <?php
                 if (isset($_POST['turma_transferidos'])) {
                     echo"<button id='btnMostrarEsconderBtnArquivo' class='btn btn-secundary'>Arquivo Passivo</button>";
@@ -83,10 +94,86 @@ if (isset($_POST['basica'])) {
                 ?>  
                 <button id='btnMostrarEsconderBtnTurmaExtra' class='btn btn-danger botoes'>Turmas Extra</button>
                 <button id="btnMostrarEsconderBtnTransferir" class="btn btn-marron botoes" >Transferir</button>
-            </p>                
+            </p>       
+            <script src="assets/js/jquery.maskMoney.min.js" type="text/javascript"></script>
+
             <form name="cadastrar" action="atualizar_varios_server.php" method="post" class="form-horizontal" >  
                 <input type="hidden" name="usuario_logado" value="<?php echo $usuario_logado ?>">
-                <!--Div historico-->
+                <div class="row" id="boletos">
+                    <div class="col-md-12">                   
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>   
+                                    <th>
+                                        <input class="radio"  type="radio" name="inlineRadioOptions" checked="" id="inlineRadio1" value="option1">
+                                        <label class="" for="inlineRadio1">Gerar Boletos</label>
+                                    </th>
+                                    <th>
+                                        <input class="radio" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">                                       
+                                        <label class="" for="inlineRadio2"> Atualizar Boletos</label>
+                                    </th>
+                                    <th>
+                                        <input class="radio" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                        <label class="" for="inlineRadio3"> Deletar Boletos</label>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>                                
+                                <tr>                                
+                                    <th colspan = '3'>
+                                        Mês e Ano do Boleto: <input type="date" name="previsao_pagamento" style="width: 100% !important">
+                                    </th>                                    
+                                </tr>
+                                <tr class="pago_em" style="display:none">                                
+                                    <th colspan = '3'>
+                                        Pago em: <input type="date" name="pago_em" style="width: 100% !important">
+                                    </th>                                    
+                                </tr>
+                                <tr class="mensalidade">                                
+                                    <th colspan = '3'>
+                                        Mensalidade:<input class="form-control dinheiro" type="text" name="mensalidade" id="mensalidade" value="0.00" style="width: 100% !important">
+                                    </th>                                    
+                                </tr>
+                                <tr style="display: none" class="desconto">                                
+                                    <th colspan = '3'>
+                                        desconto:<input class="form-control dinheiro" type="text" name="desconto" id="desconto" value="0.00" style="width: 100% !important">
+                                    </th>                                    
+                                </tr>
+                                <tr style="display: none" class="multa">                                
+                                    <th colspan = '3'>
+                                        multa:<input class="form-control dinheiro" type="text" name="multa" id="multa" value="0.00" style="width: 100% !important">
+                                    </th>                                    
+                                </tr>
+                                <tr class="bolsista">                                
+                                    <th colspan = '3'>
+                                        Aluno Bolsista: 
+                                        <select class="form-control" name="bolsista" style="width: 100% !important">
+                                            <option>SIM</option>
+                                            <option value="NAO" selected="">NÃO</option>
+                                        </select>
+                                    </th>                                    
+                                </tr>
+                                <tr class="bolsista_valor">                                
+                                    <th colspan = '3'>
+                                        Valor da Bolsa:<input class="form-control dinheiro" type="text" name="bolsista_valor" id="bolsista_valor" value="0.00" style="width: 100% !important">
+                                    </th>                                    
+                                </tr>   
+                                <tr>                                
+                                    <th>
+                                        <button  id ='boletos_criar'  type='submit' value='boletos' name = 'boletos_criar' class='btn btn-primary  btn-block' onclick = 'return confirmar()' >Criar Novo Boleto</button>
+                                    </th>                                    
+                                    <th>
+                                        <button  id ='boletos_atualizar' disabled="" type='submit' value='boletos' name = 'boletos_atualizar' class='btn btn-success  btn-block' onclick = 'return confirmar()' >Atualizar Boleto</button>
+                                    </th>                                    
+                                    <th>
+                                        <button  id ='boletos_excluir' disabled="" type='submit' value='boletos' name = 'boletos_excluir' class='btn btn-danger  btn-block' onclick = 'return confirmar()' >Excluir Boleto</button>
+                                    </th>                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                                           
+                </div>
+                <!--Div historico-->                <!--Div historico-->                <!--Div historico-->                <!--Div historico-->
                 <div class="row" id="historico">
                     <div class="container ">
                         <div class="col-sm-12">
@@ -102,8 +189,6 @@ if (isset($_POST['basica'])) {
                                             <th colspan="2">
                                                 <select class="form-control" name="inputAno" id="inputAno"  style="width: 100% !important">
                                                     <option  selected="" value="">Selecione o Ano </option>
-                                                    <option>2008</option>
-                                                    <option>2009</option>
                                                     <option>2010</option>
                                                     <option>2011</option>
                                                     <option>2012</option>
@@ -489,10 +574,49 @@ if (isset($_POST['basica'])) {
                 ?>                  
             </form>           
         </div>    
+        <script>
+            //Cuida do botões dos boletos e de alguns campos da tabela
+            $(document).ready(function () {
+                $('.radio').change(function () {
+                    var radio = $(this).val();
+                    if (radio == "option1") {
+                        $('#boletos_criar').removeAttr('disabled');
+                        $('#boletos_atualizar').attr('disabled', 'disabled');
+                        $('#boletos_excluir').attr('disabled', 'disabled');
+                        $('.desconto').hide(2000);
+                        $('.multa').hide(2000);
+                        $('.pago_em').hide(2000);
+                        $('.mensalidade').show(2000);
+                        $('.bolsista').show(2000);
+                        $('.bolsista_valor').show(2000);
+
+                    } else if (radio == "option2") {
+                        $('#boletos_atualizar').removeAttr('disabled');
+                        $('#boletos_criar').attr('disabled', 'disabled');
+                        $('#boletos_excluir').attr('disabled', 'disabled');
+                        $('.desconto').show(2000);
+                        $('.multa').show(2000);
+                        $('.pago_em').show(2000);
+                        $('.mensalidade').show(2000);
+                        $('.bolsista').show(2000);
+                        $('.bolsista_valor').show(2000);
+                    } else {
+                        $('#boletos_excluir').removeAttr('disabled');
+                        $('#boletos_atualizar').attr('disabled', 'disabled');
+                        $('#boletos_criar').attr('disabled', 'disabled');
+                        $('.desconto').hide(2000);
+                        $('.multa').hide(2000);
+                        $('.pago_em').hide(2000);
+                        $('.mensalidade').hide(2000);
+                        $('.bolsista').hide(2000);
+                        $('.bolsista_valor').hide(2000);
+                    }
+                });
+            });
+        </script>
         <!--Div Turmas-->
         <script type="text/javascript">
             $(document).ready(function () {
-
                 $("#divConteudoBtnTurmas").hide();
                 $("#btnMostrarEsconderBtnTurmas").click(function () {
                     $("#divConteudoBtnTurmas").toggle(2000);
@@ -562,6 +686,21 @@ if (isset($_POST['basica'])) {
                 });
             });
         </script>
+        <!--Div Boletos-->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#boletos").hide();
+                $("#btnMostrarEsconderBtnboletos").click(function () {
+                    $("#boletos").toggle(2000);
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                var maxLength = '-0.000,00'.length;
+                $(".dinheiro").maskMoney({thousands: ".", decimal: ",", symbol: "R$", showSymbol: true, symbolStay: true}).attr('maxlength', maxLength).trigger('mask.maskMoney');
+            });
+        </script>
         <script>
             function confirmarExclusao2() {
                 var r = confirm('Realmente deseja Criar esse(s) Histórico(s) <?php echo " $usuario_logado" ?> ? ');
@@ -613,7 +752,7 @@ if (isset($_POST['basica'])) {
         </script>
         <script type="text/javascript">
             function confirmarTransferencia() {
-                var r = confirm("Realmente deseja Transferir esse(s) Aluno(s) <?php echo "$usuario_logado";?> ?");
+                var r = confirm("Realmente deseja Transferir esse(s) Aluno(s) <?php echo "$usuario_logado"; ?> ?");
                 if (r == true) {
                     return true;
                 } else {

@@ -656,9 +656,149 @@ if (isset($_POST['atualizar'])) {
         header("Location: alunos.php?id=1");
         //
     }
+    //
+} elseif (isset($_POST['boletos_criar'])) {
+    $todos = '';
+    foreach (($_POST['aluno_selecionado']) as $lista_id) {
+        //
+        $mensalidade = filter_input(INPUT_POST, 'mensalidade', FILTER_DEFAULT);
+        $bolsista = filter_input(INPUT_POST, 'bolsista', FILTER_DEFAULT);
+        $bolsista_valor = filter_input(INPUT_POST, 'bolsista_valor', FILTER_DEFAULT);
+        $pagameto = explode('-', filter_input(INPUT_POST, 'previsao_pagamento', FILTER_DEFAULT));
+//
+        $Consulta_up = mysqli_query($Conexao, "SELECT * FROM alunos WHERE id = '$lista_id'");
+        $Registro = mysqli_fetch_array($Consulta_up, MYSQLI_BOTH);
+        $nome = $Registro['nome'];
+        $turma_id = $Registro['turma'];
+        $todos .= "$nome,";
+        //
+        $Consulta_turma = mysqli_query($Conexao, " SELECT * FROM `turmas` WHERE `id` = '$turma_id'");
+        $Linha_turma = mysqli_fetch_array($Consulta_turma);
+        $turma = $Linha_turma["turma"] . '  ' . $Linha_turma["unico"] . ' (' . $Linha_turma["turno"] . ') - ' . substr($Linha_turma["ano"], 0, -6);
+        //
+        $hoje_mes = date('m');
+        $mes_soma = '';
+        $hoje = date('Y-m-d');
+        $i = 1;
+        $data_pagamento = '';
+        $codigo = uniqid();
+
+        while ($i < 13 - $hoje_mes) {//
+            $mes_soma = $hoje_mes + $i;
+            $data_pagamento = date($pagameto[0] . '-' . "$mes_soma" . '-' . $pagameto[2]);
+            $sql = mysqli_query($Conexao, "INSERT INTO `alunos_pagamentos` (`aluno_id`, `turma_id`, `pago`, `mensalidade`,`bolsista`, `bolsista_valor`, `codigo`, `data_pagamento`,`created`) "
+                    . "VALUES ($lista_id, '$turma_id', 'NAO', '$mensalidade', '$bolsista', '$bolsista_valor', '$codigo', '$data_pagamento',NOW())");
+            $i++;
+        }
+        if ($sql) {
+            $SQL_logar = "INSERT INTO alunos_log (`usuario`, `aluno_id`,`acao`,`acao_resumo`,`data`) "
+                    . "VALUES ( '$usuario_logado','$lista_id','Gerou  o(s) boletos(s) para a turma $turma','CRIAR',now())";
+            $Consulta2 = mysqli_query($Conexao, $SQL_logar);
+//
+        }
+        //
+    }
+    $todos_nomes = substr($todos, 0, -1);
+    if ($Consulta2) {
+        //Logar no sistema
+        $SQL_logar = "INSERT INTO log (`usuario`, `acao`,`cadastrar`,`data`) "
+                . "VALUES ( '$usuario_logado', 'Gerou  o(s) Boleto(s) de: $todos_nomes " . " ' , 'SIM',now())";
+        $Consulta1 = mysqli_query($Conexao, $SQL_logar);
+        //
+        header("Location: alunos.php?id=1");
+    }
+    //
+    //
+} elseif (isset($_POST['boletos_atualizar'])) {
+    //
+    $todos = '';
+    $todas_turmas = '';
+    foreach (($_POST['aluno_selecionado']) as $lista_id) {
+        //
+        $campo = '';
+        $mensalidade = filter_input(INPUT_POST, 'mensalidade', FILTER_DEFAULT);
+        $desconto = filter_input(INPUT_POST, 'desconto', FILTER_DEFAULT);
+        $multa = filter_input(INPUT_POST, 'multa', FILTER_DEFAULT);
+        $bolsista = filter_input(INPUT_POST, 'bolsista', FILTER_DEFAULT);
+        $bolsista_valor = filter_input(INPUT_POST, 'bolsista_valor', FILTER_DEFAULT);
+        $pagamento = substr(filter_input(INPUT_POST, 'previsao_pagamento', FILTER_DEFAULT), 0, -2);
+        $pago_em = filter_input(INPUT_POST, 'pago_em', FILTER_DEFAULT);
+
+        $Consulta_up = mysqli_query($Conexao, "SELECT * FROM alunos WHERE id = '$lista_id'");
+        $Registro = mysqli_fetch_array($Consulta_up, MYSQLI_BOTH);
+        $nome = $Registro['nome'];
+        $turma_id = $Registro['turma'];
+        $todos .= "$nome,";
+//
+//        $mensalidade = str_replace(',', '.', str_replace('.', '', $Registro_backup['mensalidade']));
+//        $multa = str_replace(',', '.', str_replace('.', '', $_POST['multa'][$key]));
+//        $desconto = str_replace(',', '.', str_replace('.', '', $_POST['desconto'][$key]));
+//        $mensalidade_corrigida = number_format($mensalidade + $multa - $desconto, 2, ',', '.');
+//
+        $SQL_matricular = "UPDATE `alunos_pagamentos` SET `pago` = 'SIM', `desconto` = '$desconto', `multa` = '$multa', `pago_em` = '$pago_em', `bolsista` = '$bolsista',"
+                . "`bolsista_valor` = '$bolsista_valor', `mensalidade` = '$mensalidade', updated = now() WHERE aluno_id = '$lista_id' AND `data_pagamento` LIKE '$pagamento%'";
+        $sql = mysqli_query($Conexao, $SQL_matricular);
+        //       
+        $Consulta_turma = mysqli_query($Conexao, " SELECT * FROM `turmas` WHERE `id` = '$turma_id'");
+        $Linha_turma = mysqli_fetch_array($Consulta_turma);
+        $turma = $Linha_turma["turma"] . '  ' . $Linha_turma["unico"] . ' (' . $Linha_turma["turno"] . ') - ' . substr($Linha_turma["ano"], 0, -6);
+
+        //
+        if ($sql) {
+            $campo = 'PAGO EM: ' . $pago_em . ' / DESCONTO: ' . $desconto . '/ MULTA:' . $multa . ' / BOLSISTA: ' . $bolsista . ' / VALOR DA BOLSA: ' . $bolsista_valor . ', MENSALIDADE:' . $mensalidade . ' / '
+                    . 'PARA O MÊS:' . $pagamento;
+            //Logar na Tabela alunos_log
+            $SQL_logar = "INSERT INTO alunos_log (`usuario`, `aluno_id`,`acao`,`acao_resumo`,`data`) "
+                    . "VALUES ( '$usuario_logado','$lista_id','Atualizou o(s) boletos(s) da turma $turma / $campo','ALTERAR',now())";
+            $Consulta2 = mysqli_query($Conexao, $SQL_logar);
+        }
+        $todos_nomes = substr($todos, 0, -1);
+    }
+    if ($Consulta2) {
+        //Logar no sistema
+        $SQL_logar = "INSERT INTO log (`usuario`, `acao`,`alterar`,`data`) "
+                . "VALUES ( '$usuario_logado', 'Atualizou  o(s) Boleto(s) de: $todos_nomes da turma $turma ' , 'SIM',now())";
+        $Consulta1 = mysqli_query($Conexao, $SQL_logar);
+        //
+        header("Location: alunos.php?id=1");
+    }
+    //    
+    //
+} elseif (isset($_POST['boletos_excluir'])) {
+    //
+    $todos = '';
+    $pagamento = substr(filter_input(INPUT_POST, 'previsao_pagamento', FILTER_DEFAULT), 0, -2);
+    foreach (($_POST['aluno_selecionado']) as $lista_id) {
+        //
+        $Consulta_up = mysqli_query($Conexao, "SELECT * FROM alunos WHERE id = '$lista_id'");
+        $Registro = mysqli_fetch_array($Consulta_up, MYSQLI_BOTH);
+        $nome = $Registro['nome'];
+        $turma_id = $Registro['turma'];
+        $todos .= "$nome,";
+        //        
+        $select = mysqli_query($Conexao, "SELECT * FROM `alunos_pagamentos` WHERE aluno_id = '$lista_id' AND `turma_id` = '$turma_id' AND `data_pagamento` LIKE '$pagamento%'");
+        $linhas = mysqli_num_rows($select);
+        //
+        $SQL_matricular = "DELETE FROM `alunos_pagamentos` WHERE aluno_id = '$lista_id' AND `turma_id` = '$turma_id' AND `data_pagamento` LIKE '$pagamento%'";
+        $sql = mysqli_query($Conexao, $SQL_matricular);
+    }
+    $todos_nomes = substr($todos, 0, -1);
+    $Consulta_turma = mysqli_query($Conexao, " SELECT * FROM `turmas` WHERE `id` = '$turma_id'");
+    $Linha_turma = mysqli_fetch_array($Consulta_turma);
+    $turma = $Linha_turma["turma"] . '  ' . $Linha_turma["unico"] . ' (' . $Linha_turma["turno"] . ') - ' . substr($Linha_turma["ano"], 0, -6);
+    //  
+    if ($linhas > 0 && $sql) {
+        //Logar no sistema
+        $SQL_logar = "INSERT INTO log (`usuario`, `acao`,`excluir`,`data`) "
+                . "VALUES ( '$usuario_logado', 'Excluiu  o(s) Boleto(s) de: $todos_nomes da turma $turma do mês ' , 'SIM',now())";
+        $Consulta1 = mysqli_query($Conexao, $SQL_logar);
+        //
+        header("Location: alunos.php?id=1");
+    } else {
+        header("Location: alunos.php?id=2");
+    }
+    //
 }
 
 
-
-
-
+    
