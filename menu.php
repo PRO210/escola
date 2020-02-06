@@ -138,7 +138,7 @@ preg_match_all('/\b\w/u', $nome_menu, $m);
                             <li><a href="alunos_turma_extra.php">Turmas Extra</a></li>                         
                             <li><a href="alunos_procurar_excluir.php">Procurar Por Aluno(s)</a></li>                         
                             <li><a href="numero_de_alunos.php"  >Quant. de Alunos Cursando</a></li>                          
-                            <li><a href="boletos_listar.php">Boletos</a></li>                          
+                            <li><a href="boleto_listar.php">Boletos</a></li>                          
                         </ul>
                     </li>                    
                     <li><a href="#">DISCIPLINAS</a>

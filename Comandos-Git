@@ -57,7 +57,6 @@ asdfg197346
 git branch -a (Branchs locais e remotos)
 git branch -b "endereço do branch remoto"
 git pull nome do repositorio nome do branch (Baixa os arquivos do github)
-git pull servertabeliao master
 git push origin master (atualiza todos os arquivos) (Deve ser usado na máquina local)
 
 jobsontenorio.com.br

@@ -71,6 +71,9 @@ if (empty($_SESSION['msg'])) {
             }
             .desconto{width: 100px !important}
             .pago{width: 100px !important}
+            .mensalidade{width: 120px !important;}           
+            .multa{width: 80px !important;}
+            .bolsista_valor{width: 150px !important;}
 
         </style>    
 
@@ -311,9 +314,37 @@ if (empty($_SESSION['msg'])) {
                                         </select>
                                     </td> 
                                     <?php
-                                }                               
+                                }
+                                $data_pagamento = date_format(date_create($linhaf['data_pagamento']), 'm');
+                                $mes = '';
+                                switch (date($data_pagamento)) {
+                                    case 1: $mes = "Janeiro";
+                                        break;
+                                    case 2: $mes = "Fevereiro";
+                                        break;
+                                    case 3: $mes = "Março";
+                                        break;
+                                    case 4: $mes = "Abril";
+                                        break;
+                                    case 5: $mes = "Maio";
+                                        break;
+                                    case 6: $mes = "Junho";
+                                        break;
+                                    case 7: $mes = "Julho";
+                                        break;
+                                    case 8: $mes = "Agosto";
+                                        break;
+                                    case 9: $mes = "Setembro";
+                                        break;
+                                    case 10: $mes = "Outubro";
+                                        break;
+                                    case 11: $mes = "Novembro";
+                                        break;
+                                    case 12: $mes = "Dezembro";
+                                        break;
+                                }
                                 echo "<td><input type = 'text' value = '$mensalidade' name = 'mensalidade[]' disabled class ='mensalidade todos form-control mensalidade$id'></td>\n";
-                                echo "<td>" . $data_pagamento . "</td>\n";
+                                echo "<td>" . $mes . "</td>\n";
                                 echo "<td><input type = 'date' value = '$pago_em' name = 'pago_em[]' disabled class ='todos form-control pago_em$id'></td>\n";
                                 echo "<td><input type = 'text' value = '$desconto' name = 'desconto[]' disabled class ='desconto todos form-control desconto$id'></td>\n";
                                 echo "<td><input type = 'text' value = '$multa' name = 'multa[]' disabled class ='multa todos form-control multa$id'></td>\n";

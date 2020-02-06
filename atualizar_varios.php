@@ -29,26 +29,13 @@ if (isset($_POST['basica'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ATUALIZAR VÁRIOS</title>
-<!--        <script src="media/js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="media/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-        <link href="media/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/atualizar_varios.css" rel="stylesheet" type="text/css"/>
-        <script src="js/cadastrar_validar.js" type="text/javascript"></script>
-        <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
-        <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>-->
         <style>
             @media (max-width: 768px) {.botoes{width: -moz-available; margin-bottom: 6px;}
             } 
-        </style>
-        <style>
             @media (max-width: 384px) {#ocultar_2{display: none;}
-            } 
-        </style>
-        <style>
+            }     
             @media (max-width: 768px) {#ocultar{display: none;}
             } 
-        </style>
-        <style>
             input{
                 width: 100%;
             }
@@ -62,8 +49,7 @@ if (isset($_POST['basica'])) {
             .radio{            
                 transform: scale(1.5);
                 width: 24px !important;               
-            }   
-
+            }  
         </style>
     </head>   
     <body>
@@ -574,6 +560,16 @@ if (isset($_POST['basica'])) {
                 ?>                  
             </form>           
         </div>    
+        <script>
+            function confirmar() {
+                var r = confirm('Realmente deseja Salvar as Alterações <?php echo "$usuario_logado" ?>?');
+                if (r == true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>
         <script>
             //Cuida do botões dos boletos e de alguns campos da tabela
             $(document).ready(function () {

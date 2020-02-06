@@ -676,14 +676,15 @@ if (isset($_POST['atualizar'])) {
         $Linha_turma = mysqli_fetch_array($Consulta_turma);
         $turma = $Linha_turma["turma"] . '  ' . $Linha_turma["unico"] . ' (' . $Linha_turma["turno"] . ') - ' . substr($Linha_turma["ano"], 0, -6);
         //
-        $hoje_mes = date('m');
+//        $hoje_mes = date('m');
+        $hoje_mes = date_format(date_create(filter_input(INPUT_POST, 'previsao_pagamento', FILTER_DEFAULT)), 'm');
         $mes_soma = '';
         $hoje = date('Y-m-d');
-        $i = 1;
+        $i = 0;
         $data_pagamento = '';
         $codigo = uniqid();
 
-        while ($i < 13 - $hoje_mes) {//
+        while ($i < 13 - $hoje_mes) {
             $mes_soma = $hoje_mes + $i;
             $data_pagamento = date($pagameto[0] . '-' . "$mes_soma" . '-' . $pagameto[2]);
             $sql = mysqli_query($Conexao, "INSERT INTO `alunos_pagamentos` (`aluno_id`, `turma_id`, `pago`, `mensalidade`,`bolsista`, `bolsista_valor`, `codigo`, `data_pagamento`,`created`) "
@@ -705,7 +706,11 @@ if (isset($_POST['atualizar'])) {
                 . "VALUES ( '$usuario_logado', 'Gerou  o(s) Boleto(s) de: $todos_nomes " . " ' , 'SIM',now())";
         $Consulta1 = mysqli_query($Conexao, $SQL_logar);
         //
-        header("Location: alunos.php?id=1");
+        session_start();
+        $_SESSION['msg'] = "1";
+        header("LOCATION: boleto_listar.php");
+    } else {
+        header("Location: alunos.php?id=2");
     }
     //
     //
@@ -793,7 +798,9 @@ if (isset($_POST['atualizar'])) {
                 . "VALUES ( '$usuario_logado', 'Excluiu  o(s) Boleto(s) de: $todos_nomes da turma $turma do mês ' , 'SIM',now())";
         $Consulta1 = mysqli_query($Conexao, $SQL_logar);
         //
-        header("Location: alunos.php?id=1");
+        session_start();
+        $_SESSION['msg'] = "1";
+        header("LOCATION: boleto_listar.php");
     } else {
         header("Location: alunos.php?id=2");
     }

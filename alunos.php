@@ -38,12 +38,12 @@ if ($Recebe_id == "1") {
             <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
             <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
             <script src="js/jquery-1.12.4.js" type="text/javascript"></script>
-            
+
             <script src="media/js/jquery.dataTables.min.js" type="text/javascript"></script>
             <script src="media/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
             <link href="media/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
             <script src="js/cadastrar_validar.js" type="text/javascript"></script>
-            
+
             <link href="Tabela_Responsiva/responsive.dataTables.min.css" rel="stylesheet" type="text/css"/>
             <script src="Tabela_Responsiva/dataTables.responsive.min.js" type="text/javascript"></script>
             <script>
@@ -94,7 +94,7 @@ if ($Recebe_id == "1") {
 //$nascimento = substr($data_nascimento, 6, 4) . '-' . substr($data_nascimento, 3, 2) . '-' . substr($data_nascimento, 0, 2);
             // $Consultaf = mysqli_query($Conexao, "SELECT *, TIMESTAMPDIFF(YEAR,data_nascimento,NOW()) AS idade FROM alunos WHERE (status = 'CURSANDO' OR status = 'ADIMITIDO DEPOIS') AND excluido = 'N'  ORDER BY `nome` ASC");
             $ano = date('Y');
-            $Consultaf = mysqli_query($Conexao, "SELECT turmas.*,alunos.*,TIMESTAMPDIFF(YEAR,data_nascimento,NOW()) AS idade FROM turmas,alunos WHERE alunos.turma = turmas.id AND turmas.ano LIKE '%$ano%' AND (alunos.status = 'CURSANDO' OR alunos.status = 'ADIMITIDO DEPOIS') AND excluido = 'N' ORDER BY `alunos`.`nome` ASC");
+            $Consultaf = mysqli_query($Conexao, "SELECT turmas.*,alunos.*,TIMESTAMPDIFF(YEAR,data_nascimento,NOW()) AS idade FROM turmas,alunos WHERE alunos.turma = turmas.id AND turmas.ano LIKE '%$ano%' AND (alunos.status = 'CURSANDO' OR alunos.status = 'ADIMITIDO DEPOIS') AND excluido = 'N' ORDER BY alunos.turma ASC,alunos.nome ASC");
             $rowf = mysqli_num_rows($Consultaf);
             if ($rowf > 0) {
                 $disabled = "";
@@ -290,7 +290,7 @@ if ($Recebe_id == "1") {
                     . "<li><a href='cadastrar_update.php?id=" . base64_encode($idf) . "' target='_self' title='Alterar'><span class='glyphicon glyphicon-pencil amarelo' aria-hidden='true' >&nbsp;</span>Alterar os Dados Cadastrais</a></li>"
                     . "<li><a href='pesquisar_no_banco_unitario.php?id=" . base64_encode($idf) . "' target='_self' title='Mostrar'><span class='glyphicon glyphicon-user rosa' aria-hidden='true'>&nbsp;</span>Mostrar os Dados Cadastrais</a></li>"
                     . "<li><a href='cadastrar_historico.php?id=" . base64_encode($idf) . "' target='_blank' title='Histórico'><span class='glyphicon glyphicon-book azul' aria-hidden='true'>&nbsp;</span>Históricos/Transferências/Solicitações</a></li>"
-                    . "<li><a href='boleto_cadastrar.php?id=" . base64_encode($idf) . "' target='_blank' title='Boleto'><span class='glyphicon glyphicon-piggy-bank' aria-hidden='true'>&nbsp;</span>Boletos Cadastrar</a></li>"
+                    . "<li><a href='boleto_cadastrar.php?id=" . base64_encode($idf) . "' target='_blank' title='Boleto'><span class='glyphicon glyphicon-piggy-bank' aria-hidden='true'>&nbsp;</span>Boletos</a></li>"
                     . "</ul>"
                     . "&nbsp;&nbsp;$nomef"
                     . "</div>"
@@ -330,8 +330,8 @@ if ($Recebe_id == "1") {
                 }
                 echo "</tbody>";
                 echo "</table>";
-                echo "</form>";              
-            } else {                
+                echo "</form>";
+            } else {
                 echo "<h1>Nada enconrado.</h1>";
             }
             ?>           
@@ -346,10 +346,10 @@ if ($Recebe_id == "1") {
                     var table = $('#tbl_alunos_lista').DataTable({
                         //
                         "columnDefs": [{
-                                "targets": 0,
+                                "targets": [0],
                                 "orderable": false
                             }],
-                        "lengthMenu": [[7, 10, 15, 20, 25, 30, 40, 50, 70, 100, -1], [7, 10, 15, 20, 25, 30, 40, 50, 70, 100, "All"]],
+                        "lengthMenu": [[7, 10, 15, 20, 25, 30,35, 40, 50, 70, 100, -1], [7, 10, 15, 20, 25, 30, 35,40, 50, 70, 100, "All"]],
                         "language": {
                             "lengthMenu": " _MENU_ <?php
 //            echo "&nbsp;&nbsp;<a href='cadastrar.php' target='_self' class = 'btn btn-success' id = 'esconder_bt'>Novato</a></span>"
