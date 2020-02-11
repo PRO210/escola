@@ -49,9 +49,8 @@ if (empty($_SESSION['msg'])) {
         <title>Boletos</title>
         <style>             
             .verde{color: green; padding-bottom: 12px;}
-
-            tfoot input {width: 100%;padding: 3px;box-sizing: border-box;}
-
+            tfoot input {width: 100%;padding: 3px;box-sizing: border-box;
+            }
             #esconder_list{display: none; }
             #esconder_bt{display: inline-block; }
             @media (max-width: 1000px) { #esconder_list{ display: inline;}
@@ -222,7 +221,7 @@ if (empty($_SESSION['msg'])) {
                         <div class="container-fluid" >  
                             <h4 style="margin: 12px; margin-left: 18px">Boletos de : &nbsp;<b><?php echo"$nome" ?>&nbsp;</b>Turma Atual &nbsp;: <b><?php echo"$turma" ?></b></h4>
                             <?php
-                            $Consultaf = mysqli_query($Conexao, "SELECT * FROM `alunos_pagamentos` WHERE aluno_id = '$id_aluno' ORDER BY `alunos_pagamentos`.`created` DESC,`data_pagamento` ASC ");
+                            $Consultaf = mysqli_query($Conexao, "SELECT * FROM `alunos_pagamentos` WHERE aluno_id = '$id_aluno' ORDER BY `data_pagamento` ASC,`alunos_pagamentos`.`created` DESC ");
                             $rowf = mysqli_num_rows($Consultaf);
                             //
                             echo "<table class='nowrap table table-striped table-bordered ' id='tbl_alunos_lista' width='100%' cellspacing='0'>";
@@ -237,7 +236,7 @@ if (empty($_SESSION['msg'])) {
                             . "</ul>"
                             . "</div>"
                             . "</th>";
-                            echo "<th style = ' white-space: normal;'>CÓDIGO</th>";
+                            echo "<th style = ' white-space: normal;'>ATIVO</th>";
                             echo "<th class = 'pago'>PAGO</th>";
                             echo "<th>MENSALIDADE </th>";
                             echo "<th>PAGAMENTO </th>";
@@ -251,7 +250,7 @@ if (empty($_SESSION['msg'])) {
                             echo "<tfoot>";
                             echo "<tr>";
                             echo "<th></th>";
-                            echo "<th style = ' white-space: normal;'> CÓDIGO </th>";
+                            echo "<th style = ' white-space: normal;'>ATIVO</th>";
                             echo "<th class = 'pago'>PAGO</th>";
                             echo "<th>MENSALIDADE</th>";
                             echo "<th>PAGAMENTO</th>";
@@ -268,6 +267,7 @@ if (empty($_SESSION['msg'])) {
                                 //
                                 $id = $linhaf['id'];
                                 $codigo = $linhaf['codigo'];
+                                $ativo = $linhaf['ativo'];
                                 $pago = $linhaf['pago'];
                                 $mensalidade = $linhaf['mensalidade'];
                                 $data_pagamento = $linhaf['data_pagamento'];
@@ -279,28 +279,45 @@ if (empty($_SESSION['msg'])) {
 
 
                                 echo "<td ></td>";
-                                echo "<td id = 'thNome' style = 'padding-right:0px;'>"
-                                . "<div class='dropdown'>"
-                                . "<input type='checkbox' name='aluno_selecionado[]' id ='' class ='checkbox btmais' value='$id'>"
+                                if ($ativo == "SIM") {
+                                    echo "<td id = 'thNome' style = 'padding-right:0px;'>"
+                                    . "<div class='dropdown'>"
+                                    . "<input type='checkbox' name='aluno_selecionado[]' id ='' class ='checkbox btmais' value='$id'>"
 //                                    . "&nbsp;&nbsp;<span class='glyphicon glyphicon-cog text-success' id='dropdownMenu1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true'></span>"
 //                                    . "<ul class='dropdown-menu' aria-labelledby='dropdownMenu1'>"
 //                                    //                                . "<li><a href='impressao.php?id=$idf' target='_blank' title='Imprimir Folha de Matricula'><span class='glyphicon glyphicon-print verde ' aria-hidden='true'>&nbsp;</span>Imprimir Folha de Matricula</a></li>"
-//                                    //                                . "<li><a href='folha_re_matricula.php?id=$idf' target='_blank' title='Imprimir Folha de Ré Matricula'><span class='glyphicon glyphicon-print verde ' aria-hidden='true'>&nbsp;</span>Imprimir Folha de ReMatrícula</a></li>"
-//                                    //                                . "<li $display2><a href='declaracoes_bolsa_familia.php?id=$idf' target='_blank' title='Declaração de Frequência Escolar'><span class='glyphicon glyphicon-print verde ' aria-hidden='true'>&nbsp;</span>Declaração de Frequência Escolar</a></li>"
-//                                    //                                . "<li $display><a href='impressao_transferencia_provisoria_tratamento.php?id=$idf' target='_blank' title='Imprimir Declaração de Transferência'><span class='glyphicon glyphicon-print verde ' aria-hidden='true'>&nbsp;</span>Declaração de Transferência</a></li>"
-//                                    //                                . "<li><a href='cadastrar_update.php?id=" . base64_encode($idf) . "' target='_self' title='Alterar'><span class='glyphicon glyphicon-pencil amarelo' aria-hidden='true' >&nbsp;</span>Alterar os Dados Cadastrais</a></li>"
-//                                    //                                . "<li><a href='pesquisar_no_banco_unitario.php?id=" . base64_encode($idf) . "' target='_blanc' title='Mostrar'><span class='glyphicon glyphicon-user rosa' aria-hidden='true'>&nbsp;</span>Mostrar os Dados Cadastrais</a></li>"
-//                                    //                                . "<li><a href='cadastrar_historico.php?id=" . base64_encode($idf) . "' target='_self' title='Histórico'><span class='glyphicon glyphicon-book azul' aria-hidden='true'>&nbsp;</span>Históricos/Transferências/Solicitações</a></li>"
-//                                    //                                . "<li><a href='pesquisar_no_banco.php?id=" . base64_encode($idf) . "' target='_self' title='Possível Caso de Duplicidade'><span class='glyphicon glyphicon-remove vermelho' aria-hidden='true'>&nbsp;</span>Possível Caso de Duplicidade</a></li>"
-////                                    . "<li><a href='alunos_arquivo_passivo.php?id=" . base64_encode($idf) . "' target='_self' title='Retirar do Arquivo Passivo'><span class='glyphicon glyphicon-trash' aria-hidden='true'>&nbsp;</span>Retirar do Arquivo Passivo</a></li>"
 //                                    //                                . "<li $display4><a><button type ='submit' onclick= 'validaCheckbox2();return validaCheckbox()' name = 'turma_transferidos' value = '$idf' class='btn btn-link arquivo' title = 'Mover para Arquivo Passivo' style='text-decoration: none;color: black;margin-left: -12px;'><span class='glyphicon glyphicon-folder-open' aria-hidden='true'></span></button>Mover para o Arquivo Passivo</a></li>"
 //                                    . "</ul>"
-                                . "&nbsp;&nbsp;$codigo"
-                                . "</div>";
+                                    . "&nbsp;&nbsp;"
+                                    . "<select name='ativo[]' class='todos form-control' disabled='' id='$id' >"
+                                    . "<option selected= ''>SIM</option>"
+                                    . "<option  value='NAO' >NÃO</option>"
+                                    . "</select>"
+                                    . "</div>"
+                                    . "</td>";
+
+                                } else {
+                                    echo "<td id = 'thNome' style = 'padding-right:0px;'>"
+                                    . "<div class='dropdown'>"
+                                    . "<input type='checkbox' name='aluno_selecionado[]' id ='' class ='checkbox btmais' value='$id'>"
+//                                    . "&nbsp;&nbsp;<span class='glyphicon glyphicon-cog text-success' id='dropdownMenu1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='true'></span>"
+//                                    . "<ul class='dropdown-menu' aria-labelledby='dropdownMenu1'>"
+//                                    //                                . "<li><a href='impressao.php?id=$idf' target='_blank' title='Imprimir Folha de Matricula'><span class='glyphicon glyphicon-print verde ' aria-hidden='true'>&nbsp;</span>Imprimir Folha de Matricula</a></li>"
+//                                    //                                . "<li $display4><a><button type ='submit' onclick= 'validaCheckbox2();return validaCheckbox()' name = 'turma_transferidos' value = '$idf' class='btn btn-link arquivo' title = 'Mover para Arquivo Passivo' style='text-decoration: none;color: black;margin-left: -12px;'><span class='glyphicon glyphicon-folder-open' aria-hidden='true'></span></button>Mover para o Arquivo Passivo</a></li>"
+//                                    . "</ul>"
+                                    . "&nbsp;&nbsp;"
+                                    . "<select name='ativo[]' class='todos form-control' disabled='' id='$id' >"
+                                    . "<option >SIM</option>"
+                                    . "<option selected= '' value='NAO' >NÃO</option>"
+                                    . "</select>"
+                                    . "</div>"
+                                    . "</td>";
+                                }
+
                                 if ($pago == "SIM") {
                                     ?>
                                     <td>
-                                        <select name="pago[]" class="todos form-control" disabled="" id="<?= $id ?>">
+                                        <select name="pago[]" class="todos form-control <?= 'pag' . $id ?>" disabled="" id="<?= $id ?>">
                                             <option selected="">SIM</option>
                                             <option value="NAO">NÃO</option>
                                         </select>
@@ -308,7 +325,7 @@ if (empty($_SESSION['msg'])) {
                                 <?php } else {
                                     ?>
                                     <td>
-                                        <select name="pago[]" class="todos form-control" disabled="" id="<?= $id ?>"  >
+                                        <select name="pago[]" class="todos form-control <?= 'pag' . $id ?>" disabled="" id="<?= $id ?>"  >
                                             <option selected="">SIM</option>
                                             <option value="NAO" selected="">NÃO</option>
                                         </select>

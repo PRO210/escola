@@ -37,6 +37,14 @@ mysqli_set_charset($Conexao, "utf8");
 //                break;
 //        }
 //    }
+$botao = filter_input(INPUT_POST, 'botao', FILTER_DEFAULT);
+
+if ($botao == "excel") {
+//
+    include 'boleto_listar_excel.php';
+    exit();
+}
+//
 ?>
 <html lang="pt-br" style="background-color:white;">
     <head>
@@ -159,7 +167,7 @@ mysqli_set_charset($Conexao, "utf8");
 
                 foreach (($_POST['aluno_selecionado']) as $buscar_id) {
 
-                    $Consultaf = mysqli_query($Conexao, "SELECT alunos_pagamentos.*,alunos.nome,alunos.mae,alunos.data_nascimento  FROM `alunos_pagamentos`,`alunos` WHERE alunos_pagamentos.id = '$buscar_id' AND alunos_pagamentos.aluno_id = alunos.id");
+                    $Consultaf = mysqli_query($Conexao, "SELECT alunos_pagamentos.*,alunos.nome,alunos.mae,alunos.data_nascimento  FROM `alunos_pagamentos`,`alunos` WHERE alunos_pagamentos.id = '$buscar_id' AND alunos_pagamentos.aluno_id = alunos.id AND ativo = 'SIM'");
                     $rowf = mysqli_num_rows($Consultaf);
 
                     if ($rowf > 0) {
@@ -205,7 +213,7 @@ mysqli_set_charset($Conexao, "utf8");
                             echo "<td><input type='checkbox' name='aluno_selecionado[]' class='marcar' value='$idf' checked ></td>\n";
                             echo "<td>" . $nomef . "</td>\n";
                             echo "<td>" . $data_nascimentof . "</td>\n";
-                            echo "<td>" . $mes . '/' . $ano . "</td>\n";                          
+                            echo "<td>" . $mes . '/' . $ano . "</td>\n";
                             echo "<td id = 'ocultar_2'>" . $maef . "</td>\n";
 //                            echo "<td id = 'ocultar'>" . $nis . "</td>\n";
 //                            echo "<td id = 'ocultar'>" . $susf . "</td>\n";
@@ -221,25 +229,25 @@ mysqli_set_charset($Conexao, "utf8");
             </form>
         </div>
         <script>
-                $(document).ready(function () {
-                    var maxLength = '-0.000,00'.length;
-                    $("#desconto").maskMoney({thousands: ".", decimal: ",", symbol: "R$", showSymbol: true, symbolStay: true}).attr('maxlength', maxLength).trigger('mask.maskMoney');
-                    $("#multa").maskMoney({thousands: ".", decimal: ",", symbol: "R$", showSymbol: true, symbolStay: true}).attr('maxlength', maxLength).trigger('mask.maskMoney');
-                    $("#mensalidade").maskMoney({thousands: ".", decimal: ",", symbol: "R$", showSymbol: true, symbolStay: true}).attr('maxlength', maxLength).trigger('mask.maskMoney');
-                    $("#bolsista_valor").maskMoney({thousands: ".", decimal: ",", symbol: "R$", showSymbol: true, symbolStay: true}).attr('maxlength', maxLength).trigger('mask.maskMoney');
+            $(document).ready(function () {
+                var maxLength = '-0.000,00'.length;
+                $("#desconto").maskMoney({thousands: ".", decimal: ",", symbol: "R$", showSymbol: true, symbolStay: true}).attr('maxlength', maxLength).trigger('mask.maskMoney');
+                $("#multa").maskMoney({thousands: ".", decimal: ",", symbol: "R$", showSymbol: true, symbolStay: true}).attr('maxlength', maxLength).trigger('mask.maskMoney');
+                $("#mensalidade").maskMoney({thousands: ".", decimal: ",", symbol: "R$", showSymbol: true, symbolStay: true}).attr('maxlength', maxLength).trigger('mask.maskMoney');
+                $("#bolsista_valor").maskMoney({thousands: ".", decimal: ",", symbol: "R$", showSymbol: true, symbolStay: true}).attr('maxlength', maxLength).trigger('mask.maskMoney');
 
-                });
-            </script>           
-            <script>
-                function confirmar() {
-                    var r = confirm('Realmente deseja Salvar as Alterações <?php echo "$usuario_logado" ?>?');
-                    if (r == true) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+            });
+        </script>           
+        <script>
+            function confirmar() {
+                var r = confirm('Realmente deseja Salvar as Alterações <?php echo "$usuario_logado" ?>?');
+                if (r == true) {
+                    return true;
+                } else {
+                    return false;
                 }
-            </script>
+            }
+        </script>
         <script>
             //Cuida do botões dos boletos e de alguns campos da tabela
             $(document).ready(function () {

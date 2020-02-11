@@ -1,16 +1,12 @@
 <?php
 
 include_once 'valida_cookies.inc';
-?>
-<?php
-
 //Abre a conexão com o banco de dados
 include_once './inc.conf.php';
 $Conexao = mysqli_connect("127.0.0.1", $Usuario, $Senha, $Base);
 mysqli_set_charset($Conexao, "utf8");
-?>
-<?php
-
+//
+//
 if (isset($_POST['atualizar_usuario'])) {
     //Recebe os valores do furmulário de matrícula (Método POST)
     $id = filter_input(INPUT_POST, 'inputId', FILTER_DEFAULT);
@@ -26,47 +22,48 @@ if (isset($_POST['atualizar_usuario'])) {
     $Consulta_backup2 = mysqli_query($Conexao, "SELECT * FROM `usuarios` WHERE id = $id ");
     $Registro_backup2 = mysqli_fetch_array($Consulta_backup2, MYSQLI_BOTH);
     $nomebackup = $Registro_backup2['nome'];
-   
-        $admin = "";
-        if ($tipo == "ADMIN") {
-            $admin = "0";
-        } else {
-            $admin = "1";
-        }
 
-        $SQL_matricular = "UPDATE usuarios SET usuario = '$usuario', nome = '$nome', tipo = '$admin', senha = '$senha' WHERE id = $id ";
-        $Consulta = mysqli_query($Conexao, $SQL_matricular);
-        //     
-        if ($Consulta) {            
-            $Consulta_final = mysqli_query($Conexao, "SELECT * FROM `usuarios` WHERE id = $id ");
-            $row_final = mysqli_fetch_array($Consulta_final);
-            $result = array_diff_assoc($row_final, $row_backup);
-            $campo = "";
+    $admin = "";
+    if ($tipo == "ADMIN") {
+        $admin = "0";
+    } elseif ($tipo == "FINANCEIRO") {
+        $admin = "1";
+    } else {
+        $admin = "2";
+    }
 
-            foreach ($result as $nome_campo => $valor) {
-                //echo "$nome_campo = $valor<br>";
-                if (!is_numeric($nome_campo)) {
-                    // echo "$nome_campo = $valor<br>";
-                    $campo .= "$nome_campo = $valor / ";
-                    //echo "$campo";
-                }
+    $SQL_matricular = "UPDATE usuarios SET usuario = '$usuario', nome = '$nome', tipo = '$admin', senha = '$senha' WHERE id = $id ";
+    $Consulta = mysqli_query($Conexao, $SQL_matricular);
+    //     
+    if ($Consulta) {
+        $Consulta_final = mysqli_query($Conexao, "SELECT * FROM `usuarios` WHERE id = $id ");
+        $row_final = mysqli_fetch_array($Consulta_final);
+        $result = array_diff_assoc($row_final, $row_backup);
+        $campo = "";
+
+        foreach ($result as $nome_campo => $valor) {
+            //echo "$nome_campo = $valor<br>";
+            if (!is_numeric($nome_campo)) {
+                // echo "$nome_campo = $valor<br>";
+                $campo .= "$nome_campo = $valor / ";
+                //echo "$campo";
             }
-            //Logar no sistema
-            $SQL_logar = "INSERT INTO log (`usuario`, `acao`,`data`) "
-                    . "VALUES ( '$usuario_logado', 'Atualizou o Usuário $nomebackup em :$campo' , now())";
-            $Consulta1 = mysqli_query($Conexao, $SQL_logar);
+        }
+        //Logar no sistema
+        $SQL_logar = "INSERT INTO log (`usuario`, `acao`,`data`) "
+                . "VALUES ( '$usuario_logado', 'Atualizou o Usuário $nomebackup em :$campo' , now())";
+        $Consulta1 = mysqli_query($Conexao, $SQL_logar);
 
 
-            echo "
-		<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/Escola/pesquisar_usuario_server.php'>
+        echo "
+		<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/escola/pesquisar_usuario_server.php'>
 		<script type=\"text/javascript\">
 		alert(\"O Usuario $nome foi Alterado com Sucesso!\");
 		</script>
 			";
-        } else {
-            echo mysqli_error($Conexao);
-        }
-    
+    } else {
+        echo mysqli_error($Conexao);
+    }
 } else {
     //Recebe os valores do furmulário de matrícula (Método POST)
     $usuario = filter_input(INPUT_POST, 'inputUsuario', FILTER_DEFAULT);
@@ -99,7 +96,7 @@ if (isset($_POST['atualizar_usuario'])) {
 
             $id_matricular = mysqli_insert_id($Conexao);
             echo "
-		<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/Escola/pesquisar_usuario_server.php'>
+		<META HTTP-EQUIV=REFRESH CONTENT = '0;URL=http://localhost/escola/pesquisar_usuario_server.php'>
 		<script type=\"text/javascript\">
 		alert(\"O Usuario $nome foi Cadastrato com Sucesso!\");
 		</script>

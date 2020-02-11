@@ -12,15 +12,15 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet; //classe responsável pela manipulaç�
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx; //classe que salvará a planilha em .xlsx
 //
 use PhpOffice\PhpSpreadsheet\IOFactory; //classe responsável por ler uma planilha
-
+//
 //
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 $hoje = date('Y-m-d');
 //
-$colunas = array('turma_id', 'pago', 'mensalidade', 'desconto', 'multa', 'bolsista', 'bolsista_valor', 'data_pagamento', 'pago_em','ativo');
+$colunas = array('aluno_id','turma_id', 'pago', 'mensalidade', 'desconto', 'multa', 'bolsista', 'bolsista_valor', 'data_pagamento', 'pago_em', 'ativo');
 //
-$alfabetos = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J');
+$alfabetos = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J','K');
 //
 $ids = "";
 foreach (($_POST['aluno_selecionado']) as $value) {
@@ -31,7 +31,7 @@ $id = substr($ids, 0, -1);
 $query = mysqli_query($Conexao, "SELECT * FROM `alunos_pagamentos` WHERE `id` IN ($id)");
 $row = mysqli_num_rows($query);
 $row_aluno_id = mysqli_fetch_array($query);
-$aluno_id  = $row_aluno_id['aluno_id'];
+$aluno_id = $row_aluno_id['aluno_id'];
 //
 $query_alunos = mysqli_query($Conexao, "SELECT * FROM `alunos` WHERE `id` IN ($aluno_id)");
 $row_alunos = mysqli_fetch_array($query_alunos);
@@ -49,16 +49,16 @@ $styleArray = [
     // 'textRotation' => 90,
     ],
 ];
-$spreadsheet->getActiveSheet()->getStyle('A2:I100')->applyFromArray($styleArray);
+$spreadsheet->getActiveSheet()->getStyle('A1:K100')->applyFromArray($styleArray);
 
 //
 foreach ($alfabetos as $key => $alfabeto) {
     $sheet->setCellValue($alfabeto . '2', $colunas[$key]);
 }
 //
-$sheet->setCellValue('A1', $nome);
-$spreadsheet->getActiveSheet()->mergeCells('A1:B1');
-$spreadsheet->getActiveSheet()->getStyle('A1:B1')->applyFromArray($styleArray);
+//$sheet->setCellValue('A1', $nome);
+//$spreadsheet->getActiveSheet()->mergeCells('A1:B1');
+//$spreadsheet->getActiveSheet()->getStyle('A1:B1')->applyFromArray($styleArray);
 //
 $cont = 3;
 while ($row = mysqli_fetch_array($query)) {
@@ -73,6 +73,13 @@ while ($row = mysqli_fetch_array($query)) {
             } else {
                 $sheet->setCellValue($alfabeto . $cont, date_format(new DateTime($row["$coluna"]), 'd-m-Y'));
             }
+            //
+        } elseif ($coluna == "aluno_id") {
+            $aluno_id = $row['aluno_id'];
+            $query_alunos = mysqli_query($Conexao, "SELECT * FROM `alunos` WHERE `id` IN ($aluno_id)");
+            $row_alunos = mysqli_fetch_array($query_alunos);
+            $nome = $row_alunos['nome'];
+            $sheet->setCellValue($alfabeto . $cont, $nome);
             //
         } elseif ($coluna == "turma_id") {
             $turmaf = $row['turma_id'];
