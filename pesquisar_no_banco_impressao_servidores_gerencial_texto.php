@@ -175,7 +175,7 @@ $timbre = base64_encode($imagem->blob_imagem);
                             echo '<td>' . $ae . '</td>';
                             echo '</tr>';
                         }
-                        //
+                        //rodaé da primeira folha
                         if ($cont == 20) {
                             //
                             echo '<tr>';
@@ -196,7 +196,7 @@ $timbre = base64_encode($imagem->blob_imagem);
                             echo '<td colspan = "17"  style = "border-left-color: white;border-right-color: white;">'
                             . '<div>'
                             . " <img src='img/timbre.jpg' />"
-                            . ' <P style="    text-align: center;margin-top: -42px;font-size: 24px;">SECRETARIA MUNICIPAL DE EDUCAÇÃO</p>'
+                            . ' <P style="    text-align: center;margin-top: -42px;margin-bottom: 14px !important;font-size: 24px;">SECRETARIA MUNICIPAL DE EDUCAÇÃO</p>'
                             . '</div>'
                             . ' </td>';
                             echo '</tr>';
@@ -354,6 +354,7 @@ $timbre = base64_encode($imagem->blob_imagem);
                                 }
                             }
                             //Contina pois a primeira folha é maior que 20
+                            //Contina pois a primeira folha é maior que 20
                             if ($cont + $cont2 == 20) {
                                 //
                                 echo '<tr>';
@@ -374,7 +375,7 @@ $timbre = base64_encode($imagem->blob_imagem);
                                 echo '<td colspan = "17"  style = "border-left-color: white;border-right-color: white;">'
                                 . '<div>'
                                 . " <img src='img/timbre.jpg' />"
-                                . ' <P style="    text-align: center;margin-top: -42px;font-size: 24px;">SECRETARIA MUNICIPAL DE EDUCAÇÃO</p>'
+                                . ' <P style="    text-align: center;margin-top: -42px;margin-bottom: 12px !important; font-size: 24px;">SECRETARIA MUNICIPAL DE EDUCAÇÃO</p>'
                                 . '</div>'
                                 . ' </td>';
                                 echo '</tr>';

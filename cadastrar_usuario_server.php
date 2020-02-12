@@ -1,7 +1,6 @@
 <?php
-
+ob_start();
 include_once 'valida_cookies.inc';
-//Abre a conexão com o banco de dados
 include_once './inc.conf.php';
 $Conexao = mysqli_connect("127.0.0.1", $Usuario, $Senha, $Base);
 mysqli_set_charset($Conexao, "utf8");
@@ -21,18 +20,9 @@ if (isset($_POST['atualizar_usuario'])) {
     //
     $Consulta_backup2 = mysqli_query($Conexao, "SELECT * FROM `usuarios` WHERE id = $id ");
     $Registro_backup2 = mysqli_fetch_array($Consulta_backup2, MYSQLI_BOTH);
-    $nomebackup = $Registro_backup2['nome'];
+    $nomebackup = $Registro_backup2['nome'];   
 
-    $admin = "";
-    if ($tipo == "ADMIN") {
-        $admin = "0";
-    } elseif ($tipo == "FINANCEIRO") {
-        $admin = "1";
-    } else {
-        $admin = "2";
-    }
-
-    $SQL_matricular = "UPDATE usuarios SET usuario = '$usuario', nome = '$nome', tipo = '$admin', senha = '$senha' WHERE id = $id ";
+    $SQL_matricular = "UPDATE usuarios SET usuario = '$usuario', nome = '$nome', tipo = '$tipo', senha = '$senha' WHERE id = $id ";
     $Consulta = mysqli_query($Conexao, $SQL_matricular);
     //     
     if ($Consulta) {
@@ -77,15 +67,11 @@ if (isset($_POST['atualizar_usuario'])) {
 
     if ($row_backup > 0) {
         echo "Ops! Esse usuário já existe.";
+        //
     } else {
-        $admin = "";
-        if ($tipo == "ADMIN") {
-            $admin = "0";
-        } else {
-            $admin = "1";
-        }
+       //
         $SQL_matricular = "INSERT INTO usuarios (`usuario`,`nome`,`tipo`,`senha`) "
-                . "VALUES ( '$usuario','$nome', '$admin', '$senha')";
+                . "VALUES ( '$usuario','$nome', '$tipo', '$senha')";
         $Consulta = mysqli_query($Conexao, $SQL_matricular);
 
         if ($Consulta) {

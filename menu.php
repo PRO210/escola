@@ -105,6 +105,21 @@ $Registro = mysqli_fetch_array($Consulta_up, MYSQLI_BOTH);
 $nome_menu = $Registro["nome"];
 preg_match_all('/\b\w/u', $nome_menu, $m);
 //echo implode('',$m[0]);
+$Consulta = mysqli_query($Conexao, "SELECT * FROM `usuarios` WHERE  `usuario` = '$usuario_logado'");
+$Linha = mysqli_fetch_array($Consulta, MYSQLI_BOTH);
+//
+$tipo = $Linha['tipo'];
+$id_usuario = $Linha['id'];
+$sistema = "none";
+$visao_boleto = "none";
+//
+if ($tipo == "ROOT" || $tipo == "ADMIN") {
+    $sistema = "block";
+}
+if ($tipo == "ROOT" || $tipo == "ADMIN" || $tipo == "FINANCEIRO") {
+    $visao_boleto = "block";
+}
+
 ?>
 <style>
     .rm-nav li a, .rm-menu-item a{
@@ -138,7 +153,7 @@ preg_match_all('/\b\w/u', $nome_menu, $m);
                             <li><a href="alunos_turma_extra.php">Turmas Extra</a></li>                         
                             <li><a href="alunos_procurar_excluir.php">Procurar Por Aluno(s)</a></li>                         
                             <li><a href="numero_de_alunos.php"  >Quant. de Alunos Cursando</a></li>                          
-                            <li><a href="boleto_listar.php">Boletos</a></li>                          
+                            <li style="display: <?= $visao_boleto ?> " ><a  href="boleto_listar.php">Boletos</a></li>                          
                         </ul>
                     </li>                    
                     <li><a href="#">DISCIPLINAS</a>
@@ -178,17 +193,7 @@ preg_match_all('/\b\w/u', $nome_menu, $m);
                             <li><a href="montar_relatorio_atestados_etc.php">Montar Relatório de Atestados</a></li>
                             <li><a href="relatorios_prontos.php">Relatório de Alunos Pronto</a></li>
                             <li><a href="montar_relatorio.php">Montar Relatório de Alunos</a></li>
-                        </ul>
-                        <?php
-                        $Consulta = mysqli_query($Conexao, "SELECT * FROM `usuarios` WHERE  `usuario` = '$usuario_logado'");
-                        $Linha = mysqli_fetch_array($Consulta, MYSQLI_BOTH);
-                        $tipo = $Linha['tipo'];
-                        $id_usuario = $Linha['id'];
-                        $sistema = "";
-                        if ($tipo == "1") {
-                            $sistema = "none";
-                        }
-                        ?>
+                        </ul>                       
                         <input type="hidden" id="id_usuario" value="<?php echo "$id_usuario"; ?>">
                     <li style="display: <?php echo $sistema; ?> "><a href="#">SISTEMA</a>
                         <ul>

@@ -95,7 +95,7 @@ if ($idcerto == 1) {
                         . "<li><button type='submit' value='' name = 'imprimir_funcao'  class='btn btn-link  verde' onclick= 'return validaCheckbox()'><span class='glyphicon glyphicon-print ' aria-hidden='true'></span></button>Geral por Funcão</li>"
                         . "<li><button type='submit' value='imprimir_pdf' name = 'imprimir_pdf'  class='btn btn-link verde ' onclick= 'return validaCheckbox()'><span class='glyphicon glyphicon-print ' aria-hidden='true'></span></button>Recadast. Prefeitura</li>"
                         . "<li><button type='submit' value='' name = 'imprimir_gerencial'  class='btn btn-link  verde' ><span class='glyphicon glyphicon-print ' aria-hidden='true'></span></button>Gerencial Excel &nbsp;&nbsp;</li>"
-                        . "<li><button type='submit' value='' name = 'imprimir_gerencial_texto'  class='btn btn-link  verde' ><span class='glyphicon glyphicon-print ' aria-hidden='true'></span></button>Gerencial Texto&nbsp;&nbsp;</li>"
+                        . "<li><button type='submit' value='' name = 'imprimir_gerencial_texto'  class='btn btn-link  verde' onclick= 'return validaCheckbox()'><span class='glyphicon glyphicon-print ' aria-hidden='true'></span></button>Gerencial Texto&nbsp;&nbsp;</li>"
                         . "</th>";
 
                         echo "<th> NOME </th>";

@@ -12,3 +12,9 @@ ALTER TABLE `alunos_log` CHANGE `acao` `acao` TEXT CHARACTER SET latin1 COLLATE 
 ALTER TABLE `alunos_pagamentos` ADD `desconto` VARCHAR(255) NOT NULL AFTER `mensalidade`, ADD `multa` VARCHAR(255) NOT NULL AFTER `desconto`; 
 -- //
 ALTER TABLE `alunos_pagamentos` CHANGE `created` `created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP; 
+-- //
+ALTER TABLE `usuarios` CHANGE `tipo` `tipo` VARCHAR(255) NOT NULL; 
+-- //
+ALTER TABLE `usuarios` ADD `permissao` VARCHAR(255) NOT NULL AFTER `tipo`; 
+-- //
+ALTER TABLE `usuarios` CHANGE `permissao` `permissao` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'TODAS'; 
