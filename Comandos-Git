@@ -77,3 +77,7 @@ chmod +x post-receive
 
 
  git push --set-upstream origin master
+
+
+
+testes do git em outro pc
