@@ -1,25 +1,16 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
 <?php
 include_once 'valida_cookies.inc';
-?>    
-
-<?php
 include_once './inc.conf.php';
 $Conexao = mysqli_connect("127.0.0.1", $Usuario, $Senha, $Base);
 mysqli_set_charset($Conexao, "utf8");
+//
 ?>
 <html>
     <head>
         <?php
         include_once './head.php';
         ?>
-        <title></title>
+        <title>Usuários</title>
     </head>   
     <body>
         <?php
@@ -46,7 +37,7 @@ mysqli_set_charset($Conexao, "utf8");
                         echo "<th> ID </th>";
                         echo "<th> <input type='checkbox' name = 'turma_selecionadoa' class = 'selecionar'/></th>";
                         echo "<th> USUÁRIO </th>";
-                        echo "<th> SENHA </th>";
+                        //  echo "<th> SENHA </th>";
                         echo "<th> NOME COMPLETO </th>";
                         echo "<th> TIPO </th>";
                         echo "</tr>";
@@ -61,18 +52,25 @@ mysqli_set_charset($Conexao, "utf8");
 
                             $tipo = $linha['tipo'];
                             $txt_option = "";
-                            if ($tipo == 0) {
+                            
+                            
+                            if ($tipo == "0") {
                                 $txt_option = "ADMIN";
+                                //
+                            } elseif ($tipo == "1") {
+                                $txt_option = "FINANCEIRO";
+                                //
                             } else {
                                 $txt_option = "USUÁRIO";
                             }
+//
                             echo "<tr>";
                             echo "<td>" . $id . "</td>\n";
                             echo "<td><input type='checkbox' name='turma_selecionada[]' class = 'checkbox' value='$id'>"
                             . "&nbsp;&nbsp;<a href='cadastrar_update_usuario.php?id=" . base64_encode($id) . "' target='_self' title='Alterar'><span class='glyphicon glyphicon-pencil laranja' aria-hidden='true' ></span></a>"
                             . "&nbsp;&nbsp;<a href='excluir_usuario.php?id=" . base64_encode($id) . "' onclick='return confirmarExclusao()'  target='_self' title='Alterar'><span class='glyphicon glyphicon-remove vermelho' aria-hidden='true' ></span></a></td>\n";
                             echo "<td>" . $usuario . "</td>\n";
-                            echo "<td>" . $senha . "</td>\n";
+                            //  echo "<td>" . $senha . "</td>\n";
                             echo "<td>" . $nome . "</td>\n";
                             echo "<td>" . $txt_option . "</td>\n";
                             echo "</tr>";

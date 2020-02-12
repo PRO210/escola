@@ -1,3 +1,9 @@
+<?php
+include_once './inc.conf.php';
+$Conexao = mysqli_connect("127.0.0.1", $Usuario, $Senha, $Base);
+mysqli_set_charset($Conexao, "utf8");
+//
+?>
 <html lang="pr-br">
     <head>
         <meta charset="UTF-8">

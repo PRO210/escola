@@ -38,7 +38,7 @@ if (empty($_SESSION['msg'])) {
         include_once './menu.php';
         ?>          
         <style>
-            .verde{color: green; padding-bottom: 12px;}
+            .verde{color: green !important; padding-bottom: 12px !important;}
             .vermelho{ color: red; padding-bottom: 12px;  }
             .amarelo{  color: orange;  padding-bottom: 12px;}
             .azul{ color: blue; padding-bottom: 12px;}
@@ -79,6 +79,7 @@ if (empty($_SESSION['msg'])) {
                     $(":checkbox").wrap("<span style='background-color: rgb(204, 119, 0); border-radius: 3px; padding-top: 2px;padding-bottom: 2px; padding:3px'>");
                 });
             </script>  
+            
             <link href="css/bootstrap-theme.css" rel="stylesheet" type="text/css"/>
             <link href="css/bootstrap.css" rel="stylesheet" type="text/css"/>
             <script src="js/jquery-1.12.4.js" type="text/javascript"></script>
@@ -93,6 +94,7 @@ if (empty($_SESSION['msg'])) {
             <script src="js/bootstrap.js" type="text/javascript"></script>            
             <!--<script src="assets/js/jquery.min_maskMoney.js" type="text/javascript"></script>-->
             <script src="assets/js/jquery.maskMoney.min.js" type="text/javascript"></script>
+             
             <!--Modal-->                <!--Modal-->            <!--Modal-->        
             <!--Modal-->                <!--Modal-->            <!--Modal-->        
             <div class="modal fade modal_msg" id="exemplomodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -143,6 +145,7 @@ if (empty($_SESSION['msg'])) {
                 . "</div>"
                 . "</th>";
                 echo "<th style = ' white-space: normal;'>NOME</th>";
+                echo "<th class = 'pago'>ATIVO</th>";
                 echo "<th class = 'pago'>PAGO</th>";
                 echo "<th>MENSALIDADE </th>";
                 echo "<th>PAGAMENTO </th>";
@@ -157,6 +160,7 @@ if (empty($_SESSION['msg'])) {
                 echo "<tr>";
                 echo "<th></th>";
                 echo "<th style = ' white-space: normal;'>NOME</th>";
+                echo "<th class = 'pago'>ATIVO</th>";
                 echo "<th class = 'pago'>PAGO</th>";
                 echo "<th>MENSALIDADE</th>";
                 echo "<th>PAGAMENTO</th>";
@@ -175,6 +179,7 @@ if (empty($_SESSION['msg'])) {
                         $id = $linhaf['id'];
                         $aluno_id = $linhaf['aluno_id'];
                         $codigo = $linhaf['codigo'];
+                        $ativo = $linhaf['ativo'];
                         $pago = $linhaf['pago'];
                         $mensalidade = $linhaf['mensalidade'];
                         $pago_em = $linhaf['pago_em'];
@@ -226,26 +231,28 @@ if (empty($_SESSION['msg'])) {
                         . "<li><a href='boleto_cadastrar.php?id=" . base64_encode($aluno_id) . "' target='_blank' title='Boleto'><span class='glyphicon glyphicon-piggy-bank' aria-hidden='true'>&nbsp;</span>Boletos</a></li>"
                         . "</ul>"
                         . "&nbsp;&nbsp;$nome"
-                        . "</div>";
+                        . "</div>"
+                        . "</td>";
+                        echo "<td>$ativo</td>";
                         if ($pago == "SIM") {
                             echo '<td> SIM</td>';
                             ?>
-            <!--                            <td>
-                                            <select name="pago[]" class="todos form-control" disabled="" id="<?= $id ?>">
-                                                <option selected="">SIM</option>
-                                                <option value="NAO">NÃO</option>
-                                            </select>
-                                        </td>-->
-                        <?php
+                                                <!--                            <td>
+                                                                                <select name="pago[]" class="todos form-control" disabled="" id="<?= $id ?>">
+                                                                                    <option selected="">SIM</option>
+                                                                                    <option value="NAO">NÃO</option>
+                                                                                </select>
+                                                                            </td>-->
+                            <?php
                         } else {
                             echo '<td> NÃO</td>';
                             ?>
-            <!--                            <td>
-                                            <select name="pago[]" class="todos form-control" disabled="" id="<?= $id ?>"  >
-                                                <option selected="">SIM</option>
-                                                <option value="NAO" selected="">NÃO</option>
-                                            </select>
-                                        </td> -->
+                                                <!--                            <td>
+                                                                                <select name="pago[]" class="todos form-control" disabled="" id="<?= $id ?>"  >
+                                                                                    <option selected="">SIM</option>
+                                                                                    <option value="NAO" selected="">NÃO</option>
+                                                                                </select>
+                                                                            </td> -->
                             <?php
                         }
                         echo "<td ><input type = 'text' value = '$mensalidade' name = 'mensalidade[]' disabled class ='mensalidade todos form-control mensalidade$id'></td>\n";
@@ -256,22 +263,22 @@ if (empty($_SESSION['msg'])) {
                         if ($bolsista == "SIM") {
                             echo '<td>SIM</td>';
                             ?>
-            <!--                            <td>
-                                            <select name="bolsista[]" class="todos form-control <?= 'bols' . $id ?>"   >
-                                                <option selected="">SIM</option>
-                                                <option value="NAO">NÃO</option>
-                                            </select>
-                                        </td>-->
-                        <?php
+                                                <!--                            <td>
+                                                                                <select name="bolsista[]" class="todos form-control <?= 'bols' . $id ?>"   >
+                                                                                    <option selected="">SIM</option>
+                                                                                    <option value="NAO">NÃO</option>
+                                                                                </select>
+                                                                            </td>-->
+                            <?php
                         } else {
                             echo '<td>NÃO</td>';
                             ?>
-            <!--                            <td>
-                                            <select name="bolsista[]" class="todos form-control <?= 'bols' . $id ?>"  >
-                                                <option selected="">SIM</option>
-                                                <option value="NAO" selected="">NÃO</option>
-                                            </select>
-                                        </td> -->
+                                                <!--                            <td>
+                                                                                <select name="bolsista[]" class="todos form-control <?= 'bols' . $id ?>"  >
+                                                                                    <option selected="">SIM</option>
+                                                                                    <option value="NAO" selected="">NÃO</option>
+                                                                                </select>
+                                                                            </td> -->
                             <?php
                         }
                         echo "<td><input type = 'text' value = '$bolsista_valor' name = 'bolsista_valor[]' disabled class ='bolsista_valor todos form-control pago_em$id'></td>\n";

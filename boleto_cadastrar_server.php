@@ -1,13 +1,14 @@
 <?php
 
 ob_start();
-
+//
 include_once 'valida_cookies.inc';
 include_once './inc.conf.php';
 $Conexao = mysqli_connect("127.0.0.1", $Usuario, $Senha, $Base);
 mysqli_set_charset($Conexao, "utf8");
 //
 $botao = filter_input(INPUT_POST, 'botao', FILTER_DEFAULT);
+$ativo = filter_input(INPUT_POST, 'ativo', FILTER_DEFAULT);
 $mensalidade = filter_input(INPUT_POST, 'mensalidade', FILTER_DEFAULT);
 $bolsista = filter_input(INPUT_POST, 'bolsista', FILTER_DEFAULT);
 $bolsista_valor = filter_input(INPUT_POST, 'bolsista_valor', FILTER_DEFAULT);
@@ -25,10 +26,11 @@ $nome = $Registro['nome'];
 //
 //
 if ($botao == "criar") {
-    $hoje_mes = date('m');
+    $hoje_mes = date_format(date_create(filter_input(INPUT_POST, 'previsao_pagamento', FILTER_DEFAULT)), 'm');
+//    $hoje_mes = date('m');
     $mes_soma = '';
     $hoje = date('Y-m-d');
-    $i = 1;
+    $i = 0;
     $data_pagamento = '';
     $codigo = uniqid();
 
@@ -80,7 +82,7 @@ if ($botao == "criar") {
 //        $desconto = str_replace(',', '.', str_replace('.', '', $_POST['desconto'][$key]));
 //        $mensalidade_corrigida = number_format($mensalidade + $multa - $desconto, 2, ',', '.');
 //
-        $SQL_matricular = "UPDATE `alunos_pagamentos` SET `pago` = '" . $_POST['pago'][$key] . "', `desconto` = '" . $_POST['desconto'][$key] . "', "
+        $SQL_matricular = "UPDATE `alunos_pagamentos` SET `pago` = '" . $_POST['pago'][$key] . "', `desconto` = '" . $_POST['desconto'][$key] . "',  `ativo` = '" . $_POST['ativo'][$key] . "',"
                 . "`multa` = '" . $_POST['multa'][$key] . "', `pago_em` = '" . $_POST['pago_em'][$key] . "', `bolsista` = '" . $_POST['bolsista'][$key] . "',"
                 . "`bolsista_valor` = '" . $_POST['bolsista_valor'][$key] . "', `mensalidade` = '" . $_POST['mensalidade'][$key] . "', updated = now() WHERE id= $lista_id";
         $sql = mysqli_query($Conexao, $SQL_matricular);
