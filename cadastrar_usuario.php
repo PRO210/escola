@@ -38,7 +38,11 @@ mysqli_set_charset($Conexao, "utf8");
                             <div class="col-sm-6" >
                                 <select class="form-control" name = "inputTipo">
                                     <option value= "ADMIN" >ADMIN</option>
+<<<<<<< HEAD
                                     <option value= "USUARIO" >USUÁRIO</option>
+=======
+                                    <option value= "SECRETARIA" >SECRETARIA</option>
+>>>>>>> 988f9fde28ab1bedf650a85e5bb6829f80dfa770
                                     <option value= "FINANCEIRO" >FINANCEIRO</option>
                                 </select>
                             </div>
