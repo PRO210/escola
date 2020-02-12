@@ -49,20 +49,7 @@ mysqli_set_charset($Conexao, "utf8");
                             $usuario = $linha['usuario'];
                             $senha = $linha['senha'];
                             $nome = $linha['nome'];
-
-                            $tipo = $linha['tipo'];
-                            $txt_option = "";
-                            
-                            
-                            if ($tipo == "0") {
-                                $txt_option = "ADMIN";
-                                //
-                            } elseif ($tipo == "1") {
-                                $txt_option = "FINANCEIRO";
-                                //
-                            } else {
-                                $txt_option = "USUÁRIO";
-                            }
+                            $tipo = $linha['tipo'];                            
 //
                             echo "<tr>";
                             echo "<td>" . $id . "</td>\n";
@@ -72,7 +59,7 @@ mysqli_set_charset($Conexao, "utf8");
                             echo "<td>" . $usuario . "</td>\n";
                             //  echo "<td>" . $senha . "</td>\n";
                             echo "<td>" . $nome . "</td>\n";
-                            echo "<td>" . $txt_option . "</td>\n";
+                            echo "<td>" . $tipo . "</td>\n";
                             echo "</tr>";
                         }
                         echo "</tbody>";

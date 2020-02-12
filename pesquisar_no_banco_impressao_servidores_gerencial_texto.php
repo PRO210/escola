@@ -380,7 +380,6 @@ $timbre = base64_encode($imagem->blob_imagem);
                                 . ' </td>';
                                 echo '</tr>';
                             }
-
                             //         //Completa a 2 Folha //Completa a 2 Folha
                             if ($cont + $cont2 == $qtd + $qtd2) {
                                 if ($cont + $cont2 < 50) {
@@ -446,33 +445,35 @@ $timbre = base64_encode($imagem->blob_imagem);
                                 echo '</tr>';
                             }
                             //Completa a Última Página da Tabela
-                            if ($cont + $cont2 == $qtd + $qtd2) {
-                                for ($i = $cont + $cont2; $i < 80; $i++) {
-                                    echo '<tr>';
-                                    for ($i2 = 1; $i2 < 18; $i2++) {
-                                        echo "<th style = 'height:15px'></th>";
-                                    }
-                                    echo '</tr>';
-                                }
+                           
 
-                                echo '<tr>';
-                                echo '<td colspan = "17" style = "text-align: center; ">'
-                                . '<div>'
-                                . '<p style = " margin-top: 20px;">' . $escola_endereco . '<p>'
-                                . '<p style = " margin-top: -8px;">' . 'CNPJ:' . $cnpj . '<p>'
-                                . '<p style = " margin-top: -8px;">' . 'E-mail.:' . $email . '<p>'
-                                . '</div>'
-                                . ' </td>';
-                                echo '</tr>';
-                            }
+                            //
+                            //
                         }
                     }
                 }
+                for ($i = $cont + $cont2; $i < 80; $i++) {
+                    echo '<tr>';
+                    for ($i2 = 1; $i2 < 18; $i2++) {
+                        echo "<th style = 'height:15px'></th>";
+                    }
+                    echo '</tr>';
+                }
+
+                echo '<tr>';
+                echo '<td colspan = "17" style = "text-align: center; ">'
+                . '<div>'
+                . '<p style = " margin-top: 20px;">' . $escola_endereco . '<p>'
+                . '<p style = " margin-top: -8px;">' . 'CNPJ:' . $cnpj . '<p>'
+                . '<p style = " margin-top: -8px;">' . 'E-mail.:' . $email . '<p>'
+                . '</div>'
+                . ' </td>';
+                echo '</tr>';
                 ?>
             </tbody>
         </table>    
-        <?php
+<?php
 // echo "($cont + $cont2 == $qtd + $qtd2)";
-        ?>
+?>
     </body>
 </html>
