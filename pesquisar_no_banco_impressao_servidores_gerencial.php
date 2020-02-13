@@ -40,7 +40,7 @@
         $html .= '</tr>';
         //Selecionar todos os itens da tabela   
         foreach ($_POST['servidor_selecionado'] as $id) {
-            $SQL_Consulta = "SELECT * FROM `servidores` WHERE id = '$id' AND `funcao` NOT LIKE '%professor(a)%' AND `excluido` = 'N' ";
+            $SQL_Consulta = "SELECT * FROM `servidores` WHERE id = '$id' AND `funcao` NOT LIKE '%professor(a)%' AND `funcao` NOT LIKE '%MOTORISTA%' AND `vinculo` NOT LIKE '%PRESTADOR DE SERVIÇOS%' AND `excluido` = 'N' ";
             $Consulta = mysqli_query($Conexao, $SQL_Consulta);
             //     
             while ($row_Consulta = mysqli_fetch_assoc($Consulta)) {
