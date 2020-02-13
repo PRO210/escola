@@ -32,7 +32,8 @@ $timbre = base64_encode($imagem->blob_imagem);
         </style>
     </head>
     <body>
-        <img src="data:image/jpg;base64,<?php echo$timbre ?>" />
+        <!--<img src="data:image/jpg;base64,<?php echo$timbre ?>" />-->
+        <img src='img/timbre.jpg' />
         <P style="    text-align: center;margin-top: -42px;font-size: 24px;">SECRETARIA MUNICIPAL DE EDUCAÇÃO</p>
         <h3 style="    text-align: center; margin-bottom: 0px; margin-top: -6px;">INFORMATIVO GERENCIAL - ANO <?php echo date('Y'); ?></h3>
         <table style="border: solid black thin; width: 27.7cm ">
@@ -91,7 +92,7 @@ $timbre = base64_encode($imagem->blob_imagem);
 //                
                 $qtd = 0;
                 foreach ($_POST['servidor_selecionado'] as $id) {
-                    $SQL_Consulta = "SELECT * FROM `servidores` WHERE `id` = '$id' AND `funcao` NOT LIKE '%professor(a)%' AND `funcao` NOT LIKE '%MOTORISTA%' AND excluido = 'N'  ORDER BY nome ASC ";
+                    $SQL_Consulta = "SELECT * FROM `servidores` WHERE `id` = '$id' AND `funcao` NOT LIKE '%professor(a)%' AND `funcao` NOT LIKE '%MOTORISTA%' AND `vinculo` NOT LIKE '%PRESTADOR DE SERVIÇOS%' AND excluido = 'N'  ORDER BY nome ASC ";
                     $Consulta = mysqli_query($Conexao, $SQL_Consulta);
                     $Linha = mysqli_num_rows($Consulta);
                     if ($Linha > 0) {
@@ -104,7 +105,7 @@ $timbre = base64_encode($imagem->blob_imagem);
                 foreach ($_POST['servidor_selecionado'] as $id) {
                     //
                     //Selecionar todos os itens da tabela      
-                    $SQL_Consulta = "SELECT * FROM `servidores` WHERE `id` = '$id' AND `funcao` NOT LIKE '%professor(a)%' AND `funcao` NOT LIKE '%MOTORISTA%' AND excluido = 'N'  ORDER BY nome ASC ";
+                    $SQL_Consulta = "SELECT * FROM `servidores` WHERE `id` = '$id' AND `funcao` NOT LIKE '%professor(a)%' AND `funcao` NOT LIKE '%MOTORISTA%' AND `vinculo` NOT LIKE '%PRESTADOR DE SERVIÇOS%' AND excluido = 'N'  ORDER BY nome ASC ";
                     $Consulta = mysqli_query($Conexao, $SQL_Consulta);
                     $Linha = mysqli_num_rows($Consulta);
                     //   
@@ -175,7 +176,7 @@ $timbre = base64_encode($imagem->blob_imagem);
                             echo '<td>' . $ae . '</td>';
                             echo '</tr>';
                         }
-                        //rodaé da primeira folha
+                        //
                         if ($cont == 20) {
                             //
                             echo '<tr>';
@@ -183,7 +184,7 @@ $timbre = base64_encode($imagem->blob_imagem);
                             . '<div>'
                             . '<p style = " margin-top: 15px;">' . $escola_endereco . '<p>'
                             . '<p style = " margin-top: -8px;">' . 'CNPJ:' . $cnpj . '<p>'
-                            . '<p style = " margin-top: -8px;">' . 'E-mail.:' . $email . '<p>'
+                            . '<p style = " margin-top: -8px; margin-bottom: 4px;">' . 'E-mail.:' . $email . '<p>'
                             . '</div>'
                             . ' </td>';
                             echo '</tr>';
@@ -196,7 +197,7 @@ $timbre = base64_encode($imagem->blob_imagem);
                             echo '<td colspan = "17"  style = "border-left-color: white;border-right-color: white;">'
                             . '<div>'
                             . " <img src='img/timbre.jpg' />"
-                            . ' <P style="    text-align: center;margin-top: -42px;margin-bottom: 14px !important;font-size: 24px;">SECRETARIA MUNICIPAL DE EDUCAÇÃO</p>'
+                            . ' <P style="    text-align: center;margin-top: -42px;margin-bottom: 14px;font-size: 24px;">SECRETARIA MUNICIPAL DE EDUCAÇÃO</p>'
                             . '</div>'
                             . ' </td>';
                             echo '</tr>';
@@ -204,12 +205,13 @@ $timbre = base64_encode($imagem->blob_imagem);
                     }
                     //
                 }
-                //    
+                //
+                //Professores       //Professores   //Professores 
                 $qtd2 = 0;
                 //
                 $ano = date('Y');
                 foreach ($_POST['servidor_selecionado'] as $id) {
-                    $SQL_Consulta2 = "SELECT servidores.*,turmas_professor2.id_turma,turmas_professor2.id_professor,turmas.* FROM `servidores`,`turmas_professor2`,`turmas` WHERE `funcao` LIKE '%professor(a)%' AND servidores.id = turmas_professor2.id_professor AND servidores.id = '$id' AND turmas.id = turmas_professor2.id_turma AND servidores.excluido = 'N' GROUP BY servidores.id AND turmas.ano LIKE '%$ano%' ORDER BY nome ASC";
+                    $SQL_Consulta2 = "SELECT servidores.*,turmas_professor2.id_turma,turmas_professor2.id_professor,turmas.* FROM `servidores`,`turmas_professor2`,`turmas` WHERE `funcao` LIKE '%professor(a)%' AND servidores.id = turmas_professor2.id_professor AND servidores.id = '$id' AND turmas.id = turmas_professor2.id_turma AND servidores.excluido = 'N' AND turmas.ano LIKE '%$ano%' GROUP BY servidores.id ORDER BY nome ASC";
                     $Consulta2 = mysqli_query($Conexao, $SQL_Consulta2);
                     $LinTotal = mysqli_num_rows($Consulta2);
                     if ($LinTotal > 0) {
@@ -220,13 +222,13 @@ $timbre = base64_encode($imagem->blob_imagem);
                 //Consulta os professores //              //Consulta os professores
                 $cont2 = 0;
                 foreach ($_POST['servidor_selecionado'] as $id) {
-                    $SQL_Consulta2 = "SELECT servidores.*,turmas_professor2.id_turma,turmas_professor2.id_professor,turmas.* FROM `servidores`,`turmas_professor2`,`turmas` WHERE `funcao` LIKE '%professor(a)%' AND servidores.id = turmas_professor2.id_professor AND servidores.id = '$id' AND turmas.id = turmas_professor2.id_turma AND servidores.excluido = 'N' AND turmas.ano LIKE '%$ano%' GROUP BY servidores.id ORDER BY nome ASC";
-                    $Consulta2 = mysqli_query($Conexao, $SQL_Consulta2);
-                    $LinTotal = mysqli_num_rows($Consulta2);
+                    $SQL_Consulta22 = "SELECT servidores.*,turmas_professor2.id_turma,turmas_professor2.id_professor,turmas.* FROM `servidores`,`turmas_professor2`,`turmas` WHERE `funcao` LIKE '%professor(a)%' AND servidores.id = turmas_professor2.id_professor AND servidores.id = '$id' AND turmas.id = turmas_professor2.id_turma AND servidores.excluido = 'N' AND turmas.ano LIKE '%$ano%' GROUP BY servidores.id ORDER BY nome ASC";
+                    $Consulta22 = mysqli_query($Conexao, $SQL_Consulta22);
+                    $LinTotal = mysqli_num_rows($Consulta22);
                     //
                     if ($LinTotal > 0) {
                         $cont2++;
-                        while ($Linha2 = mysqli_fetch_array($Consulta2)) {
+                        while ($Linha2 = mysqli_fetch_array($Consulta22)) {
                             //
                             $id_professor = $Linha2['id_professor'];
                             //
@@ -342,7 +344,7 @@ $timbre = base64_encode($imagem->blob_imagem);
                                     . '<div>'
                                     . '<p style = " margin-top: 20px;">' . $escola_endereco . '<p>'
                                     . '<p style = " margin-top: -8px;">' . 'CNPJ:' . $cnpj . '<p>'
-                                    . '<p style = " margin-top: -8px;">' . 'E-mail.:' . $email . '<p>'
+                                    . '<p style = " margin-top: -8px; margin-bottom: 4px;">' . 'E-mail.:' . $email . '<p>'
                                     . '</div>'
                                     . ' </td>';
                                     echo '</tr>';
@@ -354,7 +356,6 @@ $timbre = base64_encode($imagem->blob_imagem);
                                 }
                             }
                             //Contina pois a primeira folha é maior que 20
-                            //Contina pois a primeira folha é maior que 20
                             if ($cont + $cont2 == 20) {
                                 //
                                 echo '<tr>';
@@ -362,7 +363,7 @@ $timbre = base64_encode($imagem->blob_imagem);
                                 . '<div>'
                                 . '<p style = " margin-top: 15px;">' . $escola_endereco . '<p>'
                                 . '<p style = " margin-top: -8px;">' . 'CNPJ:' . $cnpj . '<p>'
-                                . '<p style = " margin-top: -8px;">' . 'E-mail.:' . $email . '<p>'
+                                . '<p style = " margin-top: -8px; margin-bottom: 4px;">' . 'E-mail.:' . $email . '<p>'
                                 . '</div>'
                                 . ' </td>';
                                 echo '</tr>';
@@ -375,12 +376,13 @@ $timbre = base64_encode($imagem->blob_imagem);
                                 echo '<td colspan = "17"  style = "border-left-color: white;border-right-color: white;">'
                                 . '<div>'
                                 . " <img src='img/timbre.jpg' />"
-                                . ' <P style="    text-align: center;margin-top: -42px;margin-bottom: 12px !important; font-size: 24px;">SECRETARIA MUNICIPAL DE EDUCAÇÃO</p>'
+                                . ' <P style="    text-align: center;margin-top: -42px;margin-bottom: 14px;font-size: 24px;">SECRETARIA MUNICIPAL DE EDUCAÇÃO</p>'
                                 . '</div>'
                                 . ' </td>';
                                 echo '</tr>';
                             }
-                            //         //Completa a 2 Folha //Completa a 2 Folha
+
+                            //   //Completa a 2 Folha //Completa a 2 Folha
                             if ($cont + $cont2 == $qtd + $qtd2) {
                                 if ($cont + $cont2 < 50) {
                                     for ($i3 = $cont + $cont2; $i3 < 52; $i3++) {
@@ -413,10 +415,11 @@ $timbre = base64_encode($imagem->blob_imagem);
                                     . '<div>'
                                     . '<p style = " margin-top: 20px;">' . $escola_endereco . '<p>'
                                     . '<p style = " margin-top: -8px;">' . 'CNPJ:' . $cnpj . '<p>'
-                                    . '<p style = " margin-top: -8px;">' . 'E-mail.:' . $email . '<p>'
+                                    . '<p style = " margin-top: -8px; margin-bottom: 4px;">' . 'E-mail.:' . $email . '<p>'
                                     . '</div>'
                                     . ' </td>';
                                     echo '</tr>';
+                                    break;
                                 }
                             }
                             //
@@ -439,41 +442,39 @@ $timbre = base64_encode($imagem->blob_imagem);
                                 echo '<td colspan = "17" style = "white;border-left-color: white;border-right-color: white;" >'
                                 . '<div>'
                                 . " <img src='img/timbre.jpg' />"
-                                . ' <P style = "text-align: center;margin-top: -42px;font-size: 24px;">SECRETARIA MUNICIPAL DE EDUCAÇÃO</p>'
+                                . ' <P style = "text-align: center;margin-top: -42px;margin-bottom: 14px;font-size: 24px;">SECRETARIA MUNICIPAL DE EDUCAÇÃO</p>'
                                 . '</div>'
                                 . ' </td>';
                                 echo '</tr>';
                             }
                             //Completa a Última Página da Tabela
-                           
+                            if ($cont + $qtd2 == $qtd + $cont2) {
+                                for ($i = $cont + $cont2; $i < 80; $i++) {
+                                    echo '<tr>';
+                                    for ($i2 = 1; $i2 < 18; $i2++) {
+                                        echo "<th style = 'height:15px'></th>";
+                                    }
+                                    echo '</tr>';
+                                }
 
-                            //
-                            //
+                                echo '<tr>';
+                                echo '<td colspan = "17" style = "text-align: center; ">'
+                                . '<div>'
+                                . '<p style = " margin-top: 20px;">' . $escola_endereco . '<p>'
+                                . '<p style = " margin-top: -8px;">' . 'CNPJ:' . $cnpj . '<p>'
+                                . '<p style = " margin-top: -8px; margin-bottom: 4px;">' . 'E-mail.:' . $email . '<p>'
+                                . '</div>'
+                                . ' </td>';
+                                echo '</tr>';
+                            }
                         }
                     }
                 }
-                for ($i = $cont + $cont2; $i < 80; $i++) {
-                    echo '<tr>';
-                    for ($i2 = 1; $i2 < 18; $i2++) {
-                        echo "<th style = 'height:15px'></th>";
-                    }
-                    echo '</tr>';
-                }
-
-                echo '<tr>';
-                echo '<td colspan = "17" style = "text-align: center; ">'
-                . '<div>'
-                . '<p style = " margin-top: 20px;">' . $escola_endereco . '<p>'
-                . '<p style = " margin-top: -8px;">' . 'CNPJ:' . $cnpj . '<p>'
-                . '<p style = " margin-top: -8px;">' . 'E-mail.:' . $email . '<p>'
-                . '</div>'
-                . ' </td>';
-                echo '</tr>';
                 ?>
             </tbody>
         </table>    
-<?php
-// echo "($cont + $cont2 == $qtd + $qtd2)";
-?>
+        <?php
+      //  echo "($qtd + $qtd2 == $cont + $cont2)";
+        ?>
     </body>
 </html>
