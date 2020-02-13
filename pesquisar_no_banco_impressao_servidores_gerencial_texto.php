@@ -474,7 +474,7 @@ $timbre = base64_encode($imagem->blob_imagem);
             </tbody>
         </table>    
         <?php
-        // echo "($cont + $qtd2 == $qtd + $cont2)";
+        echo "($qtd + $qtd2 == $cont + $cont2)";
         ?>
     </body>
 </html>
