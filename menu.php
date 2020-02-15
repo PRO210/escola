@@ -163,7 +163,7 @@ if ($tipo == "ROOT" || $tipo == "ADMIN" || $tipo == "FINANCEIRO") {
                             <li><a href="disciplinas_professor.php">Disciplina/Professor</a></li>
                         </ul>
                     </li>                   
-                    <li><a href="#">DOCUMENT.EMPRESTADOS</a>
+                    <li><a href="#">DOC. EMPRESTADOS</a>
                         <ul>                           
                             <li><a href="pesquisar_documentos.php">Criar/Pesquisar/Editar</a></li>
                         </ul>
@@ -172,6 +172,7 @@ if ($tipo == "ROOT" || $tipo == "ADMIN" || $tipo == "FINANCEIRO") {
                         <ul>
                             <li><a href="servidores_arquivo_passivo.php">Arquivo Passivo</a></li>
                             <li><a href="pesquisar_atestado.php">Atestado /Licença /Declarão /Férias</a></li>                   
+                            <li><a href="pesquisar_substituicoes.php">Substituições</a></li>                   
                             <li><a href="servidores_procurar.php">Pesquisar</a></li>
                             <li><a href="servidores.php">Cadastrar/Pesquisar/Editar</a></li>
                             <li><a href="turmas_professor.php">Professor/Turma</a></li>

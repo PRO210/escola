@@ -80,6 +80,9 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 9);
 // 
+$pdf->Cell(270, 1, '', 0, 1);
+$pdf->RotatedText(140, 43, ' Informativo Gerencial ' . $ano, 0);
+
 $pdf->Cell(270, 4, '', 0, 1);
 $pdf->Cell(60, 35, "", 1, 0, 'C');
 $pdf->RotatedText(36, 63, 'NOME', 0);
@@ -142,16 +145,29 @@ $pdf->Cell(5, 28, "", 1, 1, 'C');
 //Pula a linha para a tabela iniciar
 $pdf->Cell(10, 0, "", 0, 1, 'C');
 
-$pdf->SetFont('Arial', '', 7);
+$pdf->SetFont('Arial', '', 7.5);
+//Toma conta das contagem antecipadas dos servidores não  professores,motoristas e prestadores
+$qtd = 0;
+foreach ($_POST['servidor_selecionado'] as $id) {
+    $SQL_Consulta = "SELECT * FROM `servidores` WHERE `id` = '$id' AND `funcao` NOT LIKE '%professor(a)%' AND `funcao` NOT LIKE '%MOTORISTA%' AND `vinculo` NOT LIKE '%PRESTADOR DE SERVIÇOS%' AND excluido = 'N'  ORDER BY nome ASC ";
+    $Consulta = mysqli_query($Conexao, $SQL_Consulta);
+    $Linha = mysqli_num_rows($Consulta);
+    if ($Linha > 0) {
+        $qtd++;
+    }
+}
+//Toma conta das contagem antecipadas dos servidores não  professores,motoristas e prestadores
+$qtd2 = 0;
 //Selecionar todos os itens da tabela   
 foreach ($_POST['servidor_selecionado'] as $id) {
-    //
     $pagina = $pdf->PageNo();
     //
     $SQL_Consulta = "SELECT * FROM `servidores` WHERE id = '$id' AND `funcao` NOT LIKE '%professor(a)%' AND `funcao` NOT LIKE '%MOTORISTA%' AND `vinculo` NOT LIKE '%PRESTADOR DE SERVIÇOS%' AND `excluido` = 'N' ";
     $Consulta = mysqli_query($Conexao, $SQL_Consulta);
     //     
     while ($row_Consulta = mysqli_fetch_assoc($Consulta)) {
+        //
+        $qtd2++;
         $m = "";
         $t = "";
         $n = "";
@@ -193,6 +209,7 @@ foreach ($_POST['servidor_selecionado'] as $id) {
             $pdf->SetFont('Arial', '', 6.5);
             $pdf->Cell(60, 5.5, $row_Consulta["nome"], 1, 0, 'L');
         } else {
+            $pdf->SetFont('Arial', '', 7.5);
             $pdf->Cell(60, 5.5, $row_Consulta["nome"], 1, 0, 'L');
         }
         $pdf->Cell(20, 5.5, $row_Consulta["cpf"], 1, 0, 'C');
@@ -214,14 +231,26 @@ foreach ($_POST['servidor_selecionado'] as $id) {
         //
     }
 }
-
 //
+$cont = 0;
+foreach ($_POST['servidor_selecionado'] as $id) {
+    $SQL_Consulta22 = "SELECT servidores.*,turmas_professor2.id_turma,turmas_professor2.id_professor,turmas.* FROM `servidores`,`turmas_professor2`,`turmas` WHERE `funcao` LIKE '%professor(a)%' AND servidores.id = turmas_professor2.id_professor AND servidores.id = '$id' AND turmas.id = turmas_professor2.id_turma AND servidores.excluido = 'N' AND turmas.ano LIKE '%$ano%' GROUP BY servidores.id ORDER BY nome ASC";
+    $Consulta22 = mysqli_query($Conexao, $SQL_Consulta22);
+    $LinTotal = mysqli_num_rows($Consulta22);
+    if ($LinTotal > 0) {
+        $cont++;
+    }
+}
+//
+$cont2 = 0;
 foreach ($_POST['servidor_selecionado'] as $id) {
     $SQL_Consulta2 = "SELECT servidores.*,turmas_professor2.id_turma,turmas_professor2.id_professor,turmas.* FROM `servidores`,`turmas_professor2`,`turmas` WHERE `funcao` LIKE '%professor(a)%' AND servidores.id = turmas_professor2.id_professor AND servidores.id = '$id' AND turmas.id = turmas_professor2.id_turma AND servidores.excluido = 'N' AND turmas.ano LIKE '%$ano%' GROUP BY servidores.id ORDER BY nome ASC";
     $Consulta2 = mysqli_query($Conexao, $SQL_Consulta2);
     $Linha = mysqli_num_rows($Consulta2);
     //   
     if ($Linha > 0) {
+        $cont2++;
+        $pagina = $pdf->PageNo();
         while ($Linha2 = mysqli_fetch_array($Consulta2)) {
             //
             $id_professor = $Linha2['id_professor'];
@@ -278,7 +307,7 @@ foreach ($_POST['servidor_selecionado'] as $id) {
             } else {
                 $pdf->Cell(60, $h, $Linha2["nome"], 1, 0, 'L');
             }
-
+            $pdf->SetFont('Arial', '', 7.5);
             $pdf->Cell(20, $h, $Linha2["cpf"], 1, 0, 'C');
             $pdf->Cell(18, $h, $Linha2["dados_certidao"], 1, 0, 'C');
             $pdf->Cell(10, $h, $Linha2["orgao_expedidor"], 1, 0, 'C');
@@ -287,17 +316,27 @@ foreach ($_POST['servidor_selecionado'] as $id) {
             $pdf->Cell(20, $h, $Linha2["resumo_funcao"] . '' . $Linha2["resumo_funcao_2"], 1, 0, 'C');
             //
             if ($Linha2["resumo_turmas_sim"] == "SIM") {
+                //
                 $anos = $Linha2["resumo_anos"] . $Linha2["resumo_anos_2"];
-                $x = $pdf->GetX();
-                $y = $pdf->GetY();
-                $pdf->SetXY($x, $y);
-                $pdf->Cell(14, $h, '', 1, 0, 'L');
-                $pdf->RotatedText($x + 1, $y + 2.5, $Linha2["resumo_anos"], 0);
-                $pdf->RotatedText($x + 1, $y + 5, $Linha2["resumo_anos_2"], 0);
+                if (strlen($anos) > 7) {
+                    $pdf->SetFont('Arial', '', 5.5);
+                    $x = $pdf->GetX();
+                    $y = $pdf->GetY();
+                    $pdf->SetXY($x, $y);
+                    $pdf->Cell(14, $h, '', 1, 0, 'L');
+                    $pdf->RotatedText($x + 1, $y + 2.5, $Linha2["resumo_anos"], 0);
+                    $pdf->RotatedText($x + 1, $y + 5, $Linha2["resumo_anos_2"], 0);
+                } else {
+                    $pdf->SetFont('Arial', '', 7.5);
+                    $pdf->Cell(14, $h, $anos, 1, 0, 'L');
+                }
+                  $pdf->SetFont('Arial', '', 7.5);
+                //
             } else {
                 $anos = $Linha2["turma"];
                 $pdf->Cell(14, $h, $anos, 1, 0, 'L');
             }
+              $pdf->SetFont('Arial', '', 7.5);
             //
             //
             if ($Linha2["resumo_turmas_sim"] == "SIM") {
@@ -319,12 +358,32 @@ foreach ($_POST['servidor_selecionado'] as $id) {
             $pdf->Cell(8, $h, $Linha2["carga_horaria"], 1, 0, 'L');
             $pdf->Cell(5, $h, $m2, 1, 0, 'L');
             $pdf->Cell(5, $h, $t2, 1, 0, 'L');
+
             $pdf->Cell(5, $h, $n2, 1, 0, 'L');
             $pdf->Cell(8, $h, $e2, 1, 0, 'L');
+
             $pdf->Cell(8, $h, $c2, 1, 0, 'L');
             $pdf->Cell(8, $h, $ae2, 1, 1, 'L');
         }
     }
+    $linha = ['60', '20', '18', '10', '10', '40', '20', '14', '14', '22', '8', '5', '5', '5', '8', '8', '8'];
+    $i3 = $qtd + $cont;
+    //
+    if ($qtd + $cont == $qtd2 + $cont2) {
+        if ($pagina == 3) {
+            while ($i3 < 66) {
+                for ($index = 0; $index < count($linha); $index++) {
+                    $pdf->Cell($linha[$index], 6, '', 1, 0, 'L');
+                    if ($index == 16) {
+                        $pdf->Ln();
+                    }
+                }
+                $i3++;
+            }
+        }
+    }
+    //
+    //
 }
 
 
@@ -342,5 +401,6 @@ foreach ($_POST['servidor_selecionado'] as $id) {
 
 
 
-$pdf->Output(utf8_decode('Gerencial.pdf'), 'I');
-//$pdf->Output(utf8_decode('Gerencial.pdf'), 'D');
+//$pdf->Output(utf8_decode('Gerencial.pdf'), 'I');
+$pdf->Output(utf8_decode('Gerencial.pdf'), 'D');
+
