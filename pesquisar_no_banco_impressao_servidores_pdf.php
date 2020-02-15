@@ -272,6 +272,18 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         $pdf->Cell(105, 7, $row_Consulta["lotacao"], 0, 1, 'L');
         $pdf->Cell(90, 7, '', 0, 0, 'L');
         $pdf->Cell(104, 6, $row_Consulta["unidade_escolar"], 0, 0, 'L');
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }
 $pdf->Output(utf8_decode('Servidor.pdf'), 'D');

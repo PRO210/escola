@@ -1,10 +1,8 @@
 <?php
 ob_start();
 include_once 'valida_cookies.inc';
-<<<<<<< HEAD
 //Abre a conexão com o banco de dados
-=======
->>>>>>> 988f9fde28ab1bedf650a85e5bb6829f80dfa770
+
 include_once './inc.conf.php';
 $Conexao = mysqli_connect("127.0.0.1", $Usuario, $Senha, $Base);
 mysqli_set_charset($Conexao, "utf8");
@@ -24,7 +22,6 @@ if (isset($_POST['atualizar_usuario'])) {
     //
     $Consulta_backup2 = mysqli_query($Conexao, "SELECT * FROM `usuarios` WHERE id = $id ");
     $Registro_backup2 = mysqli_fetch_array($Consulta_backup2, MYSQLI_BOTH);
-<<<<<<< HEAD
     $nomebackup = $Registro_backup2['nome'];
 
     $admin = "";
@@ -37,11 +34,9 @@ if (isset($_POST['atualizar_usuario'])) {
     }
 
     $SQL_matricular = "UPDATE usuarios SET usuario = '$usuario', nome = '$nome', tipo = '$admin', senha = '$senha' WHERE id = $id ";
-=======
     $nomebackup = $Registro_backup2['nome'];   
 
     $SQL_matricular = "UPDATE usuarios SET usuario = '$usuario', nome = '$nome', tipo = '$tipo', senha = '$senha' WHERE id = $id ";
->>>>>>> 988f9fde28ab1bedf650a85e5bb6829f80dfa770
     $Consulta = mysqli_query($Conexao, $SQL_matricular);
     //     
     if ($Consulta) {
