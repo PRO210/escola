@@ -81,7 +81,7 @@ $pdf->AddPage();
 $pdf->SetFont('Arial', 'B', 9);
 // 
 $pdf->Cell(270, 1, '', 0, 1);
-$pdf->RotatedText(140, 43, ' Informativo Gerencial ' . $ano, 0);
+$pdf->RotatedText(130, 43, ' Informativo Gerencial ' . $ano, 0);
 
 $pdf->Cell(270, 4, '', 0, 1);
 $pdf->Cell(60, 35, "", 1, 0, 'C');

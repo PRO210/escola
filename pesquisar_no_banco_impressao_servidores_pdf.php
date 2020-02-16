@@ -1,5 +1,6 @@
 <?php
 
+ob_start();
 include_once 'valida_cookies.inc';
 include_once './inc.conf.php';
 $Conexao = mysqli_connect("127.0.0.1", $Usuario, $Senha, $Base);
@@ -23,7 +24,7 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         $pdf->Image('img/Anexo_Formulário_1.jpg', 7, 20, 193, 250);
 
 
-        $pdf->SetFont('Arial', '', 9);
+        $pdf->SetFont('Arial', 'B', 9);
 
         $pdf->Cell(210, 59, "", 0, 1, 'L');
 
@@ -65,15 +66,50 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         $pdf->Cell(68, 6, $row_Consulta["naturalidade"], 0, 0, 'L');
         $pdf->Cell(37, 6, $row_Consulta["estado_naturalidade"], 0, 0, 'L');
         $pdf->Cell(50, 6, $row_Consulta["nacionalidade"], 0, 1, 'L');
+        //     
+        $pdf->SetFont('Arial', 'B', 7);
+        if ($row_Consulta["cor"] == "BRANCA") {
+            $Larg = "22.8";
+        } elseif ($row_Consulta["cor"] == "PRETA") {
+            $Larg = "39.7";
+        } elseif ($row_Consulta["cor"] == "AMARELA") {
+            $Larg = "54";
+        } elseif ($row_Consulta["cor"] == "PARDA") {
+            $Larg = "73";
+        } elseif ($row_Consulta["cor"] == "INDIGENA") {
+            $Larg = "87.3";
+        } else {
+            $Larg = "106";
+        }
+        $pdf->Cell("$Larg", 8, "", 0, 0, 'L');
+        $pdf->Cell(20, 8, "X", 0, 1, 'L');
         //
-         
-        $pdf->Cell(190, 7, "", 0, 1, 'L');
-        $pdf->Cell(80, 6, "", 0, 0, 'L');
+        if ($row_Consulta["deficiente"] == "SIM") {
+            $Larg2 = "25";
+        } else {
+            $Larg2 = "35.2";
+        }
+        $pdf->Cell("$Larg2", 5, "", 0, 0, 'L');
+        $pdf->Cell(45, 5, "X", 0, 0, 'L');
         $pdf->Cell(68, 6, $row_Consulta["tipo_deficiencia"], 0, 0, 'L');
         //
-        $pdf->Cell(190, 6, "", 0, 1, 'L');
-        $pdf->Cell(190, 7.2, "", 0, 1, 'L');
+        $pdf->SetFont('Arial', 'B', 8);
+        $pdf->Cell(190, 5.5, "", 0, 1, 'L');
+        if ($row_Consulta["estado_civil"] == "SOLTEIRO(A)") {
+            $pdf->Cell(27.5, 7.2, "", 0, 0, 'L');
+        } elseif ($row_Consulta["estado_civil"] == "CASADO(A)") {
+            $pdf->Cell(51, 7.2, "", 0, 0, 'L');
+        } elseif ($row_Consulta["estado_civil"] == "DIVORCIADO(A)") {
+            $pdf->Cell(72, 7.2, "", 0, 0, 'L');
+        } elseif ($row_Consulta["estado_civil"] == "VIÚVO(A)") {
+            $pdf->Cell(124, 7.2, "", 0, 0, 'L');
+        } else {
+            $pdf->Cell(142, 7.2, "", 0, 0, 'L');
+        }
+        $pdf->Cell(190, 7.2, "X", 0, 1, 'L');
         $pdf->Cell(25, 7, "", 0, 0, 'L');
+        //
+        $pdf->SetFont('Arial', 'B', 9);
         $pdf->Cell(110, 6, $row_Consulta["conjuge"], 0, 0, 'L');
         $pdf->Cell(20, 6, $row_Consulta["conjuge_cpf"], 0, 1, 'L');
         //
@@ -106,7 +142,7 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
             $pdf->Cell(7, 6, $data->format('Y'), 0, 1, 'L');
         }
         //       
-        $pdf->Cell(180, 8, "", 0, 1, 'L');
+        $pdf->Cell(180, 7.5, "", 0, 1, 'L');
         $pdf->Cell(12, 6, "", 0, 0, 'L');
         $pdf->Cell(70, 6, $row_Consulta["dados_certidao"], 0, 0, 'L');
         $pdf->Cell(32, 6, $row_Consulta["orgao_expedidor"], 0, 0, 'L');
@@ -118,9 +154,10 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
             $pdf->Cell(7, 7, '', 0, 1, 'L');
         } else {
             $data = new DateTime($row_Consulta["data_expedicao"]);
-            $pdf->Cell(11, 7, $data->format('d'), 0, 0, 'L');
-            $pdf->Cell(11, 7, $data->format('m'), 0, 0, 'L');
-            $pdf->Cell(7, 7, $data->format('Y'), 0, 1, 'L');
+            $pdf->Cell(11, 6, $data->format('d'), 0, 0, 'L');
+            $pdf->Cell(11, 6, $data->format('m'), 0, 0, 'L');
+            $pdf->Cell(7, 6, $data->format('Y'), 0, 0, 'L');
+            $pdf->Cell(7, 7, '', 0, 1, 'L');
         }
         //
         $pdf->Cell(16, 8, "", 0, 0, 'L');
@@ -272,21 +309,10 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         $pdf->Cell(105, 7, $row_Consulta["lotacao"], 0, 1, 'L');
         $pdf->Cell(90, 7, '', 0, 0, 'L');
         $pdf->Cell(104, 6, $row_Consulta["unidade_escolar"], 0, 0, 'L');
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
 }
-$pdf->Output(utf8_decode('Servidor.pdf'), 'D');
+$pdf->Output(utf8_decode('Servidor.pdf'), 'I');
+//$pdf->Output(utf8_decode('Servidor.pdf'), 'D');
 
 
 
