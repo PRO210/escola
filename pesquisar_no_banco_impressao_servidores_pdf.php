@@ -8,7 +8,7 @@ mysqli_set_charset($Conexao, "utf8");
 //
 require_once 'fpdf181/fpdf.php';
 $pdf = new FPDF('P', 'mm', 'A4');
-$_POST['servidor_selecionado'] = [1];
+//$_POST['servidor_selecionado'] = [1];
 foreach ($_POST['servidor_selecionado'] as $lista_id) {
 //
     $SQL_Consulta = "SELECT * FROM servidores WHERE `id` = $lista_id ";
@@ -345,8 +345,8 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         $pdf->Cell(104, 6, $row_Consulta["unidade_escolar"], 0, 0, 'L');
     }
 }
-$pdf->Output(utf8_decode('Servidor.pdf'), 'I');
-//$pdf->Output(utf8_decode('Servidor.pdf'), 'D');
+//$pdf->Output(utf8_decode('Servidor.pdf'), 'I');
+$pdf->Output(utf8_decode('Servidor.pdf'), 'D');
 
 
 
