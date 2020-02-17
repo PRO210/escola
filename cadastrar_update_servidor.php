@@ -765,6 +765,14 @@ $lotacao = $Registro["lotacao"];
                             </div>
                         </div>   
                     </div>
+                    <div class="container ">
+                        <table style = "border-bottom: solid #000 medium;"height =1% width="100%">
+                            <tr>
+                                <th style="text-align: center">INSTRUÇÃO ACADÊMICA</th>                                
+                            </tr>
+                        </table>
+                    </div>
+                    <br>    
                     <div class="row">
                         <div class="form-group col-sm-12">
                             <label for="" class="col-sm-2 control-label">Grau de Instrução</label>
@@ -900,9 +908,15 @@ $lotacao = $Registro["lotacao"];
                                         if ($depen_sexo_1 == "MASCULINO") {
                                             echo "<option selected>MASCULINO</option>";
                                             echo "<option>FEMININO</option>";
-                                        } else {
+                                            echo "<option  value = ''>Informe o Sexo</option>";
+                                        } elseif ($depen_sexo_1 == "FEMININO") {
                                             echo "<option selected>FEMININO</option>";
                                             echo "<option>MASCULINO</option>";
+                                            echo "<option  value = ''>Informe o Sexo</option>";
+                                        } else {
+                                            echo "<option selected value = ''>Informe  o Sexo</option>";
+                                            echo "<option >MASCULINO</option>";
+                                            echo "<option>FEMININO</option>";
                                         }
                                         ?>
                                     </select>
@@ -965,9 +979,15 @@ $lotacao = $Registro["lotacao"];
                                         if ($depen_sexo_2 == "MASCULINO") {
                                             echo "<option selected>MASCULINO</option>";
                                             echo "<option>FEMININO</option>";
-                                        } else {
+                                            echo "<option  value = ''>Informe o Sexo</option>";
+                                        } elseif ($depen_sexo_2 == "FEMININO") {
                                             echo "<option selected>FEMININO</option>";
                                             echo "<option>MASCULINO</option>";
+                                            echo "<option  value = ''>Informe o Sexo</option>";
+                                        } else {
+                                            echo "<option selected value = ''>Informe  o Sexo</option>";
+                                            echo "<option >MASCULINO</option>";
+                                            echo "<option>FEMININO</option>";
                                         }
                                         ?>
                                     </select>
@@ -1029,9 +1049,15 @@ $lotacao = $Registro["lotacao"];
                                         if ($depen_sexo_3 == "MASCULINO") {
                                             echo "<option selected>MASCULINO</option>";
                                             echo "<option>FEMININO</option>";
-                                        } else {
+                                            echo "<option  value = ''>Informe o Sexo</option>";
+                                        } elseif ($depen_sexo_3 == "FEMININO") {
                                             echo "<option selected>FEMININO</option>";
                                             echo "<option>MASCULINO</option>";
+                                            echo "<option  value = ''>Informe o Sexo</option>";
+                                        } else {
+                                            echo "<option selected value = ''>Informe  o Sexo</option>";
+                                            echo "<option >MASCULINO</option>";
+                                            echo "<option>FEMININO</option>";
                                         }
                                         ?>
                                     </select>
@@ -1057,14 +1083,17 @@ $lotacao = $Registro["lotacao"];
                                             echo "<option selected>1 GRAU</option>";
                                             echo "<option>2 GRAU</option>";
                                             echo "<option>3 GRAU'</option>";
+                                            echo "<option value = ''>Escolha o Grau Aqui!</option>";
                                         } elseif ($depen_grau_3 == "2 GRAU") {
                                             echo "<option selected>2 GRAU</option>";
                                             echo "<option>1 GRAU</option>";
                                             echo "<option>3 GRAU'</option>";
+                                            echo "<option value = ''>Escolha o Grau Aqui!</option>";
                                         } elseif ($depen_grau_3 == "3 GRAU") {
                                             echo "<option selected>3 GRAU</option>";
                                             echo "<option>2 GRAU</option>";
                                             echo "<option>1 GRAU</option>";
+                                            echo "<option value = ''>Escolha o Grau Aqui!</option>";
                                         } else {
                                             echo "<option selected = '' value = ''>Escolha o Grau Aqui!</option>";
                                             echo "<option>1 GRAU</option>";
@@ -1139,10 +1168,10 @@ $lotacao = $Registro["lotacao"];
             $(document).ready(function () {
                 var depentente = $('#depentente').val();
                 if (depentente == "NAO") {
-                  
+
                     $('#dependentes').hide('slow');
-                }else{
-                      $('#dependentes').show('slow');
+                } else {
+                    $('#dependentes').show('slow');
                 }
 
                 $('#radio_um').click(function () {

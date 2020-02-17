@@ -8,7 +8,7 @@ mysqli_set_charset($Conexao, "utf8");
 //
 require_once 'fpdf181/fpdf.php';
 $pdf = new FPDF('P', 'mm', 'A4');
-//$_POST['servidor_selecionado'] = [1];
+$_POST['servidor_selecionado'] = [1];
 foreach ($_POST['servidor_selecionado'] as $lista_id) {
 //
     $SQL_Consulta = "SELECT * FROM servidores WHERE `id` = $lista_id ";
@@ -125,7 +125,13 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         //
         $pdf->Cell(180, 7, "", 0, 1, 'L');
         $pdf->Cell(40, 6, "", 0, 0, 'L');
-        $pdf->Cell(95, 7, $row_Consulta["grau_intrucao"], 0, 1, 'L');
+        if ($row_Consulta["grau_intrucao_completo"] == "SIM") {
+            $pdf->Cell(117, 7, $row_Consulta["grau_intrucao"], 0, 0, 'L');
+            $pdf->Cell(170, 7, "X", 0, 1, 'L');
+        } else {
+            $pdf->Cell(128, 7, $row_Consulta["grau_intrucao"], 0, 0, 'L');
+            $pdf->Cell(170, 7, "X", 0, 1, 'L');
+        }
         //
         $pdf->Cell(113, 6, "", 0, 0, 'L');
         $pdf->Cell(40, 6, $row_Consulta["registro_numero"], 0, 0, 'L');
@@ -178,7 +184,16 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         //
         $pdf->Cell(180, 7, '', 0, 1, 'L');
         $pdf->Cell(16, 7, '', 0, 0, 'L');
-        $pdf->Cell(65, 7, $row_Consulta["depen_nome_1"], 0, 1, 'L');
+        if ($row_Consulta["depen_sexo_1"] == "MASCULINO") {
+            $pdf->Cell(142.5, 7, $row_Consulta["depen_nome_1"], 0, 0, 'L');
+            $pdf->Cell(65, 7, "X", 0, 1, 'L');
+        } elseif ($row_Consulta["depen_sexo_1"] == "FEMININO") {
+            $pdf->Cell(156, 7, $row_Consulta["depen_nome_1"], 0, 0, 'L');
+            $pdf->Cell(65, 7, "X", 0, 1, 'L');
+        } else {
+            $pdf->Cell(65, 7, "", 0, 1, 'L');
+        }
+        //
         $pdf->Cell(15, 7, '', 0, 0, 'L');
         $pdf->Cell(90, 6, $row_Consulta["depen_cpf_1"], 0, 0, 'L');
         $pdf->Cell(60, 6, $row_Consulta["depen_grau_1"], 0, 0, 'L');
@@ -209,10 +224,20 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
 //        } else {
 //            $pdf->Line(182.3, 232.7, 183.7, 231.2);
 //        }
-        $pdf->Cell(180, 6, '', 0, 1, 'L');
-        $pdf->Cell(16, 7, '', 0, 0, 'L');
-        $pdf->Cell(65, 7, $row_Consulta["depen_nome_2"], 0, 1, 'L');
-        $pdf->Cell(15, 7, '', 0, 0, 'L');
+        $pdf->Cell(180, 7, '', 0, 1, 'L');
+        //
+        if ($row_Consulta["depen_sexo_2"] == "MASCULINO") {
+            $pdf->Cell(16, 7, '', 0, 0, 'L');
+            $pdf->Cell(142.5, 7, $row_Consulta["depen_nome_2"], 0, 0, 'L');
+            $pdf->Cell(65, 7, "X", 0, 1, 'L');
+        } elseif ($row_Consulta["depen_sexo_2"] == "FEMININO") {
+            $pdf->Cell(16, 7, '', 0, 0, 'L');
+            $pdf->Cell(156, 7, $row_Consulta["depen_nome_2"], 0, 0, 'L');
+            $pdf->Cell(65, 7, "X", 0, 1, 'L');
+        } else {
+            $pdf->Cell(65, 7, "", 0, 1, 'L');
+        }
+
         $pdf->Cell(90, 6, $row_Consulta["depen_cpf_2"], 0, 0, 'L');
         $pdf->Cell(60, 6, $row_Consulta["depen_grau_2"], 0, 0, 'L');
 
@@ -230,7 +255,16 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         //
         $pdf->Cell(180, 7, '', 0, 1, 'L');
         $pdf->Cell(16, 7, '', 0, 0, 'L');
-        $pdf->Cell(65, 7, $row_Consulta["depen_nome_3"], 0, 1, 'L');
+        if ($row_Consulta["depen_sexo_3"] == "MASCULINO") {
+            $pdf->Cell(142.5, 7, $row_Consulta["depen_nome_3"], 0, 0, 'L');
+            $pdf->Cell(65, 7, "X", 0, 1, 'L');
+        } elseif ($row_Consulta["depen_sexo_3"] == "FEMININO") {           
+            $pdf->Cell(156, 7, $row_Consulta["depen_nome_3"], 0, 0, 'L');
+            $pdf->Cell(65, 7, "X", 0, 1, 'L');
+        } else {
+            $pdf->Cell(65, 7, "", 0, 1, 'L');
+        }
+
         $pdf->Cell(15, 7, '', 0, 0, 'L');
         $pdf->Cell(90, 6, $row_Consulta["depen_cpf_3"], 0, 0, 'L');
         $pdf->Cell(60, 6, $row_Consulta["depen_grau_3"], 0, 0, 'L');
@@ -252,7 +286,7 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         $pdf->AddPage();
         $pdf->SetLeftMargin(5);
         $pdf->Image('img/Anexo_Formulário_2.jpg', 7, 20, 193, 131);
-        $pdf->SetFont('Arial', '', 9);
+        $pdf->SetFont('Arial', 'B', 9);
         //
         $pdf->Cell(180, 20, '', 0, 1, 'L');
         $pdf->Cell(16, 7, '', 0, 0, 'L');
@@ -304,7 +338,7 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         }
         $pdf->Cell(60, 7, "$vinculo", 0, 1, 'L');
         $pdf->Cell(26, 7, '', 0, 0, 'L');
-        $pdf->SetFont('Arial', '', 7);
+        $pdf->SetFont('Arial', 'B', 7);
         $pdf->Cell(81, 6, "SECRETARIA MUNICIPAL DE EDUCAÇÃO", 0, 0, 'L');
         $pdf->Cell(105, 7, $row_Consulta["lotacao"], 0, 1, 'L');
         $pdf->Cell(90, 7, '', 0, 0, 'L');
