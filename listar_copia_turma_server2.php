@@ -118,9 +118,6 @@ mysqli_set_charset($Conexao, "utf8");
                         $html .= '</tr>';
                     }
 
-
-
-
                     //
 //                    $am = $linhaV['matriculados'];
 //                    $at = $linhaV['transferidos'];
@@ -202,6 +199,34 @@ mysqli_set_charset($Conexao, "utf8");
             $ano = filter_input(INPUT_POST, 'ano_Atual', FILTER_DEFAULT);
             $ano_anterior = filter_input(INPUT_POST, 'ano_Anterior', FILTER_DEFAULT);
             include 'pesquisar_no_banco_impressao_relatorio_ata_comparar.php';
+            //
+            //Atualiza o status da atas     //Atualiza o status da atas     //Atualiza o status da atas 
+        } elseif ($_POST['botao'] == "atualizar_status") {
+            $turma = "";
+            $status = "";
+            foreach (($_POST['turma_selecionada']) as $key => $turmaf) {
+                //
+                $SQL_turma = "SELECT * FROM `turmas` WHERE `id` = '$turmaf'";
+                $Consulta_turma = mysqli_query($Conexao, $SQL_turma);
+                $Linha_turma = mysqli_fetch_array($Consulta_turma);
+                //               
+                $turma .= $Linha_turma["turma"] . " " . $Linha_turma["unico"] . " - " . $Linha_turma["turno"] . " ( " . substr($Linha_turma["ano"], 0, -6) . ") ,";
+                $status .= $_POST['status'][$key] . ", ";
+//
+                $SQL_matricular = "UPDATE turma_backup SET status = '" . $_POST['status'][$key] . "' WHERE id_turma= '$turmaf'";
+                $Consulta = mysqli_query($Conexao, $SQL_matricular);
+            }
+            if ($Consulta) {
+                //Logar na Tabela log
+                $SQL_logar = "INSERT INTO log (`usuario`, `acao`,`alterar`,`data`) "
+                        . "VALUES ( '$usuario_logado', 'Alterou o Status da(s) turma(s) : $turma para $status ', 'SIM', now())";
+                $Consulta1 = mysqli_query($Conexao, $SQL_logar);
+                //
+                header("LOCATION: listar_copia_turma_server.php?id=1");
+            } else {
+                header("LOCATION: listar_copia_turma_server.php?id=2");
+            }
+            //
             //
         }
         ?>

@@ -109,15 +109,20 @@ $Consulta = mysqli_query($Conexao, "SELECT * FROM `usuarios` WHERE  `usuario` = 
 $Linha = mysqli_fetch_array($Consulta, MYSQLI_BOTH);
 //
 $tipo = $Linha['tipo'];
+$permissao = $Linha['permissao'];
 $id_usuario = $Linha['id'];
 $sistema = "none";
 $visao_boleto = "none";
+$visao_licensa = "none";
 //
 if ($tipo == "ROOT" || $tipo == "ADMIN") {
     $sistema = "block";
 }
 if ($tipo == "ROOT" || $tipo == "ADMIN" || $tipo == "FINANCEIRO") {
     $visao_boleto = "block";
+}
+if ($permissao == "TODAS") {
+    $visao_licensa = "block";
 }
 
 ?>

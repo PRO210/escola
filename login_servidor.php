@@ -3,7 +3,6 @@ ob_start();
 include_once './inc.conf.php';
 $Conexao = mysqli_connect("127.0.0.1", $Usuario, $Senha, $Base);
 mysqli_set_charset($Conexao, "utf8");
-
 ?>
 <html lang="pt-br">
     <head>
@@ -29,7 +28,6 @@ mysqli_set_charset($Conexao, "utf8");
 		alert(\"Usuário ou Senha Incorretos !\");
 		</script>
 			";
-            
         } else {
             setcookie("nome_usuario", $nome);
             setcookie("senha_usuario", $senha);

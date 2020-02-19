@@ -12,6 +12,10 @@ if (isset($_POST['imprimir'])) {
     include_once './pesquisar_no_banco_impressao_servidores_gerencial.php';
     //
 } elseif (isset($_POST['imprimir_gerencial_texto'])) {
+    $Consulta = mysqli_query($Conexao, "SELECT * FROM `usuarios` WHERE  `usuario` = '$usuario_logado'");
+    $Linha = mysqli_fetch_array($Consulta, MYSQLI_BOTH);
+//   
+    $permissao = $Linha['permissao'];
     include_once './pesquisar_no_banco_impressao_servidores_gerencial_texto.php';
     exit();
 } elseif (isset($_POST['imprimir_pdf'])) {
@@ -23,7 +27,8 @@ if (isset($_POST['imprimir'])) {
 } elseif (isset($_POST['imprimir_gerencial_pdf'])) {
     include_once './pesquisar_no_banco_impressao_servidores_gerencial_pdf.php';
     exit();
-}else{
+} else {
+    header("Location: servidores.php?id=2");
 //    include_once './pesquisar_no_banco_impressao_servidores_pdf.php';
 //    exit();
 }

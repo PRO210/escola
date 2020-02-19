@@ -388,19 +388,6 @@ foreach ($_POST['servidor_selecionado'] as $id) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //$pdf->Output(utf8_decode('Gerencial.pdf'), 'I');
 $pdf->Output(utf8_decode('Gerencial.pdf'), 'D');
-
+//

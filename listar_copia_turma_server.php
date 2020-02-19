@@ -36,6 +36,9 @@ if ($Recebe_id == "1") {
         </style>
     </head>   
     <body> 
+        <?php
+        include_once './menu.php';
+        ?>  
         <div class="modal fade" id="exemplomodal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -68,8 +71,14 @@ if ($Recebe_id == "1") {
         if ($M == "1") {
             echo"<script type='text/javascript'>
                 $(document).ready(function () {
-                    $('#exemplomodal').modal('show');
-                });
+                    $('#exemplomodal').modal('show');                    
+                       });
+            </script>";
+            echo"<script type='text/javascript'>                           
+                    var intervalo = window.setInterval(fechar, 4000);
+                        function fechar() {                      
+                            $('#exemplomodal').modal('hide');
+                       }                 
             </script>";
         }
         ?>
@@ -84,8 +93,8 @@ if ($Recebe_id == "1") {
                         echo "<form method= 'post' action='listar_copia_turma_server2.php' name = 'form' onsubmit ='return validaCheckbox()' > ";
                         ?>
                         <!-- Modal -->          <!-- Modal -->   <!-- Modal -->          <!-- Modal -->
-                        <div class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog modal-lg">
+                        <div class="modal fade " id="myModal" role="dialog">
+                            <div class="modal-dialog modal-lg ">
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -148,7 +157,7 @@ if ($Recebe_id == "1") {
                                         <button type="submit" name ="botao" value="comparar"  class="btn btn-success btn-block" onclick="" >Enviar Solicitação </button> 
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Continuar</button>
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +168,7 @@ if ($Recebe_id == "1") {
                                 <a href="pesquisar_turmas_server.php" ><button type="button" class="btn btn-large btn-block btn-primary" style="margin-bottom: 12px !important">Voltar Para A Página Anterior</button></a>
                             </div> 
                             <div class="col-sm-3">
-                                <a href="principal.php" ><button type="button" class="btn btn-large btn-block btn-success" style="margin-bottom: 12px !important">Menu Principal</button></a>
+                                <button type="submit" name="botao" value="atualizar_status" class="btn btn-large btn-block btn-success" style="margin-bottom: 12px !important">Atualizar o Status</button>
                             </div>
                             <div class="col-sm-3">
                                 <button type="submit" value="atualizar" name="botao" id="" class="btn btn-warning btn-block" >Atualizar Turmas </button>                                    
@@ -185,13 +194,14 @@ if ($Recebe_id == "1") {
                         . "</div>"
                         . "</th>";
                         echo "<th style = 'width:200px;'>TURMA</th>";
-                        echo "<th>MATRICULADOS </th>";
+                        echo "<th>PRONTA</th>";
+                        echo "<th>MAT.</th>";
                         echo "<th style = 'width:5%;'>TRANF.</th>";
                         echo "<th>A.AD</th>";
                         // echo "<th>DESIST.</th>";
                         echo "<th style = 'width:95px;'>CURSANDO</th>";
                         echo "<th style = 'width:5%;'>ANO</th>";
-                        echo "<th>PROFESSOR(A)</th>";
+                        echo "<th style = 'width: 350px !important;'>PROFESSOR(A)</th>";
                         echo "<th>ALUNOS</th>";
                         echo "</tr>";
                         echo "</thead>";
@@ -200,7 +210,8 @@ if ($Recebe_id == "1") {
                         echo "<tr>";
                         echo "<th>  </th>";
                         echo "<th>TURMA</th>";
-                        echo "<th>MATRICULADOS</th>";
+                        echo "<th>PRONTA</th>";
+                        echo "<th>MAT.</th>";
                         echo "<th>TRANF.</th>";
                         echo "<th>A.AD</th>";
                         //   echo "<th>DESIST.</th>";
@@ -216,6 +227,7 @@ if ($Recebe_id == "1") {
                         while ($linhaV = mysqli_fetch_array($ConsultaV)) {
                             //                           
                             $idV = $linhaV['id_turma'];
+                            $status = $linhaV['status'];
                             //
                             $SQL_turma = "SELECT * FROM `turmas` WHERE `id` = '$idV'";
                             $Consulta_turma = mysqli_query($Conexao, $SQL_turma);
@@ -240,8 +252,8 @@ if ($Recebe_id == "1") {
                             $Consulta = mysqli_query($Conexao, "SELECT * FROM turma_backup WHERE id_turma = '$idV'");
                             $linha = mysqli_fetch_array($Consulta);
                             //       
-                            $nome_professores ='Titular: '. $linha['prof'] . " <br> " . $linha['prof_aux']." ";
-                          //
+                            $nome_professores = 'Titular: ' . $linha['prof'] . " <br> " . $linha['prof_aux'] . " ";
+                            //
                             $nomes = "";
                             $ContLinhas = 0;
                             $ids = $linhaV['ids'];
@@ -274,10 +286,27 @@ if ($Recebe_id == "1") {
                             echo "<td>"
                             . "<input type='checkbox' name='turma_selecionada[]' class = 'turma' value='$idV' >"
                             . "</td>";
+                            //
                             echo "<td>"
                             . "<button type ='button' value = '$idV' class='btn btn-link btmais'  style='text-decoration: none;margin-left: -12px;'><span class='glyphicon glyphicon-plus-sign text-success ' aria-hidden='true'id = '$idV' ></span></button>"
                             . "" . $turmaf
                             . "</td>\n";
+                            //
+                            if ($status == "SIM") {
+                                echo "<td>   "
+                                . "<select name='status[]' class='status_$idV form-control status' disabled = '' id='status_$idV' >"
+                                . "<option selected= '' value='SIM' >SIM</option>"
+                                . "<option  value='NAO' >NÃO</option>"
+                                . "</select>"
+                                . "     </td>\n";
+                            } else {
+                                echo "<td>   "
+                                . "<select name='status[]' class='status_$idV form-control status' disabled = '' id='status_$idV' >"
+                                . "<option value='SIM' >SIM</option>"
+                                . "<option selected= '' value='NAO' >NÃO</option>"
+                                . "</select>"
+                                . "     </td>\n";
+                            }
                             echo "<td>" . $am . "</td>\n";
                             echo "<td class = 'text-danger'>" . $at . "</td>\n";
                             echo "<td>" . $ad . "</td>\n";
@@ -298,7 +327,21 @@ if ($Recebe_id == "1") {
                         echo "Nada enconrado.";
                     }
                     ?>  
-                </div>      
+                </div>     
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $(".turma").click(function () {
+                            var teste = $('.turma').is(':checked');
+                            var status = $(this).val();
+
+                            if (teste == true) {
+                                $("#status_" + status).removeAttr('disabled');
+                            } else {
+                                $("#status_" + status).attr('disabled', 'disabled');
+                            }
+                        });
+                    });
+                </script>
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $(".selecionar").click(function () {
@@ -308,12 +351,14 @@ if ($Recebe_id == "1") {
                                 $(".turma").each(function () {
                                     this.checked = true;
                                     $('input:checkbox').prop("checked", true);
+                                    $(".status").removeAttr('disabled');
 
                                 });
                             } else {
                                 $(".turma").each(function () {
                                     this.checked = false;
                                     $('input:checkbox').prop("checked", false);
+                                    $(".status").attr('disabled', 'disabled');
                                 });
                             }
                             ;
@@ -325,15 +370,17 @@ if ($Recebe_id == "1") {
                         $(".btmais").click(function () {
                             var valor = $(this).val();
                             $("." + valor + "").toggle();
-                            //
+                            //                          
                             var verde = $("#" + valor + "").hasClass("text-success");
                             if (verde) {
+
                                 $("#" + valor + "").removeClass("text-success");
                                 $("#" + valor + "").addClass("vermelho");
                                 $("#" + valor + "").removeClass("glyphicon glyphicon-plus-sign");
                                 $("#" + valor + "").addClass("glyphicon glyphicon-minus-sign");
                                 $("." + valor + "").each(function () {
                                     this.checked = true;
+                                    $(".status_" + valor).removeAttr('disabled');
                                 });
                             } else {
                                 $("#" + valor + "").removeClass("vermelho");
@@ -342,6 +389,7 @@ if ($Recebe_id == "1") {
                                 $("#" + valor + "").addClass("glyphicon glyphicon-plus-sign");
                                 $("." + valor + "").each(function () {
                                     this.checked = false;
+                                    $(".status_" + valor).attr('disabled', 'disabled');
                                 });
                             }
 
@@ -452,5 +500,11 @@ if ($Recebe_id == "1") {
             });
         });
     </script>
+    <script type='text/javascript'>
+        var intervalo = window.setInterval(fechar, 4000);
+        function fechar() {
+            $('.modal_msg').modal('hide');
+        }
+    </script> 
 
 </html>
