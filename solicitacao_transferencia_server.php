@@ -178,6 +178,7 @@ if ($botao == "atualizar") {
         }
     }
     //
+    //Folhas com notas  //Folhas com notas
 } elseif ($botao == "Folha_Com_Notas") {
     //   
     if (count($_POST['aluno_selecionado']) > 1) {

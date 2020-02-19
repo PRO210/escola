@@ -19,6 +19,7 @@ $nome = $Linha['nome'];
 $bimestre = filter_input(INPUT_POST, 'inputBimestre', FILTER_DEFAULT);
 //Dados da Escola:dias,horas e ano.
 $escola = filter_input(INPUT_POST, 'inputEscola', FILTER_DEFAULT);
+$ano_turma = filter_input(INPUT_POST, 'ano_turma', FILTER_DEFAULT);
 $escola_horas = filter_input(INPUT_POST, 'inputEscolaH', FILTER_DEFAULT);
 $aluno_dias = filter_input(INPUT_POST, 'inputAlunoD', FILTER_DEFAULT);
 $ano_atual = filter_input(INPUT_POST, 'inputAnoAtual', FILTER_DEFAULT);
@@ -105,7 +106,7 @@ if ($status == "TRANSFERIDO") {
     $SQL_ConsultaStatus = mysqli_query($Conexao, $ConsultaStatus);
 }
 //
-$Consulta0 = ("UPDATE `bimestre_media` SET `escola` = '$escola',`aluno` = '$escola_horas', `aluno_dias` = '$aluno_dias' ,`frequencia` = '$frequencia' , `escola_media` = '$escola_media', `cidade_media` = '$cidade', `uf` = '$uf' , `status_bimestre_media` = '$bimetre_status', `bimestre_recupera` = '$bimetre_recupera', `bimestre_turma` = '$bimestre_turma' , `bimestre_turno` = '$bimestre_turno' , `bimestre_unico` = '$bimestre_unico' , "
+$Consulta0 = ("UPDATE `bimestre_media` SET `escola` = '$escola',`aluno` = '$escola_horas', `aluno_dias` = '$aluno_dias' ,`frequencia` = '$frequencia' , `escola_media` = '$escola_media', `cidade_media` = '$cidade', `uf` = '$uf' , `status_bimestre_media` = '$bimetre_status', `bimestre_recupera` = '$bimetre_recupera', `bimestre_turma` = '$bimestre_turma' , `bimestre_turno` = '$bimestre_turno' , `bimestre_unico` = '$bimestre_unico' , `ano_turma` = '$ano_turma',"
         . " `obs_bimestre_media` = '$inputObs' , `obs_bimestre_media_ii` = '$inputObs2' , `obs_bimestre_media_iii` = '$inputObs3', `obs_bimestre_media_iv` = '$inputObs4' , `obs_bimestre_media_v` = '$inputObs5' , `obs_bimestre_media_vi` = '$inputObs6' , `obs_bimestre_media_vii` = '$inputObs7' , `obs_bimestre_media_viii` = '$inputObs8' , `obs_bimestre_media_ix` = '$inputObs9' WHERE `id_bimestre_media_aluno` = '$id_aluno' AND `ano` = '$ano' ");
 $SQL_Consulta0 = mysqli_query($Conexao, $Consulta0);
 $obs = "$inputObs $inputObs2 $inputObs3 $inputObs4 $inputObs5 $inputObs6 $inputObs7 $inputObs8 $inputObs9 .";

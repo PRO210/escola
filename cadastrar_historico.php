@@ -148,66 +148,63 @@ if (empty($_SESSION['erro'])) {
                                                 <option disabled=""></option>
                                                 <option value="2016">2016 - Primeiro Histórico</option>
                                                 <option value="2016-2">2016 - Segundo Histórico</option>
-                                                <option value="2016-3">2016 - Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2017">2017 - Primeiro Histórico</option>
                                                 <option value="2017-2">2017 Segundo Histórico</option>
-                                                <option value="2017-3">2017 Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2018">2018 - Primeiro Histórico</option>
                                                 <option value="2018-2">2018 Segundo Histórico</option>
-                                                <option value="2018-3">2018 Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2019">2019 - Primeiro Histórico</option>
                                                 <option value="2019-2">2019 Segundo Histórico</option>
-                                                <option value="2019-3">2019 Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2020">2020 - Primeiro Histórico</option>
                                                 <option value="2020-2">2020 Segundo Histórico</option>
-                                                <option value="2020-3">2020 Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2021">2021 - Primeiro Histórico</option>
                                                 <option value="2021-2">2021 Segundo Histórico</option>
-                                                <option value="2021-3">2021 Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2022">2022 - Primeiro Histórico</option>
                                                 <option value="2022-2">2022 - Segundo Histórico</option>
-                                                <option value="2022-3">2022 - Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2023">2023 - Primeiro Histórico</option>
                                                 <option value="2023-2">2023 - Segundo Histórico</option>
-                                                <option value="2023-3">2023 - Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2024">2024 - Primeiro Histórico</option>
                                                 <option value="2024-2">2024 - Segundo Histórico</option>
-                                                <option value="2024-3">2024 - Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2025">2025 - Primeiro Histórico</option>
                                                 <option value="2025-2">2025 - Segundo Histórico</option>
-                                                <option value="2025-3">2025 - Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2026">2026 - Primeiro Histórico</option>
                                                 <option value="2026-2">2026 - Segundo Histórico</option>
-                                                <option value="2026-3">2026 - Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2027">2027 - Primeiro Histórico</option>
                                                 <option value="2027-2">2027 - Segundo Histórico</option>
-                                                <option value="2027-3">2027 - Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2028">2028 - Primeiro Histórico</option>
                                                 <option value="2028-2">2028 - Segundo Histórico</option>
-                                                <option value="2028-3">2028 - Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2019">2019 - Primeiro Histórico</option>
                                                 <option value="2029-2">2029 - Segundo Histórico</option>
-                                                <option value="2029-3">2029 - Terceiro Histórico</option>
                                                 <option disabled=""></option>
                                                 <option value="2030">2030 - Primeiro Histórico</option>  
                                                 <option value="2030-2">2030 - Segundo Histórico</option>
-                                                <option value="2030-3">2030 - Terceiro Histórico</option>
                                             </select>
                                         </th>                                
-                                    </tr>                              
+                                    </tr> 
+                                    <tr>                                
+                                        <th colspan="2">
+                                            <select class="form-control" name="ano_turma" id="ano_turma"  style="width: 100% !important">
+                                                <option  selected="" value="">Selecione a Turma para Esse Ano</option>
+                                                <option>1 ANO</option>
+                                                <option>2 ANO</option>
+                                                <option>3 ANO</option>
+                                                <option>EJA I</option>
+                                                <option>EJA II</option>                                                                                              
+                                            </select>
+                                        </th>                                
+                                    </tr>
                                     <tr>
                                         <td id = 'thNome' colspan="2"><input id = 'input_escola' type = 'text' name = 'inputEscola' placeholder = 'Nome da Escola' onkeyup='maiuscula(this)'></td>
                                     </tr>
@@ -358,71 +355,5 @@ if (empty($_SESSION['erro'])) {
                 </div>              
             </form>    
         </div> 
-    </body>
-    <script type="text/javascript">
-        $('input').on("input", function (e) {
-            $(this).val($(this).val().replace('"', ""));
-            $(this).val($(this).val().replace("'", ""));
-            $(this).val($(this).val().replace("º", ""));
-            $(this).val($(this).val().replace("°", ""));
-        });
-    </script>
-    <script type="text/javascript">
-        //idSolicitante
-        function confirmarPedido() {
-            var valor = $('#idSolicitante').val();
-            var valorData = $('#idData').val();
-            if (valor == "" && valorData == "") {
-                alert('Por Favor Especifique o nome do Solicitante ou a Data Solicitação');
-                return false;
-                //
-            } else {
-                //
-                var r = confirm("Realmente deseja Pedir uma Transferência?");
-                if (r == true) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        }
-    </script>  
-    <script type="text/javascript">
-        function change() {
-            var textoOptionSelecionado = $('#Ano option:selected').text(); // armazendando em variavel
-            // alert("Texto do option selecionado: " + textoOptionSelecionado); // mostrando um alerta na tela
-            if (textoOptionSelecionado == "Selecione o Ano") {
-                alert("O Campo Ano não Pode ser Enviado em Branco!");
-                return false;
-            }
-        }
-
-    </script>
-    <script>
-        // INICIO FUNÇÃO DE MASCARA MAIUSCULA
-        function maiuscula(z) {
-            v = z.value.toUpperCase();
-            z.value = v;
-        }
-    </script>   
-    <script type="text/javascript">
-        function confirmarExclusao() {
-            var r = confirm("Realmente deseja excluir o Atestado <?php echo "$usuario_logado" ?>?");
-            if (r == true) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
-    <script>
-        function confirmarExclusao2() {
-            var r = confirm('Realmente deseja Criar esse Histórico <?php echo "$usuario_logado" ?>?');
-            if (r == true) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
+    </body>    
 </html>

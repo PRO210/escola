@@ -17,7 +17,18 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#inputAno').change(function () {
 
-        if ($('#inputAno').val() !== '') {
+        if ($('#inputAno').val() !== '' && $('#ano_turma').val() !== '') {
+            $('#criar_historico').removeAttr('disabled');
+        } else {
+
+            $('#criar_historico').attr('disabled', 'disabled');
+        }
+    });
+});
+$(document).ready(function () {
+    $('#ano_turma').change(function () {
+
+        if ($('#inputAno').val() !== '' && $('#ano_turma').val() !== '') {
             $('#criar_historico').removeAttr('disabled');
         } else {
 

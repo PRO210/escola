@@ -58,6 +58,7 @@ $Consulta2 = mysqli_query($Conexao, "SELECT bimestre_media.*,disciplinas.discipl
 $linhaConsulta2 = mysqli_fetch_array($Consulta2, MYSQLI_BOTH);
 
 $escola = $linhaConsulta2['escola'];
+$ano_turma = $linhaConsulta2['ano_turma'];
 $escola_horas = $linhaConsulta2['aluno'];
 $aluno_dias = $linhaConsulta2['aluno_dias'];
 $frequencia = $linhaConsulta2['frequencia'];
@@ -241,23 +242,23 @@ $inputObs9 = $linhaConsulta2['obs_bimestre_media_ix'];
                                                     echo "<option selected = '' >$status4</option>";
                                                     echo "<option >$status1</option>";
                                                     echo "<option >$status2</option>";
-                                                  //  echo "<option >$status3</option>";                                                   
-                                                    echo "<option >$status5</option>";                                                   
+                                                    //  echo "<option >$status3</option>";                                                   
+                                                    echo "<option >$status5</option>";
                                                 } elseif ($status == "ADIMITIDO DEPOIS") {
                                                     echo "<option selected = '' >$status2</option>";
                                                     echo "<option >CURSANDO</option>";
-                                                   // echo "<option >$status3</option>";
+                                                    // echo "<option >$status3</option>";
                                                     echo "<option >$status4</option>";
                                                     echo "<option >$status5</option>";
                                                 } elseif ($status == "NÃO RENOVADO") {
                                                     echo "<option selected = '' >$status5</option>";
                                                     echo "<option >CURSANDO</option>";
-                                                   // echo "<option >$status3</option>";
+                                                    // echo "<option >$status3</option>";
                                                     echo "<option >$status4</option>";
                                                 } else {
                                                     echo "<option selected = '' >$status1</option>";
                                                     echo "<option >$status2</option>";
-                                                 //   echo "<option >$status3</option>";
+                                                    //   echo "<option >$status3</option>";
                                                     echo "<option >$status4</option>";
                                                     echo "<option >$status5</option>";
                                                 }
@@ -305,7 +306,24 @@ $inputObs9 = $linhaConsulta2['obs_bimestre_media_ix'];
                                         </td>
                                         <!--<td><input  class= "borda" type='text' name='inputAno' value = "<?php echo $ano ?>" disabled="" onkeyup='maiuscula(this)'></td>-->
                                         <!--<td><input  class= "borda" type='hidden' name='inputAnoAtual' value = "<?php echo $ano ?>" onkeyup='maiuscula(this)'></td>-->
-                                    </tr>                    
+                                    </tr>  
+                                    <tr>
+                                        <td colspan = '2'> Turma_Ano:&nbsp;&nbsp;
+                                            <select name="ano_turma" class="form-control">
+                                                <?php
+                                                $turma = ['1 ANO', '2 ANO', '3 ANO', 'EJA I', 'EJA II'];
+                                                for ($index = 0; $index < count($turma); $index++) {
+
+                                                    if ($turma[$index] == "$ano_turma") {
+                                                        echo "<option value = '$turma[$index]' selected = ''>" . $turma[$index] . "</option>";
+                                                    } else {
+                                                        echo "<option value = '$turma[$index]'>" . $turma[$index] . "</option>";
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -568,7 +586,7 @@ $inputObs9 = $linhaConsulta2['obs_bimestre_media_ix'];
         </div>
         <style>
             .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-                padding: 5px !important;
+                padding: 6px !important;
             }
         </style>
     </body>      
@@ -600,8 +618,8 @@ $inputObs9 = $linhaConsulta2['obs_bimestre_media_ix'];
             });
         });
     </script>-->    
-    
-    
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('.radioSim').click(function () {

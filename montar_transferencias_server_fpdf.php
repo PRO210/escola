@@ -37,25 +37,40 @@ $pdf = new PDF();
 //$_POST['id_alunos']
 foreach ($array_alunos as $id_aluno) {
 
-    $cont05 = 1;
+//    $cont05 = 1;
     $ano1 = "";
     $ano2 = "";
     $ano3 = "";
+    $eja1 = "";
+    $eja2 = "";
 
-    $sql05 = mysqli_query($Conexao, "SELECT * FROM `bimestre_media` WHERE id_bimestre_media_aluno = '$id_aluno'  AND  status_bimestre_media = '5'  AND bimestre_turma LIKE '%ANO%' GROUP BY ano ORDER BY `bimestre_media`.`ano` ASC");
+    $sql05 = mysqli_query($Conexao, "SELECT * FROM `bimestre_media` WHERE id_bimestre_media_aluno = '$id_aluno'  AND  status_bimestre_media = '5'  GROUP BY ano ORDER BY `bimestre_media`.`ano` ASC");
     $rows = mysqli_num_rows($sql05);
     while ($row05 = mysqli_fetch_array($sql05)) {
+        $ano_turma = $row05['ano_turma'];
 
-        if ($cont05 == "1") {
+//        if ($cont05 == "1") {
+//            $ano1 = $row05['ano'];
+//        } elseif ($cont05 == "2") {
+//            $ano2 = $row05['ano']; //           
+//        } elseif ($cont05 == "3") {
+//            $ano3 = $row05['ano'];
+//        }
+        if ($ano_turma == "1 ANO") {
             $ano1 = $row05['ano'];
-        } elseif ($cont05 == "2") {
+        } elseif ($ano_turma == "2 ANO") {
             $ano2 = $row05['ano']; //           
-        } elseif ($cont05 == "3") {
+        } elseif ($ano_turma == "3 ANO") {
             $ano3 = $row05['ano'];
+            //
+        } elseif ($ano_turma == "EJA I") {
+            $eja1 = $row05['ano'];
+        } elseif ($ano_turma == "EJA II") {
+            $eja2 = $row05['ano'];
         }
-        $cont05++;
-    }
-    if ($rows < 3) {
+//        $cont05++;
+    }   
+    if ($rows < 1) {
         $Consulta_aluno = mysqli_query($Conexao, "SELECT * FROM alunos WHERE id = '$id_aluno' ");
         $Linha_aluno = mysqli_fetch_array($Consulta_aluno, MYSQLI_BOTH);
         $nome = $Linha_aluno['nome'];
@@ -136,10 +151,10 @@ foreach ($array_alunos as $id_aluno) {
             $ano5_conv = $ano5;
         }
 //
-        $eja1 = "";
+        //EJAS       //EJAS      //EJAS
         $eja1_conv = "";
-        $eja1 = filter_input(INPUT_POST, 'inputEja1', FILTER_DEFAULT);
-        $optradioEja1 = filter_input(INPUT_POST, 'optradioEja1', FILTER_DEFAULT);
+        $optradioEja1 = "";
+//       $eja1 = "2020";
         if ($eja1 == "") {
             $marcareja1 = "";
         } else {
@@ -152,10 +167,7 @@ foreach ($array_alunos as $id_aluno) {
         }
 
 
-        $eja2 = "";
-        $eja2_conv = "";
-        $eja2 = filter_input(INPUT_POST, 'inputEja2', FILTER_DEFAULT);
-        $optradioEja2 = filter_input(INPUT_POST, 'optradioEja2', FILTER_DEFAULT);
+        $eja2_conv = "";    
 
         if ($eja2 == "") {
             $marcareja2 = "";
