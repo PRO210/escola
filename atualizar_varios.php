@@ -175,30 +175,76 @@ if (isset($_POST['basica'])) {
                                             <th colspan="2">
                                                 <select class="form-control" name="inputAno" id="inputAno"  style="width: 100% !important">
                                                     <option  selected="" value="">Selecione o Ano </option>
+                                                    <option>2008</option>
+                                                    <option>2009</option>
                                                     <option>2010</option>
                                                     <option>2011</option>
                                                     <option>2012</option>
                                                     <option>2013</option>
                                                     <option>2014</option>
                                                     <option>2015</option>
-                                                    <option>2016</option>
-                                                    <option>2017</option>
-                                                    <option>2018</option>
-                                                    <option>2019</option>
-                                                    <option>2020</option>
-                                                    <option>2021</option>
-                                                    <option>2022</option>
-                                                    <option>2023</option>
-                                                    <option>2024</option>
-                                                    <option>2025</option>
-                                                    <option>2026</option>
-                                                    <option>2027</option>
-                                                    <option>2028</option>                                  
-                                                    <option>2029</option>                                  
-                                                    <option>2030</option>                                  
+                                                    <option disabled=""></option>
+                                                    <option value="2016">2016 - Primeiro Histórico</option>
+                                                    <option value="2016-2">2016 - Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2017">2017 - Primeiro Histórico</option>
+                                                    <option value="2017-2">2017 Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2018">2018 - Primeiro Histórico</option>
+                                                    <option value="2018-2">2018 Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2019">2019 - Primeiro Histórico</option>
+                                                    <option value="2019-2">2019 Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2020">2020 - Primeiro Histórico</option>
+                                                    <option value="2020-2">2020 Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2021">2021 - Primeiro Histórico</option>
+                                                    <option value="2021-2">2021 Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2022">2022 - Primeiro Histórico</option>
+                                                    <option value="2022-2">2022 - Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2023">2023 - Primeiro Histórico</option>
+                                                    <option value="2023-2">2023 - Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2024">2024 - Primeiro Histórico</option>
+                                                    <option value="2024-2">2024 - Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2025">2025 - Primeiro Histórico</option>
+                                                    <option value="2025-2">2025 - Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2026">2026 - Primeiro Histórico</option>
+                                                    <option value="2026-2">2026 - Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2027">2027 - Primeiro Histórico</option>
+                                                    <option value="2027-2">2027 - Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2028">2028 - Primeiro Histórico</option>
+                                                    <option value="2028-2">2028 - Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2019">2019 - Primeiro Histórico</option>
+                                                    <option value="2029-2">2029 - Segundo Histórico</option>
+                                                    <option disabled=""></option>
+                                                    <option value="2030">2030 - Primeiro Histórico</option>  
+                                                    <option value="2030-2">2030 - Segundo Histórico</option>
                                                 </select>
                                             </th>                                
-                                        </tr>                              
+                                        </tr> 
+                                        <tr>                                
+                                            <th colspan="2">
+                                                <select class="form-control" name="ano_turma" id="ano_turma"  style="width: 100% !important">
+                                                    <option  selected="" value="">Selecione a Turma para Esse Ano</option>
+                                                    <option>1 ANO</option>
+                                                    <option>2 ANO</option>
+                                                    <option>3 ANO</option>
+                                                    <option>4 ANO</option>
+                                                    <option>5 ANO</option>
+                                                    <option>EJA I</option>
+                                                    <option>EJA II</option>                                                                                              
+                                                </select>
+                                            </th>                                
+                                        </tr>                     
                                         <tr>
                                             <td id = 'thNome' colspan="2"><input id = 'input_escola' type = 'text' name = 'inputEscola' placeholder = 'Nome da Escola' onkeyup='maiuscula(this)'></td>
                                         </tr>
@@ -725,16 +771,22 @@ if (isset($_POST['basica'])) {
             //Cuida do botão criar hisóricos
             $(document).ready(function () {
                 $('#inputAno').change(function () {
-
-                    if ($('#inputAno').val() !== '') {
+                    if ($('#inputAno').val() !== '' && $('#ano_turma').val() !== '') {
                         $('#criar_historico').removeAttr('disabled');
                     } else {
-
                         $('#criar_historico').attr('disabled', 'disabled');
                     }
                 });
             });
-
+            $(document).ready(function () {
+                $('#ano_turma').change(function () {
+                    if ($('#inputAno').val() !== '' && $('#ano_turma').val() !== '') {
+                        $('#criar_historico').removeAttr('disabled');
+                    } else {
+                        $('#criar_historico').attr('disabled', 'disabled');
+                    }
+                });
+            });
         </script>
         <script type="text/javascript">
             function confirmarMover() {

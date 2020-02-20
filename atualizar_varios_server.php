@@ -577,6 +577,8 @@ if (isset($_POST['atualizar'])) {
     $todos = "";
     //
     $ano = filter_input(INPUT_POST, 'inputAno', FILTER_DEFAULT);
+    $ano_turma = filter_input(INPUT_POST, 'ano_turma', FILTER_DEFAULT);
+
     $ano_pesquisa = filter_input(INPUT_POST, 'inputAno1', FILTER_DEFAULT);
     $escola = filter_input(INPUT_POST, 'inputEscola', FILTER_DEFAULT);
     $cidade = filter_input(INPUT_POST, 'inputCidade', FILTER_DEFAULT);
@@ -628,8 +630,8 @@ if (isset($_POST['atualizar'])) {
                             . "VALUES (NULL, '$ano', '$lista_id', '$idD', '','','1','$escola','$cidade','$uf')";
                     $SQLExecuta = mysqli_query($Conexao, $SQLConsulta);
 //
-                    $SQLConsulta = "INSERT INTO `bimestre_media` (`id_bimestre_media`, `ano`, `id_bimestre_media_aluno`, `id_bimestre_media_disciplina`, `nota`,`faltas`,`escola`,`aluno`,`aluno_dias`,`frequencia`,`status_bimestre_media`,`escola_media`,`cidade_media`,`uf`,`bimestre_turma`,`bimestre_turno`,`bimestre_unico`) "
-                            . "VALUES (NULL, '$ano', '$lista_id', '$idD', '','','','','','','1','$escola','$cidade','$uf','$turma','$turno','$unica')";
+                    $SQLConsulta = "INSERT INTO `bimestre_media` (`id_bimestre_media`, `ano`, `ano_turma` ,`id_bimestre_media_aluno`, `id_bimestre_media_disciplina`, `nota`,`faltas`,`escola`,`aluno`,`aluno_dias`,`frequencia`,`status_bimestre_media`,`escola_media`,`cidade_media`,`uf`,`bimestre_turma`,`bimestre_turno`,`bimestre_unico`) "
+                            . "VALUES (NULL, '$ano', '$ano_turma' ,'$lista_id', '$idD', '','','','','','','1','$escola','$cidade','$uf','$turma','$turno','$unica')";
                     $SQLExecuta = mysqli_query($Conexao, $SQLConsulta);
 //
                     $SQLConsulta = "INSERT INTO `recuperacao_final` (`id_recuperacao_final`, `ano`, `id_recuperacao_final_aluno`, `id_recuperacao_final_disciplina`, `nota`,`media`,`id_recuperacao_final_status_alunos`,`escola`,`cidade`,`uf`) "

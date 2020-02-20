@@ -27,8 +27,7 @@ if (isset($_POST['imprimir'])) {
 } elseif (isset($_POST['imprimir_gerencial_pdf'])) {
     include_once './pesquisar_no_banco_impressao_servidores_gerencial_pdf.php';
     exit();
-} else {
-    header("Location: servidores.php?id=2");
+} else {   
 //    include_once './pesquisar_no_banco_impressao_servidores_pdf.php';
 //    exit();
 }
