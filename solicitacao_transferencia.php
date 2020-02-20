@@ -429,6 +429,7 @@ if (!empty($todos)) {
             $('#button3').attr('disabled', 'disabled');
             $('#button4').attr('disabled', 'disabled');
             $('#button5').attr('disabled', 'disabled');
+            $('#button6').attr('disabled', 'disabled');
             $('#button7').attr('disabled', 'disabled');
         }
         ;
@@ -463,12 +464,15 @@ if (!empty($todos)) {
                 $('#button3').removeAttr('disabled');
                 $('#button4').removeAttr('disabled');
                 $('#button5').removeAttr('disabled');
+                $('#button6').removeAttr('disabled');
                 $('#button7').removeAttr('disabled');
             } else {
                 $('#button').attr('disabled', 'disabled');
                 $('#button2').attr('disabled', 'disabled');
                 $('#button3').attr('disabled', 'disabled');
                 $('#button4').attr('disabled', 'disabled');
+                $('#button5').attr('disabled', 'disabled');
+                $('#button6').attr('disabled', 'disabled');
                 $('#button7').attr('disabled', 'disabled');
             }
         });

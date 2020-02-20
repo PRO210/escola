@@ -1,10 +1,31 @@
 <?php
 
 ob_start();
+
 include_once 'valida_cookies.inc';
 include_once './inc.conf.php';
 $Conexao = mysqli_connect("127.0.0.1", $Usuario, $Senha, $Base);
 mysqli_set_charset($Conexao, "utf8");
+//
+$Consulta = mysqli_query($Conexao, "SELECT * FROM `usuarios` WHERE  `usuario` = '$usuario_logado'");
+$Linha = mysqli_fetch_array($Consulta, MYSQLI_BOTH);
+//
+$tipo = $Linha['tipo'];
+$permissao = $Linha['permissao'];
+$id_usuario = $Linha['id'];
+$sistema = "none";
+$visao_boleto = "none";
+$visao_licensa = "none";
+//
+if ($tipo == "ROOT" || $tipo == "ADMIN") {
+    $sistema = "block";
+}
+if ($tipo == "ROOT" || $tipo == "ADMIN" || $tipo == "FINANCEIRO") {
+    $visao_boleto = "block";
+}
+if ($permissao == "TODAS") {
+    $visao_licensa = "block";
+}
 //
 $botao = filter_input(INPUT_POST, 'botao', FILTER_DEFAULT);
 $solicitante = filter_input(INPUT_POST, 'inputSolicitante', FILTER_DEFAULT);
@@ -167,7 +188,7 @@ if ($botao == "atualizar") {
     }
 } elseif ($botao == "Folha_de_Rosto") {
     //
-    if (count($_POST['aluno_selecionado']) > 1) {
+    if (count($_POST['aluno_selecionado']) > 1 && $permissao =="TODAS") {
         include_once 'montar_transferencias.php';
         exit();
     } else {
@@ -181,7 +202,7 @@ if ($botao == "atualizar") {
     //Folhas com notas  //Folhas com notas
 } elseif ($botao == "Folha_Com_Notas") {
     //   
-    if (count($_POST['aluno_selecionado']) > 1) {
+    if (count($_POST['aluno_selecionado']) > 1 && $permissao =="TODAS") {
 //        include_once 'montar_transferencias_notas.php';
         include'montar_transferencias_server_fpdf.php';
         exit();

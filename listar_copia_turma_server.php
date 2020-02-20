@@ -227,7 +227,7 @@ if ($Recebe_id == "1") {
                         while ($linhaV = mysqli_fetch_array($ConsultaV)) {
                             //                           
                             $idV = $linhaV['id_turma'];
-                            $status = $linhaV['status'];
+                            $status = $linhaV['pronta'];
                             //
                             $SQL_turma = "SELECT * FROM `turmas` WHERE `id` = '$idV'";
                             $Consulta_turma = mysqli_query($Conexao, $SQL_turma);

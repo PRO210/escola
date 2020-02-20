@@ -200,6 +200,8 @@ if (empty($_SESSION['erro'])) {
                                                 <option>1 ANO</option>
                                                 <option>2 ANO</option>
                                                 <option>3 ANO</option>
+                                                <option>4 ANO</option>
+                                                <option>5 ANO</option>
                                                 <option>EJA I</option>
                                                 <option>EJA II</option>                                                                                              
                                             </select>

@@ -213,7 +213,7 @@ mysqli_set_charset($Conexao, "utf8");
                 $turma .= $Linha_turma["turma"] . " " . $Linha_turma["unico"] . " - " . $Linha_turma["turno"] . " ( " . substr($Linha_turma["ano"], 0, -6) . ") ,";
                 $status .= $_POST['status'][$key] . ", ";
 //
-                $SQL_matricular = "UPDATE turma_backup SET status = '" . $_POST['status'][$key] . "' WHERE id_turma= '$turmaf'";
+                $SQL_matricular = "UPDATE turma_backup SET pronta = '" . $_POST['status'][$key] . "' WHERE id_turma= '$turmaf'";
                 $Consulta = mysqli_query($Conexao, $SQL_matricular);
             }
             if ($Consulta) {

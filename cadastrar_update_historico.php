@@ -311,7 +311,7 @@ $inputObs9 = $linhaConsulta2['obs_bimestre_media_ix'];
                                         <td colspan = '2'> Turma_Ano:&nbsp;&nbsp;
                                             <select name="ano_turma" class="form-control">
                                                 <?php
-                                                $turma = ['1 ANO', '2 ANO', '3 ANO', 'EJA I', 'EJA II'];
+                                                $turma = ['1 ANO', '2 ANO', '3 ANO', '4 ANO', '5 ANO', 'EJA I', 'EJA II'];
                                                 for ($index = 0; $index < count($turma); $index++) {
 
                                                     if ($turma[$index] == "$ano_turma") {

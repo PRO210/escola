@@ -37,10 +37,11 @@ $pdf = new PDF();
 //$_POST['id_alunos']
 foreach ($array_alunos as $id_aluno) {
 
-//    $cont05 = 1;
     $ano1 = "";
     $ano2 = "";
     $ano3 = "";
+    $ano4 = "";
+    $ano5 = "";
     $eja1 = "";
     $eja2 = "";
 
@@ -49,13 +50,7 @@ foreach ($array_alunos as $id_aluno) {
     while ($row05 = mysqli_fetch_array($sql05)) {
         $ano_turma = $row05['ano_turma'];
 
-//        if ($cont05 == "1") {
-//            $ano1 = $row05['ano'];
-//        } elseif ($cont05 == "2") {
-//            $ano2 = $row05['ano']; //           
-//        } elseif ($cont05 == "3") {
-//            $ano3 = $row05['ano'];
-//        }
+//     
         if ($ano_turma == "1 ANO") {
             $ano1 = $row05['ano'];
         } elseif ($ano_turma == "2 ANO") {
@@ -68,7 +63,6 @@ foreach ($array_alunos as $id_aluno) {
         } elseif ($ano_turma == "EJA II") {
             $eja2 = $row05['ano'];
         }
-//        $cont05++;
     }   
     if ($rows < 1) {
         $Consulta_aluno = mysqli_query($Conexao, "SELECT * FROM alunos WHERE id = '$id_aluno' ");
@@ -124,10 +118,8 @@ foreach ($array_alunos as $id_aluno) {
         }
 //
         $marcar4 = "";
-        $ano4 = "";
         $ano4_conv = "";
-        $ano4 = filter_input(INPUT_POST, 'inputAno4', FILTER_DEFAULT);
-        $optradio4 = filter_input(INPUT_POST, 'optradio4', FILTER_DEFAULT);
+        $optradio4 = '';
         if (!$ano4 == "") {
             $marcar4 = "X";
         }
@@ -138,10 +130,8 @@ foreach ($array_alunos as $id_aluno) {
         }
 //
         $marcar5 = "";
-        $ano5 = "";
         $ano5_conv = '';
-        $ano5 = filter_input(INPUT_POST, 'inputAno5', FILTER_DEFAULT);
-        $optradio5 = filter_input(INPUT_POST, 'optradio5', FILTER_DEFAULT);
+        $optradio5 = '';
         if (!$ano5 == "") {
             $marcar5 = "X";
         }
