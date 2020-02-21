@@ -36,6 +36,7 @@ $(document).ready(function () {
         }
     });
 });
+//
 
 
 //fim do criar históticos

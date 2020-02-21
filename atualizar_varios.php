@@ -235,6 +235,7 @@ if (isset($_POST['basica'])) {
                                             <th colspan="2">
                                                 <select class="form-control" name="ano_turma" id="ano_turma"  style="width: 100% !important">
                                                     <option  selected="" value="">Selecione a Turma para Esse Ano</option>
+                                                    <option value="INFANTIL">CRECHE ou PRE-ESCOLAR</option>
                                                     <option>1 ANO</option>
                                                     <option>2 ANO</option>
                                                     <option>3 ANO</option>
@@ -244,7 +245,25 @@ if (isset($_POST['basica'])) {
                                                     <option>EJA II</option>                                                                                              
                                                 </select>
                                             </th>                                
-                                        </tr>                     
+                                        </tr>   
+                                        <tr>
+                                            <td colspan="2">
+                                                <select class="form-control" name="status_bimestre_media" id="status_bimestre_media" >
+                                                    <option  selected="" value="1">Selecione o Resultado </option>
+                                                    <?php
+                                                    $query = mysqli_query($Conexao, "SELECT * FROM `status_alunos`");
+                                                    $row = mysqli_num_rows($query);
+                                                    if ($row > 0) {
+                                                        while ($result = mysqli_fetch_array($query)) {
+                                                            $status_aluno = $result['status_aluno'];
+                                                            $status_id = $result['id'];
+                                                            echo "<option value = '$status_id'>$status_aluno</option>";
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td id = 'thNome' colspan="2"><input id = 'input_escola' type = 'text' name = 'inputEscola' placeholder = 'Nome da Escola' onkeyup='maiuscula(this)'></td>
                                         </tr>
@@ -807,6 +826,14 @@ if (isset($_POST['basica'])) {
                     return false;
                 }
             }
+        </script>
+        <script type="text/javascript">
+            // INICIO FUNÇÃO DE MASCARA MAIUSCULA
+            function maiuscula(z) {
+                v = z.value.toUpperCase();
+                z.value = v;
+            }
+
         </script>
     </body> 
 </html>
