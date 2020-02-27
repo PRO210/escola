@@ -17,6 +17,36 @@ $inputbs5 = filter_input(INPUT_POST, 't5', FILTER_DEFAULT);
 $inputbs6 = filter_input(INPUT_POST, 't6', FILTER_DEFAULT);
 $inputbs7 = filter_input(INPUT_POST, 't7', FILTER_DEFAULT);
 //
+$religiao = filter_input(INPUT_POST, 'religiao', FILTER_DEFAULT);
+if ($religiao == "SIM") {
+    $Xreligiao = 155;
+    $Yreligiao = 194;
+    $Mreligiao = "X";
+} elseif ($religiao == "NAO") {
+    $Xreligiao = 175;
+    $Yreligiao = 194;
+    $Mreligiao = "X";
+} else {
+    $Xreligiao = 155;
+    $Yreligiao = 194;
+    $Mreligiao = "";
+}
+$fisica = filter_input(INPUT_POST, 'fisica', FILTER_DEFAULT);
+if ($fisica == "SIM") {
+    $Xfisica = 155;
+    $Yfisica = 208;
+    $Mfisica = "X";
+} elseif ($fisica == "NAO") {
+    $Xfisica = 175;
+    $Yfisica = 208;
+    $Mfisica = "X";
+} else {
+    $Xfisica = 175;
+    $Yfisica = 208;
+    $Mfisica = "";
+}
+
+//
 $sql = "UPDATE `alunos_solicitacoes` SET `t1` = '$inputbs1', `t2` = '$inputbs2', `t3` = '$inputbs3', `t4` = '$inputbs4',`t5` = '$inputbs5',`t6` = '$inputbs6', `t7` = '$inputbs7'  WHERE `id_solicitacao`IN ($id_solicitacao)";
 $Consulta_sql = mysqli_query($Conexao, $sql);
 //
@@ -25,7 +55,28 @@ require_once 'rotation.php';
 
 //
 class PDF extends PDF_Rotate {
-    
+
+//
+// Page footer
+    function Footer() {
+// Position at 1.5 cm from bottom
+        $this->SetY(-14);
+// Arial italic 8
+        $this->SetFont('Arial', 'B', 7);
+// Page number
+//        $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
+        $this->Cell(0, 5, $this->PageNo(), 0, 0, 'C');
+    }
+
+    //
+    function RotatedText($x, $y, $txt, $angle) {
+        $txt = utf8_decode($txt);
+        //Text rotated around its origin
+        $this->Rotate($angle, $x, $y);
+        $this->Text($x, $y, $txt);
+        $this->Rotate(0);
+    }
+
 }
 
 // Instanciation of inherited class
@@ -56,19 +107,19 @@ while ($rowf = mysqli_fetch_array($Consultaf)) {
 //
     if ($Linha['categoria'] == "EDUCAÇÃO INFANTIL") {
         $ano_edui = "PRE ESCOLAR II ";
-        //
+//
     } elseif ($Linha['categoria'] == "FASE") {
         $ano_fase = $Linha['turma'];
-        $ano_fase_xs = "checked";
-        //
-    } elseif ($Linha['turma'] == "3 ANO") {
+        $ano_fase_xs = "X";
+//
+    } elseif ($Linha['categoria'] == "1 GRAU") {
 //    $ano = substr($inputConcluiu, 0, -1);
         $ano = $Linha['turma'];
-        $ano_fase_xn = "checked";
-        //
+        $ano_fase_xn = "X";
+//
     } else {
         $ano_letivo_turma = substr($Linha['ano'], 0, -6);
-        //
+//
         if ($ano_letivo_turma == "2018") {
             $ano = substr($Linha['turma'], 0, -1);
             $ano_fase_xn = "checked";
@@ -118,7 +169,7 @@ while ($rowf = mysqli_fetch_array($Consultaf)) {
     $Registro_up3 = mysqli_fetch_array($Consulta_up3, MYSQLI_BOTH);
     $escola_estado = strtoupper($Registro_up3["uf"]);
 //
-    //
+//
     $pdf->SetAutoPageBreak(true);
     $pdf->AliasNbPages();
     $pdf->AddPage();
@@ -181,10 +232,17 @@ while ($rowf = mysqli_fetch_array($Consultaf)) {
     $pdf->Cell(60, 7.2, "SÉRIE ", 0, 0, 'R');
     $pdf->Rect(75, 154, 5, 5);
     $pdf->Cell(60, 7.2, "ANO ", 0, 0, 'C');
+    $pdf->SetFont('Arial', 'B', 13);
+    $pdf->RotatedText(111, 158, "$ano_fase_xn", 0);
+
+    $pdf->SetFont('Arial', '', 11);
     $pdf->Rect(110, 154, 5, 5);
     $pdf->Cell(60, 7.2, "FASE", 0, 1, 'L');
+    $pdf->SetFont('Arial', 'B', 13);
+    $pdf->RotatedText(150, 158, "$ano_fase_xs", 0);
     $pdf->Rect(149, 154, 5, 5);
 //
+    $pdf->SetFont('Arial', '', 11);
     $pdf->SetFont('Arial', '', 8.5);
     $pdf->Cell(10, 7.2, "1", 0, 0, 'C');
     $pdf->Cell(170, 7.2, "O mínimo exigido para promoção é:6,0 e 75% de frequência do total de horas letivas.", 0, 1, 'L');
@@ -199,16 +257,26 @@ while ($rowf = mysqli_fetch_array($Consultaf)) {
     $pdf->Cell(10, 7.2, "3", 0, 0, 'C');
     $pdf->Cell(120, 7.2, "Participante em Seminários de Ensino Religioso:", 0, 0, 'L');
     $pdf->Cell(20, 7.2, "SIM", 0, 0, 'L');
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->RotatedText($Xreligiao, $Yreligiao, $Mreligiao, 0);
     $pdf->Rect(154, 190, 5, 5);
+    //
+    $pdf->SetFont('Arial', '', 8.5);
     $pdf->Cell(30, 7.2, "NÃO", 0, 1, 'L');
+    $pdf->SetFont('Arial', 'B', 13);
     $pdf->Rect(174, 190, 5, 5);
+    $pdf->SetFont('Arial', '', 8.5);
     $pdf->Cell(10, 7.2, "", 0, 0, 'C');
     $pdf->Cell(120, 7.2, "Base Legal:Art.33 da Lei 9.394/96 modificado pela Lei 9.475 de 22/07/1996 DOU.", 0, 1, 'L');
 //
     $pdf->Cell(10, 7.2, "4", 0, 0, 'C');
     $pdf->Cell(120, 7.2, "Dispensa de Educação Física:", 0, 0, 'L');
     $pdf->Cell(20, 7.2, "SIM", 0, 0, 'L');
+
+    $pdf->SetFont('Arial', 'B', 11);
+    $pdf->RotatedText($Xfisica, $Yfisica, $Mfisica, 0);
     $pdf->Rect(154, 204, 5, 5);
+    $pdf->SetFont('Arial', '', 8.5);
     $pdf->Cell(30, 7.2, "NÃO", 0, 1, 'L');
     $pdf->Rect(174, 204, 5, 5);
     $pdf->Cell(10, 7.2, "", 0, 0, 'C');
@@ -245,6 +313,7 @@ while ($rowf = mysqli_fetch_array($Consultaf)) {
 }
 
 $pdf->Output(utf8_decode($nome . ".pdf"), 'D');
+//$pdf->Output(utf8_decode($nome . ".pdf"), 'I');
 
 
 

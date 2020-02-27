@@ -40,7 +40,7 @@ if ($rows > 0) {
             <input type="hidden" name="id_solicitacao" value="<?= substr($id_solicitacao, 0, -1) ?>">
             <div class="row">
                 <div class="form-group col-sm-12"> 
-                    <h4 class="text-center"><?php echo substr($nome, 0, -1) ?></h4>
+                    <h4 class="text-center" style="margin: 24px!important "><?php echo substr($nome, 0, -1) ?></h4>
                     <label for="inputConcluiu" class="col-sm-2 control-label">Concluíu o:</label>
                     <div class="col-sm-8">
                         <select class="form-control" name="inputConcluiu" id="inputTurma" >
@@ -58,6 +58,30 @@ if ($rows > 0) {
                         </select> 
                     </div>  
                 </div>                                    
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label for="religiao" class="col-sm-2 control-label">Dispenda de Religião</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="religiao" id="" >
+                            <option value="">NÃO SEI</option>
+                            <option value="NAO">NÃO</option>
+                            <option value="SIM">SIM</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label for="religiao" class="col-sm-2 control-label">Dispenda de Educação Física</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="fisica" id="" >
+                            <option value="">NÃO SEI</option>
+                            <option value="NAO">NÃO</option>
+                            <option value="SIM">SIM</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <br>
             <style>

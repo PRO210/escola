@@ -172,7 +172,7 @@ if (isset($_POST['basica'])) {
                                     </thead>
                                     <tbody>
                                         <tr>                                
-                                            <th colspan="2">
+                                            <td colspan="2">
                                                 <select class="form-control" name="inputAno" id="inputAno"  style="width: 100% !important">
                                                     <option  selected="" value="">Selecione o Ano </option>
                                                     <option>2008</option>
@@ -229,10 +229,10 @@ if (isset($_POST['basica'])) {
                                                     <option value="2030">2030 - Primeiro Histórico</option>  
                                                     <option value="2030-2">2030 - Segundo Histórico</option>
                                                 </select>
-                                            </th>                                
+                                            </td>                                
                                         </tr> 
                                         <tr>                                
-                                            <th colspan="2">
+                                            <td colspan="2">
                                                 <select class="form-control" name="ano_turma" id="ano_turma"  style="width: 100% !important">
                                                     <option  selected="" value="">Selecione a Turma para Esse Ano</option>
                                                     <option value="INFANTIL">CRECHE ou PRE-ESCOLAR</option>
@@ -244,7 +244,7 @@ if (isset($_POST['basica'])) {
                                                     <option>EJA I</option>
                                                     <option>EJA II</option>                                                                                              
                                                 </select>
-                                            </th>                                
+                                            </td>                                
                                         </tr>   
                                         <tr>
                                             <td colspan="2">

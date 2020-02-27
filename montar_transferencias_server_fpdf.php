@@ -12,6 +12,17 @@ require_once 'rotation.php';
 
 class PDF extends PDF_Rotate {
 
+//    Page footer
+    function Footer() {
+// Position at 1.5 cm from bottom
+        $this->SetY(-14);
+// Arial italic 8
+        $this->SetFont('Arial', 'B', 7);
+// Page number
+//        $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
+        $this->Cell(0, 5, $this->PageNo(), 0, 0, 'R');
+    }
+
     function RotatedText($x, $y, $txt, $angle) {
         $txt = utf8_decode($txt);
 //Text rotated around its origin
@@ -63,7 +74,7 @@ foreach ($array_alunos as $id_aluno) {
         } elseif ($ano_turma == "EJA II") {
             $eja2 = $row05['ano'];
         }
-    }   
+    }
     if ($rows < 1) {
         $Consulta_aluno = mysqli_query($Conexao, "SELECT * FROM alunos WHERE id = '$id_aluno' ");
         $Linha_aluno = mysqli_fetch_array($Consulta_aluno, MYSQLI_BOTH);
@@ -157,7 +168,7 @@ foreach ($array_alunos as $id_aluno) {
         }
 
 
-        $eja2_conv = "";    
+        $eja2_conv = "";
 
         if ($eja2 == "") {
             $marcareja2 = "";
@@ -757,3 +768,4 @@ foreach ($array_alunos as $id_aluno) {
 }
 
 $pdf->Output(utf8_decode('Histórico Escolar.pdf'), 'D');
+//$pdf->Output(utf8_decode('Histórico Escolar.pdf'), 'I');

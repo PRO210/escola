@@ -154,7 +154,7 @@ if (empty($_SESSION['msg'])) {
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>                                
+<!--                                                <tr>                                
                                                     <th colspan="2">
                                                         <select class="form-control" name="ano" id="ano" onchange="change()" style="width: 100% !important">
                                                             <option  selected="" value="">Selecione o Ano</option>                                           
@@ -171,12 +171,12 @@ if (empty($_SESSION['msg'])) {
                                                             <option>2030</option>
                                                         </select>
                                                     </th>
-                                                </tr>
+                                                </tr>-->
                                                 <tr>                                
                                                     <th>
-                                                        Data para o Pagamento: <input type="date" name="previsao_pagamento" style="width: 100% !important">
+                                                        Data para o Pagamento: <input type="date" name="previsao_pagamento" onchange="change_02()" id="previsao_pagamento" style="width: 100% !important">
                                                     </th>                                    
-                                                </tr>
+                                                </tr>                                            
                                                 <tr>                                
                                                     <th>
                                                         Mensalidade:<input class="form-control" type="text" name="mensalidade" id="mensalidade" value="0.00" style="width: 100% !important">
@@ -221,7 +221,7 @@ if (empty($_SESSION['msg'])) {
                         <div class="container-fluid" >  
                             <h4 style="margin: 12px; margin-left: 18px">Boletos de : &nbsp;<b><?php echo"$nome" ?>&nbsp;</b>Turma Atual &nbsp;: <b><?php echo"$turma" ?></b></h4>
                             <?php
-                            $Consultaf = mysqli_query($Conexao, "SELECT * FROM `alunos_pagamentos` WHERE aluno_id = '$id_aluno' ORDER BY `data_pagamento` ASC,`alunos_pagamentos`.`created` DESC ");
+                            $Consultaf = mysqli_query($Conexao, "SELECT * FROM `alunos_pagamentos` WHERE aluno_id = '$id_aluno' ORDER BY `data_pagamento` DESC");
                             $rowf = mysqli_num_rows($Consultaf);
                             //
                             echo "<table class='nowrap table table-striped table-bordered ' id='tbl_alunos_lista' width='100%' cellspacing='0'>";
@@ -289,13 +289,12 @@ if (empty($_SESSION['msg'])) {
 //                                    //                                . "<li $display4><a><button type ='submit' onclick= 'validaCheckbox2();return validaCheckbox()' name = 'turma_transferidos' value = '$idf' class='btn btn-link arquivo' title = 'Mover para Arquivo Passivo' style='text-decoration: none;color: black;margin-left: -12px;'><span class='glyphicon glyphicon-folder-open' aria-hidden='true'></span></button>Mover para o Arquivo Passivo</a></li>"
 //                                    . "</ul>"
                                     . "&nbsp;&nbsp;"
-                                    . "<select name='ativo[]' class='todos form-control' disabled='' id='$id' >"
+                                    . "<select name='ativo[]' class='todos form-control ativo$id' disabled='' id='$id' >"
                                     . "<option selected= ''>SIM</option>"
                                     . "<option  value='NAO' >NÃO</option>"
                                     . "</select>"
                                     . "</div>"
                                     . "</td>";
-
                                 } else {
                                     echo "<td id = 'thNome' style = 'padding-right:0px;'>"
                                     . "<div class='dropdown'>"
@@ -306,7 +305,7 @@ if (empty($_SESSION['msg'])) {
 //                                    //                                . "<li $display4><a><button type ='submit' onclick= 'validaCheckbox2();return validaCheckbox()' name = 'turma_transferidos' value = '$idf' class='btn btn-link arquivo' title = 'Mover para Arquivo Passivo' style='text-decoration: none;color: black;margin-left: -12px;'><span class='glyphicon glyphicon-folder-open' aria-hidden='true'></span></button>Mover para o Arquivo Passivo</a></li>"
 //                                    . "</ul>"
                                     . "&nbsp;&nbsp;"
-                                    . "<select name='ativo[]' class='todos form-control' disabled='' id='$id' >"
+                                    . "<select name='ativo[]' class='todos form-control ativo$id' disabled='' id='$id' >"
                                     . "<option >SIM</option>"
                                     . "<option selected= '' value='NAO' >NÃO</option>"
                                     . "</select>"
@@ -333,6 +332,7 @@ if (empty($_SESSION['msg'])) {
                                     <?php
                                 }
                                 $data_pagamento = date_format(date_create($linhaf['data_pagamento']), 'm');
+                                $data_pagamento_ano = date_format(date_create($linhaf['data_pagamento']), 'Y');
                                 $mes = '';
                                 switch (date($data_pagamento)) {
                                     case 1: $mes = "Janeiro";
@@ -361,7 +361,7 @@ if (empty($_SESSION['msg'])) {
                                         break;
                                 }
                                 echo "<td><input type = 'text' value = '$mensalidade' name = 'mensalidade[]' disabled class ='mensalidade todos form-control mensalidade$id'></td>\n";
-                                echo "<td>" . $mes . "</td>\n";
+                                echo "<td>" . $mes . '/' . $data_pagamento_ano . "</td>\n";
                                 echo "<td><input type = 'date' value = '$pago_em' name = 'pago_em[]' disabled class ='todos form-control pago_em$id'></td>\n";
                                 echo "<td><input type = 'text' value = '$desconto' name = 'desconto[]' disabled class ='desconto todos form-control desconto$id'></td>\n";
                                 echo "<td><input type = 'text' value = '$multa' name = 'multa[]' disabled class ='multa todos form-control multa$id'></td>\n";
@@ -408,7 +408,7 @@ if (empty($_SESSION['msg'])) {
                                 "targets": 0,
                                 "orderable": false
                             }],
-                        "lengthMenu": [[12, 24, 36, 48, 25, 30, 40, 50, 70, 100, -1], [12, 24, 36, 48, 25, 30, 40, 50, 70, 100, "All"]],
+                        "lengthMenu": [[-1,12, 24, 36, 48, 25, 30, 40, 50, 70, 100, -1], ["All",12, 24, 36, 48, 25, 30, 40, 50, 70, 100, "All"]],
                         "language": {
                             "lengthMenu": "Meses por Página _MENU_ <?php
                             echo "<input type='submit' name = 'botao' disabled = '' value='Atualizar' id ='atualizar' class = 'btn btn-primary' onclick= 'return validaCheckbox()'>"
@@ -479,7 +479,7 @@ if (empty($_SESSION['msg'])) {
 
                 });
             </script>
-            <script type="text/javascript">
+<!--            <script type="text/javascript">
                 function change() {
                     var texto = $('#ano option:selected').text();
                     if (texto == 'Selecione o Ano') {
@@ -488,7 +488,18 @@ if (empty($_SESSION['msg'])) {
                         $('#criar_boleto').removeAttr('disabled');
                     }
                 }
+            </script>-->
+            <script type="text/javascript">
+                function change_02() {
+                    var texto = $('#previsao_pagamento').val();
+                    if (texto == '') {
+                        $('#criar_boleto').attr('disabled', 'disabled');
+                    } else {
+                        $('#criar_boleto').removeAttr('disabled');
+                    }
+                }
             </script>
+
             <script>
                 function confirmar() {
                     var r = confirm('Realmente deseja Criar esse Boleto <?php echo "$usuario_logado" ?>?');
@@ -530,6 +541,7 @@ if (empty($_SESSION['msg'])) {
                         var valor = $(this).val();
                         if (this.checked) {
                             $("#" + valor + "").removeAttr('disabled');
+                            $(".mensalidade" + valor + "").removeAttr('disabled');
                             $(".mensalidade" + valor + "").removeAttr('disabled');
                             $(".desconto" + valor + "").removeAttr('disabled');
                             $(".pag" + valor + "").removeAttr('disabled');
