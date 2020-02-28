@@ -356,8 +356,8 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         $pdf->Cell(104, 6, $row_Consulta["unidade_escolar"], 0, 0, 'L');
     }
 }
-$pdf->Output(utf8_decode('Servidor.pdf'), 'I');
-//$pdf->Output(utf8_decode('Servidor.pdf'), 'D');
+// $pdf->Output(utf8_decode('Servidor.pdf'), 'I');
+$pdf->Output(utf8_decode('Servidor.pdf'), 'D');
 
 
 
