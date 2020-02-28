@@ -28,6 +28,8 @@ if (isset($_POST['imprimir'])) {
     include_once './pesquisar_no_banco_impressao_servidores_gerencial_pdf.php';
     exit();
 } else {   
+//        include_once './pesquisar_no_banco_impressao_servidores_pdf.php';
+
 //    include_once './pesquisar_no_banco_impressao_servidores_pdf.php';
 //    exit();
 }

@@ -258,7 +258,7 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         if ($row_Consulta["depen_sexo_3"] == "MASCULINO") {
             $pdf->Cell(142.5, 7, $row_Consulta["depen_nome_3"], 0, 0, 'L');
             $pdf->Cell(65, 7, "X", 0, 1, 'L');
-        } elseif ($row_Consulta["depen_sexo_3"] == "FEMININO") {           
+        } elseif ($row_Consulta["depen_sexo_3"] == "FEMININO") {
             $pdf->Cell(156, 7, $row_Consulta["depen_nome_3"], 0, 0, 'L');
             $pdf->Cell(65, 7, "X", 0, 1, 'L');
         } else {
@@ -307,8 +307,19 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
             $pdf->Cell(7, 6, $data->format('Y'), 0, 1, 'L');
         }
         //
-        $pdf->Cell(190, 33, '', 0, 1, 'L');
-        $pdf->Cell(160, 7, '', 0, 0, 'L');
+        $pdf->Cell(190, 33.5, '', 0, 1, 'L');
+        $pdf->Cell(34.5, 7, '', 0, 0, 'L');
+        $Xvinculo = "";
+        $Xvinculo02 = "";
+        if ($row_Consulta["vinculo"] == "EFETIVO(A)") {
+            $Xvinculo = "X";
+        } elseif ($row_Consulta["vinculo"] == "CONTRATADO(A)") {
+            $Xvinculo02 = "X";
+        }
+        $pdf->Cell(45.5, 7, $Xvinculo, 0, 0, 'L');
+        $pdf->Cell(80, 7, $Xvinculo02, 0, 0, 'L');
+
+//
         $data = $row_Consulta["admissao"];
         if ($data == "0000-00-00" || $data == "") {
             $pdf->Cell(10, 6, '', 0, 0, 'L');
@@ -345,8 +356,8 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         $pdf->Cell(104, 6, $row_Consulta["unidade_escolar"], 0, 0, 'L');
     }
 }
-//$pdf->Output(utf8_decode('Servidor.pdf'), 'I');
-$pdf->Output(utf8_decode('Servidor.pdf'), 'D');
+$pdf->Output(utf8_decode('Servidor.pdf'), 'I');
+//$pdf->Output(utf8_decode('Servidor.pdf'), 'D');
 
 
 
