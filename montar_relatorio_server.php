@@ -119,8 +119,8 @@ mysqli_set_charset($Conexao, "utf8");
                     <td><span class="span_personalizada"><input type="checkbox" value="unico" name="titulos[]"></span>&nbsp;ÚNICO</td>
                     <td><span class="span_personalizada"><input type="checkbox" value="turno" name="titulos[]"></span>&nbsp;TURNO</td>
                     </tbody>
-                                   
-                 </tbody>
+
+                    </tbody>
                 </table>
                 <h3 style=" height: 24px"></h3>
                 <?php

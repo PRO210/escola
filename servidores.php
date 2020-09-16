@@ -138,7 +138,7 @@ if ($idcerto == 1) {
                             }
                             $teste_folga = "";
                             $teste_nome = $nome;
-                            $query_atestados = mysqli_query($Conexao, "SELECT *, datediff(fim,now()) AS dias FROM atestados_servidor WHERE `servidor` like '$teste_nome' ORDER BY `atestados_servidor`.`fim` DESC LIMIT 1");
+                            $query_atestados = mysqli_query($Conexao, "SELECT *, datediff(fim,now()) AS dias FROM atestados_servidor WHERE `servidor` like '$teste_nome' AND `excluido` = 'N' ORDER BY `atestados_servidor`.`fim` DESC LIMIT 1");
                             $linha_atestados = mysqli_fetch_array($query_atestados, MYSQLI_BOTH);
                             $ContLinhasAtestados = mysqli_num_rows($query_atestados);
                             if ($ContLinhasAtestados > 0) {

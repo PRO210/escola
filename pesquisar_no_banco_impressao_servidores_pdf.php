@@ -225,6 +225,7 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
 //            $pdf->Line(182.3, 232.7, 183.7, 231.2);
 //        }
         $pdf->Cell(180, 7, '', 0, 1, 'L');
+
         //
         if ($row_Consulta["depen_sexo_2"] == "MASCULINO") {
             $pdf->Cell(16, 7, '', 0, 0, 'L');
@@ -237,6 +238,7 @@ foreach ($_POST['servidor_selecionado'] as $lista_id) {
         } else {
             $pdf->Cell(65, 7, "", 0, 1, 'L');
         }
+        $pdf->Cell(15, 7, '', 0, 0, 'L');
 
         $pdf->Cell(90, 6, $row_Consulta["depen_cpf_2"], 0, 0, 'L');
         $pdf->Cell(60, 6, $row_Consulta["depen_grau_2"], 0, 0, 'L');

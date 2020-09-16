@@ -580,10 +580,12 @@ if (isset($_POST['atualizar'])) {
     $ano_turma = filter_input(INPUT_POST, 'ano_turma', FILTER_DEFAULT);
     $status_bimestre_media = filter_input(INPUT_POST, 'status_bimestre_media', FILTER_DEFAULT);
     $ano_pesquisa = filter_input(INPUT_POST, 'inputAno1', FILTER_DEFAULT);
+    
     $escola = filter_input(INPUT_POST, 'inputEscola', FILTER_DEFAULT);
-    $cidade = filter_input(INPUT_POST, 'inputCidade', FILTER_DEFAULT);
+    $cidade = filter_input(INPUT_POST, 'inputCidade', FILTER_DEFAULT);    
     $uf = filter_input(INPUT_POST, 'inputUf', FILTER_DEFAULT);
-    $turma = filter_input(INPUT_POST, 'inputTurma', FILTER_DEFAULT);
+    
+    $turma = filter_input(INPUT_POST, 'inputTurmaHistorico', FILTER_DEFAULT);
     $turno = filter_input(INPUT_POST, 'inputTurno', FILTER_DEFAULT);
     $unica = filter_input(INPUT_POST, 'inputUnica', FILTER_DEFAULT);
     //

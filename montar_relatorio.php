@@ -97,13 +97,13 @@ mysqli_set_charset($Conexao, "utf8");
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type = 'radio' name='sexo_selecionado' value = '' checked>&nbsp;TODOS</td>
+                                    <td><input type = 'radio' name='sexo_selecionado' value = '' checked ="" >&nbsp;TODOS</td>
                                 </tr>
                                 <tr>                                   
-                                    <td><input type = 'radio' name='sexo_selecionado' value = 'F'>&nbsp;FEMININO</td>
+                                    <td><input type = 'radio' name='sexo_selecionado' value = 'F' >&nbsp;FEMININO</td>
                                 </tr>
                                 <tr>                                   
-                                    <td><input type = 'radio' name='sexo_selecionado'  value = 'M'/>&nbsp;MASCULINO</td>
+                                    <td><input type = 'radio' name='sexo_selecionado'  value = 'M'>&nbsp;MASCULINO</td>
                                 </tr>
                             </tbody>
                         </table>   
@@ -117,13 +117,13 @@ mysqli_set_charset($Conexao, "utf8");
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><input type = 'radio' name='necessidades_selecionado' value = '' checked>&nbsp;TODOS</td>
+                                    <td><input type = 'radio' name='necessidades_selecionado' value = '' checked = "" >&nbsp;TODOS</td>
                                 </tr>
                                 <tr>                                   
                                     <td><input type = 'radio' name='necessidades_selecionado' value = 'SIM'>&nbsp;SIM</td>
                                 </tr>
                                 <tr>                                   
-                                    <td><input type = 'radio' name='necessidades_selecionado'  value = 'NÃO'/>&nbsp;NÃO</td>
+                                    <td><input type = 'radio' name='necessidades_selecionado'  value = 'NÃO'>&nbsp;NÃO</td>
                                 </tr>
                             </tbody>
                         </table>                         
@@ -135,7 +135,7 @@ mysqli_set_charset($Conexao, "utf8");
                             </thead>
                             <tbody>  
                                 <tr>                                   
-                                    <td><input type = 'radio' name='inputOuvinte' value = '' >TODOS</td>
+                                    <td><input type = 'radio' name='inputOuvinte' value = '' checked="" >TODOS</td>
                                 </tr>
                                 <tr>                                   
                                     <td><input type = 'radio' name='inputOuvinte' value = 'SIM'>&nbsp;SIM</td>

@@ -65,7 +65,7 @@ mysqli_set_charset($Conexao, "utf8");
                             <td style="color:<?= $red ?> "><?php echo $linhaMatutino['qtd']; ?></td>
                         </tr>
                         <?php
-                        $contMatutino += $linhaMatutino['qtd'];
+                        $contMatutinonhaMatutino['qtd'];
                     }
                     ?>
                     <tr>

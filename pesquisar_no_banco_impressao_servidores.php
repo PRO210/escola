@@ -50,7 +50,7 @@
         $html .= '<td><b>OUTROS</b></td>';
 
         $html .= '</tr>';
-
+        $ano = date('Y');
 //Selecionar todos os itens da tabela 
         foreach (($_POST['servidor_selecionado']) as $lista_id) {
             $SQL_Consulta = " SELECT * FROM servidores WHERE `id` = '$lista_id' ";
@@ -65,7 +65,8 @@
                     $Linha_Professor = mysqli_fetch_array($Consulta_professor);
                     $id_turma = $Linha_Professor["id_turma"];
                     //
-                    $SQL_turma = "SELECT * FROM `turmas` WHERE `id` = '$id_turma'";
+                    
+                    $SQL_turma = "SELECT * FROM `turmas` WHERE `id` = '$id_turma' AND `ano` LIKE '%". $ano ."%' ";
                     $Consulta_turma = mysqli_query($Conexao, $SQL_turma);
                     $Linha_turma = mysqli_fetch_array($Consulta_turma);
                     //                 

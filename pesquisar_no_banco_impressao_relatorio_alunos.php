@@ -42,15 +42,15 @@
         // Criamos uma tabela HTML com o formato da planilha
         $html = '';
         $html .= '<table>';
-        $html .= '<tr>';
-        $html .= '<td colspan = "4">ESCOLA MUNICIPAL TABELIÃO RAUL GALINDO SOBRINHO</tr>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= '<td>ALAGOINHA</tr>';
-        $html .= '</tr>';
-        $html .= '<tr>';
-        $html .= "<td colspan = '2'>Quantidade de Alunos:" . $quant2 . "</tr>";
-        $html .= '</tr>';
+//        $html .= '<tr>';
+//        $html .= '<td colspan = "4">ESCOLA MUNICIPAL TABELIÃO RAUL GALINDO SOBRINHO</tr>';
+//        $html .= '</tr>';
+//        $html .= '<tr>';
+//        $html .= '<td>ALAGOINHA</tr>';
+//        $html .= '</tr>';
+//        $html .= '<tr>';
+//        $html .= "<td colspan = '2'>Quantidade de Alunos:" . $quant2 . "</tr>";
+//        $html .= '</tr>';
 
 
         $html .= '<tr>';
@@ -104,6 +104,7 @@
         $html .= '<td><b>Professor(a) Auxiliar</b></td>';
         $html .= '<td><b>Professor(a) Substtituta</b></td>';
         $html .= '<td><b>Professor(a) de PROJETOS</b></td>';
+        $html .= '<td><b>Especificidades</b></td>';
 
         $html .= '</tr>';
 
@@ -241,6 +242,7 @@
                 $html .= '<td>' . $aux_professores . '</td>';
                 $html .= '<td>' . $nome_professores2 . '</td>';
                 $html .= '<td>' . $nome_professores3 . '</td>';
+                $html .= '<td>' . $row_Consulta["especificidades"] . '</td>';
 
                 $html .= '</tr>';
             }

@@ -60,7 +60,7 @@ mysqli_set_charset($Conexao, "utf8");
 
         echo "$start_sem_barra" . "<br>";
         echo "$end_sem_barra" . "<br>";
-        
+
         $entrada = strtotime($start_sem_barra);
         $saida = strtotime($end_sem_barra);
         $diferenca = $saida - $entrada;
@@ -68,11 +68,31 @@ mysqli_set_charset($Conexao, "utf8");
         echo $diferenca . "<br>";
         // echo $diferenca/3600 . "<br>";
         echo ceil($diferenca / 60) . "<br>";
+
+        $contMaterial01 = 0;
         for ($i = 0; $i <= $diferenca / 60; $i++) {
             $hora_conv = date('Y-m-d H:i:s', strtotime('+' . $i . ' minute', strtotime($start_sem_barra))) . "<br>";
-            echo "SELECT * FROM `agendamentos` WHERE `start` LIKE '%$hora_conv%' OR `end` LIKE '%$hora_conv%' ORDER BY `start` ASC";
+                                     echo "SELECT * FROM `agendamentos` WHERE `start` = '$hora_conv' OR `end` = '$hora_conv' AND `id_material` = '$material' ORDER BY `start` ASC";
+            $sql = mysqli_query($Conexao, "SELECT * FROM `agendamentos` WHERE `start` = '$hora_conv' OR `end` = '$hora_conv' AND `id_material` = '$material' ORDER BY `start` ASC");
+            $sqlResult = mysqli_fetch_array($sql, MYSQLI_BOTH);
+            $sqlLinhas = mysqli_num_rows($sql);
+            
+            if ($sqlLinhas > 0) {
+                $contMaterial01 += $sqlResult['quantidade'];
+            }
+
+
             echo "<br>";
         }
+        echo "Contagem dos pedidos: $contMaterial01";
+        $Consulta = mysqli_query($Conexao, "SELECT * FROM `materiais` WHERE id = '$material'");
+        $Registro = mysqli_fetch_array($Consulta, MYSQLI_BOTH);
+        $quantidade_arq = $Registro['quantidade'];
+        $qdt_material = $nome = $Registro['nome'];
+
+
+
+
         echo"<br>";
         exit();
         $consulta = mysqli_query($Conexao, "SELECT * FROM `agendamentos` WHERE `start` LIKE '%$data_sem_barra%' ORDER BY `start` ASC");

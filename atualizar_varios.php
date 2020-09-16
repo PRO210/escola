@@ -172,7 +172,7 @@ if (isset($_POST['basica'])) {
                                     </thead>
                                     <tbody>
                                         <tr>                                
-                                            <td colspan="2">
+                                            <th colspan="2">
                                                 <select class="form-control" name="inputAno" id="inputAno"  style="width: 100% !important">
                                                     <option  selected="" value="">Selecione o Ano </option>
                                                     <option>2008</option>
@@ -229,10 +229,10 @@ if (isset($_POST['basica'])) {
                                                     <option value="2030">2030 - Primeiro Histórico</option>  
                                                     <option value="2030-2">2030 - Segundo Histórico</option>
                                                 </select>
-                                            </td>                                
+                                            </th>                                
                                         </tr> 
                                         <tr>                                
-                                            <td colspan="2">
+                                            <th colspan="2">
                                                 <select class="form-control" name="ano_turma" id="ano_turma"  style="width: 100% !important">
                                                     <option  selected="" value="">Selecione a Turma para Esse Ano</option>
                                                     <option value="INFANTIL">CRECHE ou PRE-ESCOLAR</option>
@@ -244,7 +244,7 @@ if (isset($_POST['basica'])) {
                                                     <option>EJA I</option>
                                                     <option>EJA II</option>                                                                                              
                                                 </select>
-                                            </td>                                
+                                            </th>                                
                                         </tr>   
                                         <tr>
                                             <td colspan="2">
@@ -274,7 +274,7 @@ if (isset($_POST['basica'])) {
                                             <td colspan="2"><input id = 'input_escola' type = 'text' name = 'inputUf' placeholder = 'Estado' onkeyup='maiuscula(this)'></td>                            
                                         </tr>
                                         <tr>
-                                            <td colspan="2"><input id = 'input_escola' type = 'text' name = 'inputTurma' placeholder = 'Turma' onkeyup='maiuscula(this)'></td>                             
+                                            <td colspan="2"><input id = 'input_escola' type = 'text' name = 'inputTurmaHistorico' placeholder = 'Turma' onkeyup='maiuscula(this)'></td>                             
                                         </tr>
                                         <tr>
                                             <td colspan="2"><input id = 'input_escola' type = 'text' name = 'inputTurno' placeholder = 'Turno' onkeyup='maiuscula(this)'></td>                             
@@ -298,7 +298,8 @@ if (isset($_POST['basica'])) {
                         </div> 
                     </div>
                 </div>
-                <!--Fim da Div Historico-->
+                <!--Fim da Div Historico-->                <!--Fim da Div Historico-->
+
                 <div id="divConteudoBtnTurmas" style="background-color: #cc7700; "><br>
                     <div class="form-group">
                         <label for="inputTurma" class="col-sm-3 control-label">Turma</label>
