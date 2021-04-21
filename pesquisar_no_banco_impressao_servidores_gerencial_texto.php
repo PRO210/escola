@@ -1,7 +1,9 @@
 <?php
 include_once 'valida_cookies.inc';
 include_once './inc.conf.php';
-$Conexao = mysqli_connect("127.0.0.1", $Usuario, $Senha, $Base);
+//$Conexao = mysqli_connect("127.0.0.1", $Usuario, $Senha, $Base);
+$Conexao = mysqli_connect($conexao_tipo, $Usuario, $Senha, $Base);
+
 mysqli_set_charset($Conexao, "utf8");
 $querySelecionaPorCodigo = "SELECT * FROM `imagens` where id = 7";
 //$querySelecionaPorCodigo = "SELECT * FROM `imagens` ORDER BY `id` DESC LIMIT 1";
@@ -223,7 +225,9 @@ $timbre = base64_encode($imagem->blob_imagem);
                     //
                     $ano = date('Y');
                     foreach ($_POST['servidor_selecionado'] as $id) {
-                        $SQL_Consulta2 = "SELECT servidores.*,turmas_professor2.id_turma,turmas_professor2.id_professor,turmas.* FROM `servidores`,`turmas_professor2`,`turmas` WHERE `funcao` LIKE '%professor(a)%' AND servidores.id = turmas_professor2.id_professor AND servidores.id = '$id' AND turmas.id = turmas_professor2.id_turma AND servidores.excluido = 'N' AND turmas.ano LIKE '%$ano%' GROUP BY servidores.id ORDER BY nome ASC";
+                        $SQL_Consulta2 = "SELECT servidores.*,turmas_professor2.id_turma,turmas_professor2.id_professor,turmas.* FROM `servidores`,`turmas_professor2`,`turmas`"
+                                . " WHERE `funcao` LIKE '%professor(a)%' AND servidores.substituta LIKE 'NAO' AND servidores.id = turmas_professor2.id_professor AND servidores.id = '$id' AND turmas.id = turmas_professor2.id_turma AND servidores.excluido = 'N'  AND turmas.ano LIKE '%$ano%' AND servidores.substituta LIKE 'NAO'"
+                                . "GROUP BY servidores.id ORDER BY nome ASC";
                         $Consulta2 = mysqli_query($Conexao, $SQL_Consulta2);
                         $LinTotal = mysqli_num_rows($Consulta2);
                         if ($LinTotal > 0) {
@@ -234,7 +238,9 @@ $timbre = base64_encode($imagem->blob_imagem);
                     //Consulta os professores //              //Consulta os professores
                     $cont2 = 0;
                     foreach ($_POST['servidor_selecionado'] as $id) {
-                        $SQL_Consulta22 = "SELECT servidores.*,turmas_professor2.id_turma,turmas_professor2.id_professor,turmas.* FROM `servidores`,`turmas_professor2`,`turmas` WHERE `funcao` LIKE '%professor(a)%' AND servidores.id = turmas_professor2.id_professor AND servidores.id = '$id' AND turmas.id = turmas_professor2.id_turma AND servidores.excluido = 'N' AND turmas.ano LIKE '%$ano%' GROUP BY servidores.id ORDER BY nome ASC";
+                        $SQL_Consulta22 = "SELECT servidores.*,turmas_professor2.id_turma,turmas_professor2.id_professor,turmas.* FROM `servidores`,`turmas_professor2`,`turmas`"
+                                . " WHERE `funcao` LIKE '%professor(a)%' AND servidores.substituta LIKE 'NAO' AND servidores.id = turmas_professor2.id_professor AND servidores.id = '$id' AND turmas.id = turmas_professor2.id_turma AND servidores.excluido = 'N' AND turmas.ano LIKE '%$ano%' AND servidores.substituta LIKE 'NAO' "
+                                . "GROUP BY servidores.id ORDER BY nome ASC";
                         $Consulta22 = mysqli_query($Conexao, $SQL_Consulta22);
                         $LinTotal = mysqli_num_rows($Consulta22);
                         //
